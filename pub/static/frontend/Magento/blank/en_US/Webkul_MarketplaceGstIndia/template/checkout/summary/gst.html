@@ -1,0 +1,46 @@
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<!-- ko if: isDisplayed() && getGstModuleStatus() -->
+<tr class="totals-tax-summary"
+    data-bind="mageInit: {'toggleAdvanced':{'selectorsToggleClass': 'shown', 'baseToggleClass': 'expanded', 'toggleContainers': '.totals-tax-details'}}"
+>
+    <th data-bind="text: title" class="mark" scope="row"></th>
+    <td class="amount" data-bind="attr: {'data-th': title}">
+        <span class="price" data-bind="text: getValue()"></span>
+    </td>
+</tr>
+
+<tr class="totals-tax-details">
+    <th class="mark" scope="row" colspan="1" data-bind="text: getStateTaxTitle()"></th>
+    <td class="amount" rowspan="1">
+        <span class="price" data-bind="text: getSgstValue()"></span>
+    </td>
+</tr>
+<tr class="totals-tax-details">
+    <th class="mark" scope="row" colspan="1" data-bind="text: getCentralTaxTitle()"></th>
+    <td class="amount" rowspan="1">
+        <span class="price" data-bind="text: getCgstValue()"></span>
+    </td>
+</tr>
+<tr class="totals-tax-details">
+    <th class="mark" scope="row" colspan="1" data-bind="text: getInterTaxTitle()"></th>
+    <td class="amount" rowspan="1">
+        <span class="price" data-bind="text: getIgstValue()"></span>
+    </td>
+</tr>
+<tr class="totals-tax-details">
+    <th class="mark" scope="row" colspan="1" data-bind="text: getUtTaxTitle()"></th>
+    <td class="amount" rowspan="1">
+        <span class="price" data-bind="text: getUtgstValue()"></span>
+    </td>
+</tr>
+<!-- /ko -->

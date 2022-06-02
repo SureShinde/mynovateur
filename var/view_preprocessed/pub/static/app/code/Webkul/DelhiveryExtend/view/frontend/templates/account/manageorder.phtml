@@ -1,0 +1,36 @@
+<?php /** * Webkul Software * * @category Webkul * @package Webkul_DelhiveryExtend * @author Webkul * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com) * @license https://store.webkul.com/license.html */ $order = $block->getOrder(); $orderInfo = $block->ordersHelper->getOrderinfo($order->getId()); $shippingMethod = $order->getShippingMethod(); $multishipping = []; if (strrpos($shippingMethod, 'mp_multishipping') !== false) { $multishipping = explode('_', $orderInfo->getMultishipMethod()); } ?> <?php if (strrpos($shippingMethod, 'delhivery') !==false || (isset($multishipping[0]) && $multishipping[0] == 'delhivery')): ?> <tr><td><div style= "display:none;" class="field choice admin__field admin__field-option field-create"><input id="create_shipping_label" class="admin__control-checkbox" name="create_api_shipping_label" value="1" type="checkbox" onclick="toggleCreateLabelCheckbox();"/><label class="admin__field-label" for="create_shipping_label"><span><?= $block->escapeHtml(__('Generate Delhivery Label')) ?></span></label></div></td></tr><?php endif; ?> <script>
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/alert",
+        "prototype"
+    ], function(jQuery, alert){
+        window.FORM_KEY = document.getElementsByName("form_key")[0].value;
+
+        window.toggleCreateLabelCheckboxDelhivery = function() {
+            var checkbox = $('create_shipping_label');
+            var submitButton = checkbox.up('.wk-mp-fieldset').select('#mp-create-shipment-btn span')[0];
+            if (checkbox.checked) {
+                jQuery("#marketplace-shipping-form input[name|='carrier']").prop('disabled', true);
+                jQuery("#marketplace-shipping-form input[name|='tracking_id']").prop('disabled', true);
+                
+                
+            } else {
+                submitButton.innerText = submitButton.innerText.replace(/\.\.\.$/, '');
+                jQuery("#marketplace-shipping-form input[name|='carrier']").prop('disabled', false);
+                jQuery("#marketplace-shipping-form input[name|='tracking_id']").prop('disabled', false);
+            }
+        }
+        jQuery('#create_label').on ('click', function(btn) {
+            packaging.showWindow();
+        });
+        window.validQtyItems = function() {
+            var valid = true;
+            $$('.qty-item').each(function(item) {
+                var val = parseFloat(item.value);
+                if (isNaN(val) || val < 0) {
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    });</script>

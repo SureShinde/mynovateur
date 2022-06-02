@@ -1,0 +1,19 @@
+diff --git a/vendor/amasty/product-attachment/Model/Product/DataProvider/Modifiers/Meta.php b/vendor/amasty/product-attachment/Model/Product/DataProvider/Modifiers/Meta.php
+index 65e64a73c..f50ab6e46 100644
+--- a/vendor/amasty/product-attachment/Model/Product/DataProvider/Modifiers/Meta.php
++++ b/vendor/amasty/product-attachment/Model/Product/DataProvider/Modifiers/Meta.php
+@@ -48,9 +48,11 @@ class Meta
+     public function execute($meta)
+     {
+         $product = $this->locator->getProduct();
+-
+-        if ($isPartOfConfigurable = (bool)$this->configurableProduct->getParentIdsByChild($product->getId())) {
+-            $isPartOfConfigurable = $product->getVisibility() == Visibility::VISIBILITY_NOT_VISIBLE;
++        $isPartOfConfigurable = '';
++        if($product->getId()){
++            if ($isPartOfConfigurable = (bool)$this->configurableProduct->getParentIdsByChild($product->getId())) {
++                $isPartOfConfigurable = $product->getVisibility() == Visibility::VISIBILITY_NOT_VISIBLE;
++            }
+         }
+ 
+         if ($isPartOfConfigurable) {

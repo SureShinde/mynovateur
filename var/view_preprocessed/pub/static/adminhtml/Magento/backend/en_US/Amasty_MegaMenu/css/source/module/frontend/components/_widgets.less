@@ -1,0 +1,55 @@
+//
+//  Amasty MegaMenu Product Widget
+//  ----------------------------------------------
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+
+    //  Inheriting colors for all product cards in menu
+    .ammenu-nav-sections .ammenu-product-list {
+        * {
+            color: inherit !important;
+        }
+
+        &.-slider .slick-slide {
+            vertical-align: top;
+        }
+
+        .actions-secondary .action:hover {
+            color: inherit;
+            opacity: .75;
+        }
+
+        .product-item,
+        .product-item-info {
+            background: transparent;
+        }
+
+        .actions-secondary .action {
+            & {
+                color: inherit;
+                opacity: 1;
+            }
+
+            &:hover {
+                opacity: .75;
+            }
+        }
+    }
+    //  END Inheriting colors for all product cards in menu
+
+    .ammenu-submenu-block .amreview-widget-container {
+        .amreview-title,
+        .review-item {
+            background: none !important; // Amasty Reviews override
+        }
+    }
+
+    .ammenu-submenu-block .ammenu-product-list.-grid {
+        margin: 0;
+        padding: 0 @ammenu__indent;
+    }
+}

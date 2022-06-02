@@ -1,0 +1,2 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1653998615;s:6:"expire";i:9999999999;s:4:"tags";s:40:"184_DB_PDO_MYSQL_DDL,184_DB_DDL,184_MAGE";}
+"CREATE TABLE `sequence_order_1` (\n  `sequence_value` int(10) unsigned NOT NULL AUTO_INCREMENT,\n  PRIMARY KEY (`sequence_value`)\n) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1"

@@ -1,0 +1,2 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1653997879;s:6:"expire";i:9999999999;s:4:"tags";s:19:"184_CONFIG,184_MAGE";}
+{"sales_setup":{"name":"sales_setup","extends":"core_setup"},"sales":{"name":"sales","extends":"core"},"checkout":{"name":"checkout","extends":"core"}}

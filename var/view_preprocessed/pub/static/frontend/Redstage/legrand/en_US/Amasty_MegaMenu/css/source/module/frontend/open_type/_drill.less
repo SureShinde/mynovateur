@@ -1,0 +1,136 @@
+//
+//  Drill Open Type
+//  ----------------------------------------------
+
+//
+//  Keyframes
+//  ----------------------------------------------
+
+@keyframes slide-right {
+    0% {
+        transform: translateX(-500%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(500%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ammenu-nav-sections.-mobile.-drill {
+        & {
+            .ammenu-transition(.1);
+        }
+
+        .ammenu-items.-drill .ammenu-toggle {
+            transform: rotate(90deg);
+        }
+
+        .ammenu-button.-go-main {
+            & {
+                .ammenu-flex(none, center);
+
+                padding: 12px 20px;
+                width: 100%;
+                border: none;
+                border-radius: 0;
+                background: @ammenu__color__blue__lite;
+                box-shadow: none;
+                color: #fff;
+                text-align: left;
+                font-weight: 400;
+            }
+
+            &:before {
+                margin: 0 @ammenu__indent__l 0 5px;
+                width: 12px;
+                content: '<<';
+                font-size: 1rem;
+                line-height: 1px;
+                transform: scaleY(2);
+            }
+        }
+
+        .-slide-left {
+            animation: slide-left .1s forwards;
+        }
+
+        .-slide-right {
+            animation: slide-right .1s forwards;
+        }
+
+        .ammenu-active-level {
+            & {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .ammenu-button.-prev {
+                & {
+                    .ammenu-flex(none, center);
+                    .ammenu-reset(button);
+
+                    width: 32px;
+                    height: 50px;
+                }
+
+                .ammenu-icon {
+                    width: 20px;
+                    height: 20px;
+                    transform: rotate(180deg);
+                }
+            }
+
+            .ammenu-item {
+                .ammenu-flex(none, center);
+
+                height: 50px;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .ammenu-head {
+                & {
+                    .ammenu-flex(none, center);
+
+                    flex-basis: 100%;
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 0 @ammenu__indent__xl;
+                    max-width: 100%;
+                    border-bottom: 1px solid #9c9c9c;
+                    font-size: 1.6rem;
+                    cursor: pointer;
+                }
+
+                .ammenu-link {
+                    padding: 0;
+                    text-transform: uppercase;
+                    font-weight: 600;
+                }
+            }
+
+            .ammenu-text-block {
+                padding: 0 0 0 10px;
+            }
+
+            .ammenu-text {
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+        }
+    }
+}

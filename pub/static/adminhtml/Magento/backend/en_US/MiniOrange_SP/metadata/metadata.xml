@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" entityID="http://localhost/magento/mospsaml/metadata/index">
+  <SPSSODescriptor WantAuthnRequestsSigned="1" AuthnRequestsSigned="1" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <KeyDescriptor xmlns:ds="http://www.w3.org/2000/09/xmldsig#" use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDoTCCAokCFAkYOm9dmoCuy2scWoVezjHAIYInMA0GCSqGSIb3DQEBCwUAMIGMMQswCQYDVQQGEwJJTjELMAkGA1UECAwCTUgxDTALBgNVBAcMBFBVTkUxEzARBgNVBAoMCk1JTklPUkFOR0UxEzARBgNVBAsMCk1JTklPUkFOR0UxEzARBgNVBAMMCk1JTklPUkFOR0UxIjAgBgkqhkiG9w0BCQEWE2luZm9AbWluaW9yYW5nZS5jb20wHhcNMjIwMjIxMTExNjAyWhcNMjcwMjIwMTExNjAyWjCBjDELMAkGA1UEBhMCSU4xCzAJBgNVBAgMAk1IMQ0wCwYDVQQHDARQVU5FMRMwEQYDVQQKDApNSU5JT1JBTkdFMRMwEQYDVQQLDApNSU5JT1JBTkdFMRMwEQYDVQQDDApNSU5JT1JBTkdFMSIwIAYJKoZIhvcNAQkBFhNpbmZvQG1pbmlvcmFuZ2UuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4Dp+Gm15FArPhyGw44CMOXvHuXOsU4RNGm5rpB4LRZh8eGOQaJPBck3s8oM0lOE2jugxuBtPBFlM0LT4hdWo/wfSPFvbcXvKegz9DXPGd7pCfJ34N++g259sKTB8/EtwpfqCd06SPIQ/+LpPgihULQfGOpHz/hB7vCZO0uHO0pZw2gvtmA1uJ5r9EFm+t6gAo0H87t3D/0Re8YLsu/mJTasEaAAadA39DdrK5LjBHR7ua716u7p69Wh84QAV6G78ySGeovzubtq0+wdFdM2P/qVrecI/OgMZUee1HtJ4QSNPESPY2vIsMi1qA4oJOHK3dmnM9rqDqDI3KSo4syvr4QIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBVRch/h7SrDn8rmdZmf91hNoE5fn0R4AcYUhpKcJw9Jx3Dy9pJFczao3e0ni4vx59dyVbTR4pRyvsm1XvT165vGW1McYbNwA0yLbpJkM2TdrS4ydb0RukoCyJyRxRya+dWZgrmCKlYMaAJmXsD5P3EvGHdeBIYBwHeZSaq2LEvq8BdBoK9nHkpT6SiI/zgrEiy3Cy2GZO9L9NEGydb9f8cqWzQKYIH5Yh7SMb5fP6QE26MiKxaVATw26e8WWMBwGCbafSjBa2H5Zaj//uHlQFmgbopCe6m2lIq0YGkWNpPt4jUbswGolVF/408hntu8CcHMp+Rx5pL7aLdGfKri6Ly</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <KeyDescriptor xmlns:ds="http://www.w3.org/2000/09/xmldsig#" use="encryption">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <ds:X509Certificate>MIIDoTCCAokCFAkYOm9dmoCuy2scWoVezjHAIYInMA0GCSqGSIb3DQEBCwUAMIGMMQswCQYDVQQGEwJJTjELMAkGA1UECAwCTUgxDTALBgNVBAcMBFBVTkUxEzARBgNVBAoMCk1JTklPUkFOR0UxEzARBgNVBAsMCk1JTklPUkFOR0UxEzARBgNVBAMMCk1JTklPUkFOR0UxIjAgBgkqhkiG9w0BCQEWE2luZm9AbWluaW9yYW5nZS5jb20wHhcNMjIwMjIxMTExNjAyWhcNMjcwMjIwMTExNjAyWjCBjDELMAkGA1UEBhMCSU4xCzAJBgNVBAgMAk1IMQ0wCwYDVQQHDARQVU5FMRMwEQYDVQQKDApNSU5JT1JBTkdFMRMwEQYDVQQLDApNSU5JT1JBTkdFMRMwEQYDVQQDDApNSU5JT1JBTkdFMSIwIAYJKoZIhvcNAQkBFhNpbmZvQG1pbmlvcmFuZ2UuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4Dp+Gm15FArPhyGw44CMOXvHuXOsU4RNGm5rpB4LRZh8eGOQaJPBck3s8oM0lOE2jugxuBtPBFlM0LT4hdWo/wfSPFvbcXvKegz9DXPGd7pCfJ34N++g259sKTB8/EtwpfqCd06SPIQ/+LpPgihULQfGOpHz/hB7vCZO0uHO0pZw2gvtmA1uJ5r9EFm+t6gAo0H87t3D/0Re8YLsu/mJTasEaAAadA39DdrK5LjBHR7ua716u7p69Wh84QAV6G78ySGeovzubtq0+wdFdM2P/qVrecI/OgMZUee1HtJ4QSNPESPY2vIsMi1qA4oJOHK3dmnM9rqDqDI3KSo4syvr4QIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBVRch/h7SrDn8rmdZmf91hNoE5fn0R4AcYUhpKcJw9Jx3Dy9pJFczao3e0ni4vx59dyVbTR4pRyvsm1XvT165vGW1McYbNwA0yLbpJkM2TdrS4ydb0RukoCyJyRxRya+dWZgrmCKlYMaAJmXsD5P3EvGHdeBIYBwHeZSaq2LEvq8BdBoK9nHkpT6SiI/zgrEiy3Cy2GZO9L9NEGydb9f8cqWzQKYIH5Yh7SMb5fP6QE26MiKxaVATw26e8WWMBwGCbafSjBa2H5Zaj//uHlQFmgbopCe6m2lIq0YGkWNpPt4jUbswGolVF/408hntu8CcHMp+Rx5pL7aLdGfKri6Ly</ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost/magento/mospsaml/actions/spObserver"/>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="http://localhost/magento/mospsaml/actions/spObserver"/>
+    <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+    <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</NameIDFormat>
+    <IDPSSODescriptor Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost/magento/mospsaml/actions/spObserver" Index="1"/>
+  </SPSSODescriptor>
+</EntityDescriptor>

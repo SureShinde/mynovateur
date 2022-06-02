@@ -1,0 +1,12 @@
+<?php /** * Copyright © Magento, Inc. All rights reserved. * See COPYING.txt for license details. */ /** @var \Magento\Cookie\Block\Html\Notices $block */ /** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */ ?> <?php /** @var \Magento\Cookie\Helper\Cookie $cookieHelper */ $cookieHelper = $block->getData('cookieHelper'); if ($cookieHelper->isCookieRestrictionModeEnabled()): ?> <div role="alertdialog" tabindex="-1" class="message global cookie" id="notice-cookie-block"><div role="document" class="content" tabindex="0"><p><strong><?= $block->escapeHtml(__('By continuing your browsing on this site, you agree to the use of cookies in order to optimize the functionality of the')) ?></strong> <span><a href="http://www.shop.numericups.com"><strong>www.shop.numericups.com</strong></a></span> <strong><?= $block->escapeHtml(__('website through the production of anonymous and statistical data. You also agree to the use of third party cookies in order to enable content sharing from and/or to social media provider .')) ?></strong> <?= $block->escapeHtml(__('<a href="%1">Learn more</a>.', $block->getPrivacyPolicyLink()), ['a']) ?></p><div class="actions"><button id="btn-cookie-allow" class="action allow primary"><span><?= $block->escapeHtml(__('OK')) ?></span></button></div></div></div><?= /* @noEscape */ $secureRenderer->renderStyleAsTag("display: none;", 'div#notice-cookie-block') ?> <script type="text/x-magento-init">
+        {
+            "#notice-cookie-block": {
+                "cookieNotices": {
+                    "cookieAllowButtonSelector": "#btn-cookie-allow",
+                    "cookieName": "<?= /* @noEscape */ \Magento\Cookie\Helper\Cookie::IS_USER_ALLOWED_SAVE_COOKIE ?>",
+                    "cookieValue": <?= /* @noEscape */ $cookieHelper->getAcceptedSaveCookiesWebsiteIds() ?>,
+                    "cookieLifetime": <?= /* @noEscape */ $cookieHelper->getCookieRestrictionLifetime() ?>,
+                    "noCookiesUrl": "<?= $block->escapeJs($block->getUrl('cookie/index/noCookies')) ?>"
+                }
+            }
+        }</script><?php endif; ?>

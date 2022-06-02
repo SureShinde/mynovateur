@@ -1,0 +1,2 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1653998614;s:6:"expire";i:9999999999;s:4:"tags";s:40:"184_DB_PDO_MYSQL_DDL,184_DB_DDL,184_MAGE";}
+{"AMASTY_LBL_CSTR_GROUP_LBL_ID_AMASTY_LBL_ENTT_LBL_ID":{"FK_NAME":"AMASTY_LBL_CSTR_GROUP_LBL_ID_AMASTY_LBL_ENTT_LBL_ID","SCHEMA_NAME":null,"TABLE_NAME":"amasty_label_customer_group","COLUMN_NAME":"label_id","REF_SHEMA_NAME":"","REF_TABLE_NAME":"amasty_label_entity","REF_COLUMN_NAME":"label_id","ON_DELETE":"CASCADE"}}

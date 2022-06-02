@@ -1,0 +1,2 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1653998614;s:6:"expire";i:9999999999;s:4:"tags";s:23:"184_REFLECTION,184_MAGE";}
+{"get":{"type":"\\Magento\\Rma\\Api\\Data\\RmaInterface","isRequired":true,"description":null,"parameterCount":1},"getList":{"type":"\\Magento\\Rma\\Api\\Data\\RmaSearchResultInterface","isRequired":true,"description":null,"parameterCount":1},"save":{"type":"\\Magento\\Rma\\Api\\Data\\RmaInterface","isRequired":true,"description":"","parameterCount":1},"delete":{"type":"bool","isRequired":true,"description":"","parameterCount":1}}

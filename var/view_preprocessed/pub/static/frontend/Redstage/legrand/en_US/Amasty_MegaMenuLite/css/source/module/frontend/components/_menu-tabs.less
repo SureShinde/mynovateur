@@ -1,0 +1,46 @@
+//
+//  Amasty Menu Tabs Component
+//  ______________________________________________
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ammenu-tabs-list {
+        & {
+            .ammenu-flex();
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .ammenu-item {
+            .ammenu-flex(center, center);
+
+            flex-grow: 1;
+            cursor: pointer;
+        }
+
+        .ammenu-button {
+            & {
+                .ammenu-reset(button);
+                .ammenu-transition(.1);
+
+                width: 100%;
+                min-height: 50px;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 19px;
+            }
+
+            &.-active {
+                font-weight: 500;
+            }
+
+            &:hover {
+                color: #000;
+            }
+        }
+    }
+}

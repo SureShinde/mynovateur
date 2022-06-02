@@ -1,0 +1,86 @@
+<?php /** * Webkul Software. * * @category Webkul * @author Webkul * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com) * @license https://store.webkul.com/license.html */ $helper = $this->helper('Webkul\MpAssignProduct\Helper\Data'); $address = $helper->getSavedAddress(); ?> <div class="wk-right-loc-field"><div class="control loc-control"><input class="input-text loc-input" id="zipaddress" type="number" name="zipaddress" value="<?= $address ?>" placeholder="<?= __('Enter Pincode'); ?>" /><img class="wk-pincode-img" src='<?= $block->getViewFileUrl('images/header-location.svg'); ?>' alt='' /></div><div class="track-order"><a class="btn-track" href="<?php echo $this->getUrl('sales/guest/form');?>" target="_blank"><img class="wk-truck-img" src='<?= $block->getViewFileUrl('images/header-truck.svg'); ?>' alt='' /><span>TRACK ORDER</span></a></div></div><div id="zipaddress-modal"><div class="control loc-control"><div class="wk-logo-div"><img class="wk-logo-img" src='<?= $block->getViewFileUrl('images/wk-logo.png'); ?>' alt='' /><p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p></div><div class="wk-submit-code"><p>To serve you better, please provide us your Pincode!</p><input class="input-text loc-input" id="zipaddressinp" type="number" name="zipaddressinp" value="<?= $address ?>" placeholder="<?= __('Enter your pincode'); ?>" /></div></div></div><script>
+require([
+    "jquery",
+    "mage/translate",
+    "Magento_Ui/js/modal/modal",
+    "Magento_Ui/js/modal/alert",
+    "Magento_Ui/js/modal/confirm"
+],function ($, $t, modal, alert, confirmation) {
+    var self = this;
+    var zipcode = "<?= $address ?>";
+    var options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        
+        title: "<?= __('Enter your zip code'); ?>",
+        modalClass: 'zipaddress-modal-popup',
+        buttons: [{
+            text: $.mage.__('Submit'),
+            class: '',
+            click: function () {
+                
+                var updatedZip = $('#zipaddressinp').val();
+                if (zipcode && zipcode != updatedZip) {
+                    confirmation({
+                        title: $.mage.__('Confirm'),
+                        content: $.mage.__('On location change cart will empty.'),
+                        actions: {
+                            confirm: function(){
+                                locationUpdate(updatedZip);
+                            },
+                            cancel: function(){},
+                            always: function(){}
+                        }
+                    });
+                } else if (!zipcode){
+                    locationUpdate(updatedZip);
+                }
+                this.closeModal();
+            }
+        }]
+    };
+   
+
+    function locationUpdate(updatedZip) {
+        $.ajax({
+            url: "<?= $block->getUrl('mpassignproduct/index/setaddress'); ?>",
+            data: {
+                'address':updatedZip,
+            },
+            type: 'POST',
+            dataType:'html',
+            beforeSend: function() {
+                $('body').trigger('processStart');
+            },
+            success: function (transport) {
+                $('body').trigger('processStop');
+                var response = $.parseJSON(transport);
+                if (!response.status) {
+                    alert({
+                        title: $.mage.__('Error'),
+                        content: $.mage.__(response.msg),
+                        actions: {
+                            always: function(){}
+                        }
+                    });
+                } else {
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function showPopup() {
+        $('#zipaddress-modal').modal(options).modal('openModal');
+    }
+    if (!zipcode) {
+        showPopup();
+    }
+
+    $('#zipaddress').on('click', function() {
+        showPopup();
+        $('.zipaddress-modal-popup .action-close').css('display', 'inline-block');
+        
+    });
+})</script>

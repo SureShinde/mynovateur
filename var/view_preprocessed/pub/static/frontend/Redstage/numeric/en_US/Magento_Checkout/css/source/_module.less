@@ -1,0 +1,165 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+@import 'module/_cart.less';
+@import 'module/_minicart.less';
+@import 'module/_checkout.less';
+
+
+& when (@media-common = true) {	
+	.checkout_row:before {
+	    display: table;
+	    content: " ";
+	}	
+	.checkout_row{
+		margin-top: 8%;
+		margin-bottom: 8%;
+		.page-title-wrapper{
+			.page-title{
+				font-size:34px;
+			}
+		}
+	}
+	.checkout_row:after {
+	    clear: both;
+	    margin-bottom: 5%;
+	}
+	.checkout_row_item {
+		&.container-left {
+			float: left;
+		}
+	}
+	.checkout_row {
+		.container-right {
+			float: right;
+		}
+	}
+	.checkout_row{
+		.container-right {
+			width: 50%;
+			float: right;
+			.actions-toolbar{
+				a.action.primary.continue {
+					margin-top: 20px;
+					border-radius: 20px;
+					&:after{
+						width: 17px;
+                        height: 12px;
+						margin-left: 8px;
+					}
+			    }
+			}
+			.print {
+				display: none;
+			
+			}
+		}
+	} 
+	.page-title {
+	    font-size: 35px;
+		padding-bottom: 20px;
+	    font-weight: bold;
+		color: #000;
+	}
+	#registration > div > a.action.primary {
+	    background: #fff;
+	    color: #000;
+		padding: 5px 30px;
+	    font-size: 18px;
+	}
+	a.action.primary.continue {
+	    font-size: 17px;
+	    width: 290px;
+	}
+
+	p {
+	    margin-top: 0rem;
+	    margin-bottom: 1rem;
+	    font-size: 18px;
+	}
+	.columns:after {
+	    clear: both;
+	    content: ' ';
+	    display: block;
+	    height: 0;
+	    overflow: hidden;
+	    visibility: hidden;
+	   
+	}
+	.checkout-success{
+		span{
+			font-size: 18px;
+			font-weight: bold;
+		}
+	}
+	.checkout-index-index{
+		.form{
+			&.payments{
+				.fieldset{
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+	.checkout_row .container-left{
+		width: 100%;
+	}
+	.checkout_row_item{
+		.page-title{
+			font-size: 28px;
+		}
+		&.container-right {
+			display: contents;
+			text-align: center;
+			.checkout-success{
+				p{
+					font-size: 14px;
+					font-weight: 600;
+				}
+			}
+			#registration{
+				p{
+					font-size: 14px;
+					font-weight: 600;
+				}
+				> div {
+					> a.action.primary{
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+	.checkout-success {
+		span{
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.actions-toolbar{				
+			span{
+				font-size: 16px;
+			}
+			.action.primary.continue{
+				font-size: 16px;
+				width: 250px;
+			}
+		}
+	}
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+}

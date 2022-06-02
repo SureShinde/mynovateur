@@ -1,0 +1,18 @@
+<?php /** * Custom Footer Links * */ ?> <div class="footer-middle"><?php echo $this->getLayout() ->createBlock('Magento\Cms\Block\Block') ->setBlockId('footer-menu') ->toHtml(); ?></div><div id="back_top"><i class="fas fa-chevron-up"></i></div><script>
+    require([
+        'jquery',
+      ], function ($) {
+
+        
+        let copyLoginLink = $('li.link.authorization-link').find('a').attr('href');
+        if(copyLoginLink){
+            $(".customer-login-info a.action.primary.sign-in").attr("href", copyLoginLink);
+        }
+        $(window).on("load resize",function() {
+            if($(window).width() < 768 ){
+               $('.footer-middle .block-title.parent').click(function(){
+                  $(this).toggleClass('active');
+               })
+            }
+         });
+   });</script>

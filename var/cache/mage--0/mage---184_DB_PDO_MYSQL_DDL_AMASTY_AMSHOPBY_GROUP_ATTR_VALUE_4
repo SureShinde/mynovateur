@@ -1,0 +1,2 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1653998614;s:6:"expire";i:9999999999;s:4:"tags";s:40:"184_DB_PDO_MYSQL_DDL,184_DB_DDL,184_MAGE";}
+{"FK_48904B8AA7D37656849240EB1C2061BB":{"FK_NAME":"FK_48904B8AA7D37656849240EB1C2061BB","SCHEMA_NAME":null,"TABLE_NAME":"amasty_amshopby_group_attr_value","COLUMN_NAME":"group_id","REF_SHEMA_NAME":"","REF_TABLE_NAME":"amasty_amshopby_group_attr","REF_COLUMN_NAME":"group_id","ON_DELETE":"CASCADE"}}

@@ -1,0 +1,89 @@
+//
+//  Common (styles-m.css)
+//  _____________________________________________
+& when (@media-common = true) {
+    .navigation li.level0 + div {
+        display: inline-block;
+    }
+    .page-layout-1column {
+        .product.media {
+            position: relative;
+        }
+    }
+    .product-info-main-wrapper {
+        overflow: hidden;
+    }
+}
+
+//
+//  Mobile (styles-m.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .navigation {
+        .submenu {
+            &:not(:first-child) {
+                .active {
+                    >a {
+                        border-color: #5D83BE !important;
+                    }
+                }
+            }
+        }
+        .level0.active {
+            >a {
+                &:not(.ui-state-active) {
+                    border-color: #5D83BE !important;
+                }
+            }
+        }
+        .level0.has-active {
+            >a {
+                &:not(.ui-state-active) {
+                    border-color: #5D83BE !important;
+                }
+            }
+        }
+    }
+
+    .navigation {
+        .level0.parent {
+            >.level-top.ui-state-active {
+                >span&+span {
+                    border-bottom: none;
+                    color: #575757 !important;
+                }
+            }
+        }
+    }
+    .product-info-main-wrapper {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+//
+//  Tablet
+//  _____________________________________________
+
+// This will add styles for tablet devices. When using native media-queries, we recommend wrapping your media-queries with media-width Magento mixins or media-target
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__m) and (max-width: (@screen__xl - 1)) {
+        // styles for breakpoint >= 768px and < 1440px
+    }
+}
+//
+//  Desktop (style-l.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .zipaddress-modal-popup {
+        .action-close {
+            display: block !important;
+        }
+    }
+}

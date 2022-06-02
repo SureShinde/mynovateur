@@ -1,0 +1,19 @@
+<?php /** * Copyright © Magento, Inc. All rights reserved. * See COPYING.txt for license details. */ /** @var $block Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare */ $compare_active = ""; $redstage_helper = $this->helper('Redstage\Catalog\Helper\Data'); $compare_list = $redstage_helper->getCompareList(); if(!empty($compare_list['items'])){ foreach($compare_list['items'] as $key => $value){ $in_comparelist = false; if($block->getProduct()->getId() == $value["id"]){ $in_comparelist = true; break; } } if(!empty($in_comparelist) && $in_comparelist){ $compare_active = "compare-active"; } } ?> <a href="#" id='product_compare_<?= $block->getProduct()->getId() ?>' class="action tocompare <?php ?>" title="<?= $block->escapeHtml(__('Compare')) ?>" aria-label="<?= $block->escapeHtml(__('Compare')) ?>" data-post='<?= /* @noEscape */ $block->getCompareHelper()->getPostDataParams($block->getProduct()) ?>' role="button"><span><?= $block->escapeHtml(__('Compare')) ?></span></a> <script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(document).ready(function () {            
+            $(document).on('customer-data-reload', function (event, sections) {
+                
+                var storage = localStorage.getItem("mage-cache-storage");
+                
+                $.each($.parseJSON(storage), function(key,value) {                
+                    $.each(value['items'], function(key2,item) {                        
+                        $("#product_compare_"+item['id']).addClass("compare-active");
+                         
+                    });
+                });
+            });
+             
+        });
+    });</script>

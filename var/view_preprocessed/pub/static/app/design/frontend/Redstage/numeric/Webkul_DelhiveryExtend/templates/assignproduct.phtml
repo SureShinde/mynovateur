@@ -1,0 +1,44 @@
+<?php /** * Webkul Software. * * @category Webkul * @package Webkul_MpAssignProduct * @author Webkul * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com) * @license https://store.webkul.com/license.html */ ?> <div class="wk-loading-mask wk-display-none"><div class="wk-loader"></div></div><?php $assignedProducts = $block->getAssignedProducts(); $product = $block->getProduct(); $productType = $product->getTypeId(); $isPriceVisible = $block->isShippingCostEnableOnProPage(); ?> <?php if ($assignedProducts->getSize()):?> <div id="product_list" class="seller-container"><p>Check our selling partners for your location</p><div class="seller-wrapper"><div class="deliver-details-section"><p>Delivered within 5 to 7 days</p><p>Sold and delivery by :<span class="seller-count"></span></p></div><div id="product_list" class="wk-ap-product-list wk-ap-fieldset"><?php foreach ($assignedProducts as $assignedProduct): ?> <?php $sellerDetails = $block->getSellerDetail($assignedProduct->getSellerId()); $shopTitle = $sellerDetails->getShopTitle(); if ($shopTitle == "") { $shopTitle = $sellerDetails->getShopUrl(); } $shopUrl = $sellerDetails->getShopUrl(); ?> <div class="main-seller-div"><p><span class="wk-ap-shop-title"><a class="wk-ap-shop-link" title="<?= /* @noEscape */ $shopTitle; ?>" target="_blank" href="<?= /* @noEscape */ $block->getUrl('marketplace/seller/profile',['shop'=>$shopUrl]); ?>"><?= /* @noEscape */ $shopTitle; ?></a></span></p><div class=price-section><?php if ($isPriceVisible) { $sellerOrigin = $block->getSellerOriginPostalCode($sellerDetails->getSellerId()); $customerOrigin = $block->getCustomerOriginPostalCode(); $shippingCost = $block->getDeliveryShipCost($sellerOrigin, $customerOrigin, $product); $shippingPrice = $block->getFormattedPrice($shippingCost); $sellerProPrice = $block->getFormattedPrice($assignedProduct->getPrice()); ?> <div class="price"><span class="wk-ap-product-price product" data-seller-price="<?= $assignedProduct->getPrice(); ?>"><span class="amount"><?= $sellerProPrice ?></span></span> <span class="wk-ap-product-price shipping-price"><?= /* @noEscape */ __('Shipping Price : ').$shippingPrice ?></span></div><?php } ?> <div class="qty"><input type="number" class="wk-ap-qty input-text qty" title="<?= /* @noEscape */ __('Qty'); ?>" value="1" maxlength="12" name="qty"><div class="qty-changer"><a href="javascript:void(0)" class="qty-dec"><i class="fas fa-minus"></i></a> <a href="javascript:void(0)" class="qty-inc"><i class="fas fa-plus"></i></a></div></div><div class="add-to-cart"><button data-id="<?= /* @noEscape */ $assignedProduct->getId() ?>" class="wk-ap-add-to-cart action primary tocart" title="<?= /* @noEscape */ __('Add to Cart'); ?>" type="button"><span><?= /* @noEscape */ __('Add to Cart'); ?></span></button></div></div></div><?php endforeach; ?></div></div></div><?php endif; ?> <?php if (count($assignedProducts) == 0){ ?> <p class="no-seller-text"><span><?= __('No seller available for your location') ?></span></p><?php } ?> <script id="seller-row-template" type="text/x-magento-template">
+    <div class="main-seller-div">    
+        <p>
+            <span class="wk-ap-shop-title">
+                <%- data.shop_url %></span></p>
+        <div class=price-section>
+            <?php if ($isPriceVisible) {?>
+                <div class="price">
+                    <span class="wk-ap-product-price"><%- data.seller_price %></span>
+                    <span class="wk-ap-product-price shipping-price"><%- data.ship_price %></span></div>
+            <?php } ?> <div class="qty">
+                <input type="number" class="wk-ap-qty input-text qty" title="<?= /* @noEscape */ __('Qty'); ?>" value="1" maxlength="12" name="qty">
+                <div class="qty-changer">
+                    <a href="javascript:void(0)" class="qty-dec"><i class="fas fa-minus"></i></a>
+                    <a href="javascript:void(0)" class="qty-inc"><i class="fas fa-plus"></i></a></div></div>
+            <div class="add-to-cart">
+                <button data-id="<%- data.assign_pro_id %>"
+                    class="wk-ap-add-to-cart action primary tocart"
+                    title="<?= /* @noEscape */ __('Add to Cart'); ?>"
+                    type="button">
+                    <span><?= /* @noEscape */ __('Add to Cart'); ?></span></button></div></div></div></script><script type="text/x-magento-init">
+{
+    "body": {
+        "Webkul_MpAssignProduct/js/assignproduct": ""
+    }
+}</script><script>
+    require([
+        'jquery'
+    ], function ($) {
+        $(".qty-inc").unbind('click').click(function(){
+            if($(this).parents('.qty').find("input.input-text.qty").is(':enabled')){
+                $(this).parents('.qty').find("input.input-text.qty").val((+$(this).parents('.qty').find("input.input-text.qty").val() + 1) || 0);
+                $(this).parents('.qty').find("input.input-text.qty").trigger('change');
+                $(this).focus();
+            }
+        });
+        $(".qty-dec").unbind('click').click(function(){
+            if($(this).parents('.qty').find("input.input-text.qty").is(':enabled')){
+                $(this).parents('.qty').find("input.input-text.qty").val(($(this).parents('.qty').find("input.input-text.qty").val() - 1 > 0) ? ($(this).parents('.qty').find("input.input-text.qty").val() - 1) : 0);
+                $(this).parents('.qty').find("input.input-text.qty").trigger('change');
+                $(this).focus();
+            }
+        });
+    });</script>

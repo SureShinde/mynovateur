@@ -1,0 +1,2 @@
+a:4:{s:4:"hash";s:0:"";s:5:"mtime";i:1653998614;s:6:"expire";i:9999999999;s:4:"tags";s:40:"184_DB_PDO_MYSQL_DDL,184_DB_DDL,184_MAGE";}
+"CREATE TABLE `admin_system_messages` (\n  `identity` varchar(100) NOT NULL COMMENT 'Message ID',\n  `severity` smallint(5) unsigned NOT NULL DEFAULT 0 COMMENT 'Problem type',\n  `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Create date',\n  PRIMARY KEY (`identity`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Admin System Messages'"

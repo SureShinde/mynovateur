@@ -1,0 +1,36 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .breadcrumbs {
+        .lib-breadcrumbs();
+        .item{
+            text-transform: uppercase;
+            color: #000;
+            &:not(:last-child):after{
+                content: "/";
+                font-family: 'Open Sans';
+                margin: 0 5px;
+            }
+        }
+        strong{
+            color: #000;
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .breadcrumbs {
+        
+    }
+}

@@ -1,0 +1,1461 @@
+<?php $roomBundlesCollection = $block->getRoomBundle(); $roomTypesCollection = $block->getRoomType(); print_r($this->getRequest()->getParam('quoteData')); ?> <div id="counter"></div><script type="text/javascript" src="https://github.com/niklasvh/html2canvas/releases/download/0.5.0-alpha1/html2canvas.js"></script><script type="text/javascript">
+require(
+    [
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],
+    function(
+        $,
+        modal
+    ){
+        $(document).ready(function() {
+            <?php if(!$this->getRequest()->getParam('customerId') && !$this->getRequest()->getParam('quoteData')){ ?>
+            setTimeout(function(){ 
+                $('.room-bundle:eq(0)').trigger("click");
+            }, 500);
+            $("#create-quote").hide(); 
+            $("#cart-message").hide(); 
+            $('#counter').html(function(i, val) {return +val+1 });
+            <?php } ?> $(document).on("click",".room-bundle",function(){                 
+                $(".room-type").removeClass("active");
+                var bundle_name = $(this).attr('data-name');
+                var room_type_config_id = $(this).attr('data-config-ids');
+                boqRoomSet(bundle_name, room_type_config_id);
+                $(this).addClass("active");
+            });
+
+            $(document).on("click",".clickable-room-type",function(){                 
+                $(".room-type").removeClass("active");
+                var name = $(this).attr('data-name');
+                var id = $(this).attr('data-id');
+                var range_config_id = $(this).attr('data-range-config');
+                addRoom(name, id, range_config_id);
+                $(this).addClass("active");
+            });
+
+            $(document).on("click",".roomtitle label",function(){
+                $(this).parent().toggleClass("active");
+                $(this).parent().siblings(".room-details").toggle();
+            });
+
+            $(document).on("change",".dropdownConfigRange",function(){
+                var boqRoomTypeId = $(this).attr('data-room-type-id');
+                var index = $(this).attr('data-index');
+                getColorAttr(this,boqRoomTypeId,index);
+            });
+
+            $(document).on("change",".colorDropdown",function(){
+                var rangeId = $(this).attr('data-range-id');
+                var boqRoomTypeId = $(this).attr('data-room-type-id');
+                var index = $(this).attr('data-index');
+                checkProductFinishedAttr(this,rangeId,boqRoomTypeId,index);
+            });
+            $(document).on("change",".plates-and-frames-colorDropdown",function(){
+                var rangeId = $(this).attr('data-range-id');
+                var boqRoomTypeId = $(this).attr('data-room-type-id');
+                var index = $(this).attr('data-index');
+                platesAndFramesProducts(boqRoomTypeId,index);
+            });
+
+            $(document).on("change",".finishedDropdown",function(){
+                var boqRoomTypeId = $(this).attr('data-room-type-id');
+                var index = $(this).attr('data-index');
+                boqProducts(boqRoomTypeId,index);
+            });            
+
+            $(document).on("click",".cloneRoom",function(){                
+                var index = $(this).attr('data-index');
+                var roomTypeName = $(this).attr('data-room-type-name');
+                var boqRoomTypeId = $(this).attr('data-room-type-id');
+                var boqRangeIds = $(this).attr('data-range-ids');
+                cloneRoomType(index,roomTypeName,boqRoomTypeId,boqRangeIds);
+            });
+
+            $(document).on("click",".removeRoom",function(){                
+                var index = $(this).attr('data-index');
+                removeContainer(index);
+            });
+
+            $(document).on("click",".preferable-button",function(){                   
+                $(".preferable-button").removeClass("active"); 
+                var attrValue = $(this).attr('data-value');  
+                $('input[name = preferableSpace]').val(attrValue);                         
+                
+                $(".resetRoomType").trigger("click");
+                $(".resetColor").trigger("click");
+                $(this).addClass("active");
+                $('.roomtitle').removeClass('active');
+                $(".roomtitle label").parent().siblings(".room-details").hide();
+
+                $(".boq-products-list").remove();
+                $(".recommended-product-list").remove();
+                $(".finishedDropdown").remove();
+                $(".colorDropdown").remove();
+                $(".dropdownConfigRange").val(0);
+                $(".product-alert").remove();
+                $(".room-details").hide(); 
+                $("#create-quote").hide();
+            });
+
+            $(document).on("click",".resetRoomType",function(){    
+            
+            var parentElement = $(this).parent("div.option-wrapper.fieldset").parent().parent(".room-details");            
+                parentElement.children("div.product-list").children(".boq-products-list").remove();
+                $(this).siblings("div.field").not('div.field:first').remove();
+                $(this).siblings("div.field").children(".dropdownConfigRange").val(0);
+                
+                if($(this).parent(".fieldset").parent("div").parent(".room-details").children(".product-alert").length){
+                    $(this).parent(".fieldset").parent("div").parent(".room-details").children(".product-alert").remove();
+                }
+                if(parentElement.children(".product-list").length){
+                    parentElement.children(".product-list").remove();
+                }
+                if(parentElement.children(".recommended-product-list").length){
+                    parentElement.children(".recommended-product-list").remove();
+                }
+
+                if($(".boq-products-list").length == 0){
+                    $("#create-quote").hide();
+                }
+            });
+
+            $(document).on("click",".resetColor",function(){ 
+                var parentElement = $(this).parent("div.option-wrapper.fieldset").parent(".plates-and-frames");
+                
+                parentElement.children("div.product-list").children(".boq-products-list").remove();
+                if($(this).parent(".fieldset").parent("div.plates-and-frames").children(".product-alert").length){
+                    $(this).parent(".fieldset").parent("div.plates-and-frames").children(".product-alert").remove();
+                }
+                
+            });
+
+            $(document).on("click","#print-quote",function(){                
+                printDiv();
+            });
+
+            $(document).on("click","#add-to-cart",function(){   
+                var productData = [];     
+                for (var i = 0; i < $("#room-data-wrapper ol").length; i++) {
+
+                    var idIndex = [];
+                    var olId = $("#room-data-wrapper ol")[i].id;
+                    idIndex = olId.split('-');
+                    var itemIndex = 0;
+                    if(idIndex[0] == "recommended_product_ol"){
+                        itemIndex = $("#ol-"+idIndex[1]).children("li").length;                    
+                    } 
+                    if(idIndex[0] == "plates_and_frames_ol"){
+                        itemIndex = $("#ol-"+idIndex[1]).children("li").length + $("#recommended_product_ol-"+idIndex[1]).children("li").length;       
+                    } 
+                    $("#"+olId+" > li").each(function(index, value) {   
+                        idInput = $('input[name = product_id_'+idIndex[1]+'_'+itemIndex+']').val();
+                        qtyInput = $('input[name = product_qty_'+idIndex[1]+'_'+itemIndex+']').val();
+                        
+                        productData.push({
+                            id : idInput, 
+                            qty : qtyInput
+                        });
+                        itemIndex++;
+                    });
+                }     
+                addToCart(productData);        
+            });
+
+                        
+            
+            function boqRoomSet(bundle_name, room_type_config_id){
+                $("#counter").empty(); 
+                $('#counter').html(function(i, val) {return +val+1 });
+                var globalCounter = $('#counter').html();
+                var configIds = room_type_config_id.split(",");
+                var boq_room_type_data = <?php echo json_encode($block->getRoomType()); ?>; 
+                var plusUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/plus.png'); ?>";
+                var cancelUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/cancel.png'); ?>";
+
+                counts = {};
+                $.each(configIds, function(key,value) {
+                  if (!counts.hasOwnProperty(value)) {
+                    counts[value] = 1;
+                  } else {
+                    counts[value]++;
+                  }
+                });    
+                $("#room-data-wrapper").empty(); 
+                $.each( counts, function( key, value ) {
+                  for (var i = 0; i < boq_room_type_data.length; i++) {
+                    if(key == boq_room_type_data[i]['id']){
+                            for (var j = 0; j < value; j++) {
+                                var param = globalCounter+",'"+boq_room_type_data[i]['name']+"',"+boq_room_type_data[i]['id']+",'"+boq_room_type_data[i]['range_config']+"'";
+
+                                $("#room-data-wrapper").append('<div id="layout-container-'+globalCounter+'" class="room-layout">'+
+                                    '<div class="roomtitle">'+
+                                        '<label class="'+ boq_room_type_data[i]['name'].replace(/\s/g, '') +'_'+ boq_room_type_data[i]['id'] +'">'+boq_room_type_data[i]['name']+'</label>'+
+                                        '<div class="buttonset">' +
+                                            '<a href="javascript:void(0)" class="action-btn addRoom cloneRoom"  data-index="'+globalCounter+'" data-room-type-name="'+boq_room_type_data[i]['name']+'" data-room-type-id="'+boq_room_type_data[i]['id']+'" data-range-ids="'+boq_room_type_data[i]['range_config']+'" ></a> <a href="javascript:void(0)" class="action-btn removeRoom" data-index="'+globalCounter+'"  ></a>'+
+                                        '</div>'+
+                                    '</div>'+                                    
+                                    '<div id="room-container-'+globalCounter+'" class="room-details" >'+
+                                        '<div id="dropdown-container-'+globalCounter+'">'+
+                                            '<p class="simply-the-result">Please select following items to simply the results:</p>'+
+                                            '<div class="option-wrapper fieldset"><div class="field">'+
+
+                                                '<label>Brand Range</label>'+
+                                                '<select id="config-range-'+globalCounter+'" class="dropdownConfigRange" data-room-type-id="'+boq_room_type_data[i]['id']+'" data-index="'+globalCounter+'">'+
+                                                    '<option value="0">Choose product range</option>'+                                       
+                                                '</select></div>'+
+                                                '<span class="resetRoomType"><i class="fas fa-redo-alt" aria-hidden="true"></i>Reset</span>'+
+                                            '</div>'+
+                                        '</div>'+
+                                    '</div>'+
+
+                                '</div>');
+                             
+                              roomTypeConfigList(boq_room_type_data[i]['range_config'], globalCounter);
+                              $('#counter').html(function(i, val) {return +val+1 });
+                              globalCounter = $('#counter').html();
+                          }
+                      }
+                    }
+                });
+            }
+
+            function addRoom(name, id, roomTypeConfigData){
+                var globalCounter = $('#counter').html();
+                var plusUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/plus.png'); ?>";
+                var cancelUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/cancel.png'); ?>";
+                var param = globalCounter+",'"+name+"',"+id+",'"+roomTypeConfigData+"'";
+                /*var numItems = $('.'+ name.replace(/\s/g, '') +'_'+id).length;
+                numItems++;*/
+                 $("#room-data-wrapper").append('<div id="layout-container-'+globalCounter+'" class="room-layout">'+
+                        '<div class="roomtitle">'+
+                           '<label class="'+ name.replace(/\s/g, '') +'_'+ id +'">'+ name +'</label>'+
+                            '<div class="buttonset">' +
+                                '<a href="javascript:void(0)" class="action-btn AddRoomType cloneRoom" data-index="'+globalCounter+'" data-room-type-name="'+name+'" data-room-type-id="'+id+'" data-range-ids="'+roomTypeConfigData+'"><img src="'+plusUrl+'"/></a> <a href="javascript:void(0)" class="removeRoomType removeRoom" data-index="'+globalCounter+'" ></a>'+
+                            '</div>'+
+                        '</div>'+    
+                        '<div id="room-container-'+globalCounter+'" class="room-details" >'+
+                                '<div class="option-wrapper fieldset"><div class="field"><label>Brand Rang</label>'+
+                                    '<select id="config-range-'+globalCounter+'" class="dropdownConfigRange" data-room-type-id="'+id+'" data-index="'+globalCounter+'" >'+
+                                        '<option value="0">Choose product range</option>'+                                       
+                                    '</select></div>'+
+                                    '<span class="resetRoomType" ><i class="fas fa-redo-alt" aria-hidden="true"></i>Reset</span>'+
+                                '</div>'+
+                        '</div>'+
+
+                    '</div>');
+                     
+                roomTypeConfigList(roomTypeConfigData, globalCounter);
+                $('#counter').html(function(i, val) {return +val+1 });
+            }
+
+            $(document).on("input",".boq_product_qty",function(){
+                isNormalInteger(this,this.value);
+                var qty = this.value;
+                var unitPrice = $(this).parent("div.control").parent("div.qty").parent("div.qty-wrapper").children("div.price-box").children("span.price-wrapper").children("span.price").attr('data-plain-price');
+                var priceId = $(this).parent("div.control").parent("div.qty").parent("div.qty-wrapper").children("div.price-box").children("span.price-wrapper").children("span.price").attr('id');
+                
+                $.ajax({
+                    url: "<?= $block->getTotalPriceUrl() ?>",
+                    type: "POST",
+                    data: {qty:qty, price:unitPrice},
+                    
+                    success: function (response) {                
+                        $("#"+priceId).attr('data-total-price', response);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                       console.log(textStatus, errorThrown);
+                    }
+                });
+            });
+
+
+            function isNormalInteger(element,str) {
+                var n = Math.floor(Number(str));
+
+                var number = n !== Infinity && String(n) === str && n > 0;  
+                           
+                if(number == 1 || String(n) == parseInt(str) && parseInt(str) > 0){
+                    $(element).next("span").empty();
+                    
+                }
+                /*else if(String(n) !== str){
+                    $(element).next("span").text("Quantity should be under limit.");
+                }*/
+                else{
+                    $(element).next("span").text("Quantity should be greater than zero.");
+                    
+                }
+
+                 return number;
+            }
+
+        });
+    
+  
+
+    function roomTypeConfigList(ids, indx){
+         $.ajax({
+            url: "<?= $block->getAjaxUrl() ?>",
+            type: "POST",
+            data: {ids:ids},
+            showLoader: true,
+            success: function (response) {                
+                $.each($.parseJSON(response), function(index, value){
+                    $("#config-range-"+indx).append('<option value="'+index+'">'+value+'</option>');
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+
+    function getColorAttr(elm,roomTypeId,indx){
+        
+        if( $('#'+elm.id+' option:selected').val() != "0"){
+            var rangeId = $('#'+elm.id+' option:selected').val();
+            $.ajax({
+                url: "<?= $block->getColorAjaxUrl() ?>",
+                type: "POST",
+                data: {rangeId:rangeId},
+                showLoader: true,
+                success: function (response) {
+                    if($("#finished-"+indx).length){
+                        $("#finished-"+indx).parent("div.field").remove();
+                    }
+                    if($("#color-"+indx).length){
+                        $("#color-"+indx).parent("div.field").remove();
+                    }
+                    
+                    if($("#product-list-"+indx).length){
+                        $("#product-list-"+indx).remove();
+                    }
+                    if($("#recommended-product-list-"+indx).length){
+                        $("#recommended-product-list-"+indx).remove(); 
+                    }
+                    var colorDropdown = '<div class="field"><label>Color</label><select id="color-'+indx+'" data-range-id="'+rangeId+'" data-room-type-id="'+roomTypeId+'" data-index="'+indx+'" class="colorDropdown" >'+
+                        '<option value="0">Color</option>';
+                    $.each($.parseJSON(response), function(index, value){
+                        colorDropdown += '<option value="'+index+'">'+value+'</option>';
+                    });
+                    colorDropdown += '</select></div>';
+                        $(colorDropdown).insertBefore('#room-container-'+ indx+' .resetRoomType')
+                        $("#cart-message").hide();
+                        $("#add-to-cart").prop('disabled', false);
+                }
+            });
+        }else{
+            if($("#finished-"+indx).length){
+                $("#finished-"+indx).parent("div.field").remove();
+            }
+            if($("#color-"+indx).length){
+                $("#color-"+indx).parent("div.field").remove();
+            }
+            
+            if($("#product-list-"+indx).length){
+                $("#product-list-"+indx).remove();
+            }
+            if($("#recommended-product-list-"+indx).length){
+                $("#recommended-product-list-"+indx).remove(); 
+            }
+        }
+    }
+
+    function checkProductFinishedAttr(elm,rangeId,roomTypeId,indx){
+        
+        if($("#product-list-"+indx).length){
+            $("#product-list-"+indx).remove();
+        }
+        if($("#recommended-product-list-"+indx).length){
+            $("#recommended-product-list-"+indx).remove();
+        }
+        var elementConfigRange = document.getElementById('config-range-'+indx);  
+        if( $('#'+elm.id+' option:selected').val() != "0"){
+            var colorId = $('#'+elm.id+' option:selected').val();
+            $.ajax({
+                url: "<?= $block->getFinishedAjaxUrl() ?>",
+                type: "POST",
+                data: {rangeId:rangeId,colorId:colorId},
+                showLoader: true,
+                success: function (response) {
+                    if($("#finished-"+indx).length){
+                        $("#finished-"+indx).parent("div.field").remove();
+                    }
+                    
+                    var finishedDropdown = '<div class="field"><label>Finish</label><select id="finished-'+indx+'" class="finishedDropdown" data-room-type-id="'+roomTypeId+'" data-index="'+indx+'" >'+
+                        '<option value="0">Finish</option>';
+                    var countFinishedOption = 0;
+                    $.each($.parseJSON(response), function(index, value){
+                        finishedDropdown += '<option value="'+index+'">'+value+'</option>';
+                        countFinishedOption++;
+                    });
+
+                    finishedDropdown += '</select></div>';
+                    if(countFinishedOption > 0){    
+                        $(finishedDropdown).insertBefore('#room-container-'+indx+' .resetRoomType')
+                        
+                    }else{  
+                        boqProducts(roomTypeId,indx);
+                    }
+
+                    $("#cart-message").hide();
+                    $("#add-to-cart").prop('disabled', false); 
+                }
+            });
+        }else{
+            if($("#finished-"+indx).length){
+                $("#finished-"+indx).parent("div.field").remove();
+            }
+        }
+    }    
+
+    function boqProducts(roomTypeId, indx){
+        var configRangeVal = $('#config-range-'+indx+' option:selected').val();
+        var colorVal = $('#color-'+indx+' option:selected').val();
+        var preferableSpace = $('input[name = preferableSpace]').val();
+        if($('#finished-'+indx+' option:selected').val())
+            var finishedVal = $('#finished-'+indx+' option:selected').val();
+        else
+            var finishedVal = 0;
+        
+        if( configRangeVal != "0" && colorVal != "0"){
+            if($("#product-list-"+indx).length){
+                $("#product-list-"+indx).remove();
+            }
+            if($("#plates-and-frames-"+indx).length){
+                $("#plates-and-frames-"+indx).remove();
+            }
+            if($("#recommended-product-list-"+indx).length){
+                $("#recommended-product-list-"+indx).remove();
+            }
+            
+            $("#room-container-"+indx).append('<div id="product-list-'+indx+'" class="product-list" ></div>'+
+                '<div id="plates-and-frames-'+indx+'" class="plates-and-frames" >'+
+                    '<h3>Select Plates & Frames*</h3>'+
+                    '<div class="option-wrapper fieldset"></div>'+
+                    
+                '</div>'+
+                '<div id="recommended-product-list-'+indx+'" class="recommended-product-list" ></div>');
+
+            var rangeId = $('#config-range-'+indx+' option:selected').val();
+            var productListUrl = "<?= $block->getProductGroupAjaxUrl() ?>";
+            getProductList(productListUrl,roomTypeId,rangeId,colorVal,finishedVal,preferableSpace,indx);
+            
+
+            setTimeout(function() {
+                var recommendedProductUrl = "<?= $block->getRecommendedProductAjaxUrl() ?>";
+                getProductList(recommendedProductUrl,roomTypeId,rangeId,colorVal,finishedVal,preferableSpace,indx);
+                
+                    $( "#color-"+indx ).parent('div.field').clone().appendTo( "#plates-and-frames-"+indx+" .fieldset");
+                    $("#plates-and-frames-"+indx).children("div.fieldset").children("div.field").children("#color-"+indx).attr("id","plates-and-frames-color-"+indx);
+                    $("#plates-and-frames-"+indx).children("div.fieldset").children("div.field").children("label").text("Color / Finishes");
+                    $("#plates-and-frames-color-"+indx).attr("class","plates-and-frames-colorDropdown");
+                    $("#plates-and-frames-"+indx).children("div.fieldset").append('<span class="resetColor"><i class="fas fa-redo-alt" aria-hidden="true"></i>Reset</span>');
+            }, 500);
+            
+
+        }else{            
+            $("#product-list-"+indx).remove();
+            $("#recommended-product-list-"+indx).remove();
+        }
+    }
+
+    function removeContainer(index){
+        if (confirm("Are you sure you want to delete this?")) {
+            $("#layout-container-"+index).remove(); 
+            $('#table-quote ').empty();
+            if($(".boq-products-list").length == 0){
+                $("#create-quote").hide();
+            }
+        }
+        return false;
+    }
+
+    function createQuote(){
+        if($("#table-quote").length){
+            $("#table-quote").empty();
+        }
+        
+        var roomTypeTh = '';
+        var columnArr = [];
+        
+        for (var i = 0; i < $("#room-data-wrapper ol").length; i++) {
+            var idIndex = [];
+            var olId = $("#room-data-wrapper ol")[i].id;
+
+            idIndex = olId.split('-');
+            var newColumn = $("#layout-container-"+idIndex[1]).children("div.roomtitle").children("label").text();
+            if($.inArray(newColumn, columnArr) == '-1'){
+                columnArr[i] = $("#layout-container-"+idIndex[1]).children("div.roomtitle").children("label").text();
+                roomTypeTh += '<th>'+$("#layout-container-"+idIndex[1]).children("div.roomtitle").children("label").text()+'</th>';
+            }            
+        }
+
+        var headings = '<thead>'+
+                '<tr>'+
+                    '<th>Cat Ref</th>'+
+                    '<th>Product</th>'+
+                    '<th>Description</th>'+
+                    roomTypeTh +
+                    '<th>Price</th>'+
+                '</tr>'+
+            '</thead><tbody></tbody>';
+        $('#table-quote').append(headings);
+        
+        var skuIndex = 0;
+        for (var i = 0; i < $("#room-data-wrapper ol").length; i++) {
+
+            var idIndex = [];
+            var olId = $("#room-data-wrapper ol")[i].id;
+            idIndex = olId.split('-');
+
+            var itemIndex = 0;  
+            if(idIndex[0] == "recommended_product_ol"){
+                itemIndex = $("#ol-"+idIndex[1]).children("li").length;                    
+            } 
+            if(idIndex[0] == "plates_and_frames_ol"){
+                itemIndex = $("#ol-"+idIndex[1]).children("li").length + $("#recommended_product_ol-"+idIndex[1]).children("li").length;       
+            } 
+
+            $("#"+olId+" > li").each(function(index, value) {
+                qtyInput = $('input[name = product_qty_'+idIndex[1]+'_'+itemIndex+']').val();
+                if(qtyInput != 0){
+                    var tr = "";
+                    tr += '<tr>';
+                    tr += '<td>'+ $(this).children("div.product-item-info").children("div.product-item-details").children("div.sku").children("span").text() +'</td>'; 
+                    tr += '<td>'+ $(this).children("div.product-item-info").children("div.product-item-details").children("div.short-desc").text() +'</td>';
+                    tr += '<td>'+ $(this).children("div.product-item-info").children("div.product-item-details").children("div.product-name").text() +'</td>';
+
+                    
+                    var checkFlag = 0;
+                    for (var c = 0; c < $("#room-data-wrapper ol").length; c++) {
+                        
+                        if($("#layout-container-"+idIndex[1]+" .roomtitle label").text() == columnArr[c]){
+                            tr += '<td>'+ qtyInput +'</td>';
+                            checkFlag = 1;
+                        }else{
+                            if(columnArr[c]){
+                                tr += '<td></td>';
+                            }
+                        }                            
+                    }
+                    tr += '<td>'+ $(this).children("div.product-item-info").children("div.product-item-details").children("div.qty-wrapper").children("div.price-box").children("span.price-wrapper").children("span.price").attr('data-total-price') +'</td>';                
+                    tr += '</tr>';
+                    $('#table-quote > tbody:last').append(tr);
+                }
+                skuIndex++;
+                itemIndex++;
+
+            });            
+        }
+        
+    }    
+
+    function cloneRoomType(indx,name,id,roomTypeConfigData){
+                
+        var globalCounter = $('#counter').html();
+        
+        var addUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/add.png'); ?>";
+        var plusUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/plus.png'); ?>";
+        var cancelUrl = "<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/cancel.png'); ?>";
+        var param = globalCounter+",'"+name+"',"+id+",'"+roomTypeConfigData+"'";
+        var newElement = '<div id="layout-container-'+globalCounter+'" class="room-layout" ></div>';
+        var selectedRange = $('#config-range-'+indx+' option:selected').val();
+        var selectedcolor = $('#color-'+indx+' option:selected').val();
+        
+        if($("#finished-"+indx+" option:selected").val()){
+            var selectedFinished = $('#finished-'+indx+' option:selected').val();
+        }else{
+            var selectedFinished = 0;
+        }
+        $("#layout-container-"+indx).after(newElement);
+        var cloneData = $("#layout-container-"+indx).children().clone();
+        $("#layout-container-"+globalCounter).append(cloneData);
+
+        $("#layout-container-"+globalCounter).children("div.room-details").attr("id","room-container-"+globalCounter);
+        
+        $("#layout-container-"+globalCounter).children("div.room-details").children("select:eq(0)").attr("id","config-range-"+globalCounter);        
+        $("#layout-container-"+globalCounter).children("div.room-details").children("select:eq(0)").attr("data-index",globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("select:eq(1)").attr("id","color-"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("select:eq(1)").attr("data-index",globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("select:eq(2)").attr("id","finished-"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("select:eq(2)").attr("data-index",globalCounter);
+        $('#config-range-'+globalCounter+' option[value="'+selectedRange+'"]').attr("selected",true);
+        $('#color-'+globalCounter+' option[value="'+selectedcolor+'"]').attr("selected",true);
+        $('#finished-'+globalCounter+' option[value="'+selectedFinished+'"]').attr("selected",true);
+
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.product-list").attr("id","product-list-"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.product-list").children("div.ref-ol").attr("id","ref-ol"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.product-list").children("div.ref-ol").children("ol.product-items").attr("id","ol-"+globalCounter);
+
+        $("#ol-"+globalCounter+" > li").each(function(index, value){
+            console.log("clone"+ index);
+            console.log("clone"+ value);
+            $(this).children("div.product-item-info").children("div.product-item-details").children("div.qty-wrapper").children("div.qty").children("div.control").children(".product_id").attr("name","product_id_"+globalCounter+"_"+index);
+            $(this).children("div.product-item-info").children("div.product-item-details").children("div.qty-wrapper").children("div.qty").children("div.control").children(".boq_product_qty").attr("name","product_qty_"+globalCounter+"_"+index);
+        });
+
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.recommended-product-list").attr("id","recommended-product-list"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.recommended-product-list").children("div.accessories-recommendation").attr("id","recommendation-ol"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.recommended-product-list").children("div.accessories-recommendation").children("div.boq-products-list").attr("id","recommended-product-ol"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.recommended-product-list").children("div.accessories-recommendation").children("div.boq-products-list").children("ol").attr("id","recommended_product_ol-"+globalCounter);
+        $("#recommended_product_ol-"+globalCounter+" > li").each(function(index, value){
+            console.log("recommended clone"+ index);
+            $()
+        });
+
+        /*$("#layout-container-"+globalCounter).children("div.room-details").children("div.ref-ol").attr("id","ref-ol"+globalCounter);
+        $("#layout-container-"+globalCounter).children("div.room-details").children("div.ref-ol").children("ol").attr("id","ol-"+globalCounter);*/
+        $('#counter').html(function(i, val) {return +val+1 });
+        
+    }
+
+    var options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        title: 'Order Review',
+        modalClass: 'boq-modal-popup',
+        width: 200,
+        height: 300,
+        buttons: [{
+            text: $.mage.__('Cancel'),
+            class: '',
+            click: function () {  
+
+
+                this.closeModal();
+            }
+        },
+        {
+            text: $.mage.__('Ok'),
+            class: '',
+            click: function () {
+                
+                console.log("test");
+            }
+        }]
+    };
+
+    var popup = modal(options, $('#popup-modal'));
+    $("#create-quote").on('click',function(){ 
+        createQuote();
+        $("#popup-modal").modal("openModal");
+
+    });
+
+    function addToCart(productData){
+        $.ajax({
+            url: "<?= $block->getAddToCartAjaxUrl() ?>",
+            type: "POST",
+            data: {productData:productData},
+            showLoader: true,
+            success: function (response) {                
+                
+                
+                if(response == "0"){
+                    $("#cart-message").text("Something went wrong.").show();                    
+                }
+                if(response == "1"){
+                    
+                    $("#cart-message").text("successfully added to cart.").show();
+                    $("#add-to-cart").prop('disabled', true);                    
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+
+    }
+
+    function saveQuote(productData){
+
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "<?= $block->getSaveQuoteAjaxUrl() ?>",
+            data: productData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            showLoader: true,
+            timeout: 800000,
+            success: function (data) {
+                
+                if(data == "0"){
+                    $("#cart-message").text("Something went wrong.").show();                    
+                }
+                if(data == "1"){
+                    $("#cart-message").html('<span>Your quote is saved in <a href="<?php echo $block->getMyAccountUrl(); ?>" >My Account</a></span>').show();
+                    $("#save-quote").prop('disabled', true); 
+                    $(".info-heading").load(location.href + " .info-heading");                    
+                }
+ 
+            },
+            error: function (e) {
+ 
+                $("#output").text(e.responseText);
+                console.log("ERROR : ", e);
+                $("#btnSubmit").prop("disabled", false);
+ 
+            }
+        });
+
+    }
+
+    var imageOptions = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true
+            };
+    var imagePopup = modal(imageOptions, $('#popup-image-modal'));            
+    $(document).on("click",".click-image",function(){
+        if($(this).attr('src') != "<?= $block->getPlaceholderImageUrl() ?>"){
+            $(".popup-image").attr('src', $(this).attr('src'));
+            $("#popup-image-modal").modal("openModal");
+        }
+    });
+    
+    $('.modal-footer').hide();
+
+    function printDiv() 
+    {
+        
+        var divToPrint=document.getElementById('table-quote-container');
+
+        
+        var newWin = window.open('', '_blank','');
+        newWin.document.open();
+
+        newWin.document.write('<html><head><style>@media print{'+
+                                                    'body {-webkit-print-color-adjust: exact;'+
+                                                        '}'+
+                                                    'header{'+
+                                                        'position: absolute;'+
+                                                        'top: 0;'+                                                        
+                                                    '}'+
+                                                    '#table-quote{'+
+                                                        'font-family: Arial, Helvetica, sans-serif;'+
+                                                        'border-collapse: collapse;'+
+                                                        'width: 100%;'+                                                        
+                                                        'border: 1px solid #ddd;'+
+                                                        'margin: 30mm 0mm 0mm 0mm;'+
+                                                    '}'+
+                                                    '#table-quote tr{'+
+                                                        'page-break-inside: avoid;'+
+                                                    '}'+
+                                                    '#table-quote thead{'+
+                                                        'margin: 30mm 0mm 0mm 0mm;'+
+                                                    '}'+
+                                                    '#table-quote td, #table-quote th {'+
+                                                        'border: 1px solid #ddd;'+
+                                                        'padding: 5px;'+
+                                                        'text-align: center;'+
+                                                    '}'+
+                                                    '#table-quote td:nth-child(2){'+
+                                                        'width:20%;'+
+                                                        'text-align: left;'+
+                                                    '}'+
+                                                    '#table-quote td:nth-child(3) {'+  
+                                                        'width:35%;'+                     
+                                                        'text-align: left;'+
+                                                    '}'+                                                    
+                                                    '#table-quote td:last-child{'+
+                                                        'width: 15%;'+
+                                                        'padding: 0px;'+
+                                                    '}'+
+                                                    '#table-quote th {'+
+                                                      'padding-top: 12px;'+
+                                                      'padding-bottom: 12px;'+
+                                                      'text-align: center;'+
+                                                      'background-color: unset;'+
+                                                      'box-shadow: inset 0 0 0 1000px #EDEDED;'+           
+                                                    '}}'+
+                                                    '@page {'+
+                                                      'size: A4;'+
+                                                      'margin: 9mm 10mm 10mm 10mm;'+  
+                                                      'widows:2;'+                     
+                                                    '}'+
+                                        '</style>'+
+                                    '</head>'+
+
+                                    '<body onload="window.print()" style="max-width: 1140px;margin: 0px auto;"><header><img class="logo" src="<?php echo $block->getLogoSrc(); ?>" alt="image-icon" width="157" height="60" ></header><div>'+divToPrint.innerHTML+'</div><style> header {  margin-bottom:25px;margin-top:25px;}</style></body></html>');
+
+        newWin.document.close();
+    }
+
+    function getProductList(url,roomTypeId,rangeId,colorVal,finishedVal,preferableSpace,indx){
+        if(url == "<?= $block->getRecommendedProductAjaxUrl() ?>"){
+            var showLoaderValue = false;
+        }else{
+            var showLoaderValue = true;
+        }
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {roomTypeId:roomTypeId, rangeId:rangeId, colorOptionId:colorVal, finishedOptionId:finishedVal, preferableSpace:preferableSpace},
+            showLoader: showLoaderValue,
+            success: function (response) {                
+                if($.parseJSON(response).length != 0){
+                    if($("#no-data-"+indx).length){
+                        $("#no-data-"+indx).remove();
+                    }
+                    $("#create-quote").show();
+                    var products = '';
+                    
+                    var indexCount = 0;
+                    
+                    if(url == "<?= $block->getRecommendedProductAjaxUrl() ?>"){
+                        
+                        if($("#ol-"+indx).children("li").length){
+                            indexCount = parseInt($("#ol-"+indx).children("li").length); 
+                        }
+                    }
+                    var productIndex = 0;
+                    var checkToAddLine = 1;
+                    $.each($.parseJSON(response), function(index, value){
+                        
+                        
+                        if(value.image){
+                            var productImage = value.image;
+                        }else{
+                            var productImage = "<?= $block->getPlaceholderImageUrl() ?>";
+                        }
+
+
+                        
+                        products += '<li class="item product product-item">'+
+                                        '<div class="product-item-info" >'+
+                                            
+                                                '<span class="product-image-container product-image-container-'+value.id+'" style="width: 240px;">'+
+                                                    '<span class="product-image-wrapper" style="padding-bottom: 125%;">'+
+                                                        '<img class="product-image-photo click-image" src="'+productImage+'" loading="lazy" width="240" height="300" alt="">'+
+                                                    '</span>'+
+                                                '</span>'+
+                                        '<div class="product details product-item-details">'+
+                                            '<div class="product-name">'+value.product_name+'</div>'+
+                                            '<div class="short-desc">'+value.description+'</div>'+
+                                            '<div class="sku">Category Ref: <span class="sku-value">'+value.sku+'</span></div>'+
+                                            '<div class="qty-wrapper">'+
+                                                '<div class="field qty">'+
+                                                    '<div class="control">'+      
+                                                        '<input type="hidden" name="product_id_'+indx+'_'+parseInt(indexCount)+'" value="'+value.id+'" class="product_id" />'+                            
+                                                        '<input type="number" class="input-text qty boq_product_qty" name="product_qty_'+indx+'_'+parseInt(indexCount)+'" value="'+value.qty+'" title="Qty" id="product_qty_'+indx+'_'+parseInt(indexCount)+'" />'+
+                                                        '<span class="validateQty"></span>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="price-box price-final_price" data-role="priceBox" data-product-id="'+value.id+'" data-price-box="product-id-'+value.id+'">'+
+                                                    '<span class="price-wrapper ">'+
+                                                        '<span id="product-price-'+indx+'_'+parseInt(indexCount)+'" class="price" data-total-price="'+value.total_value+'" data-plain-price="'+value.plain_value+'">'+value.value+'</span>'+
+                                                    '</span>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+         
+                                    '</div>'+
+                                '</li>';
+                                
+                                if(index != 0 && index % 2 != 0){
+                                    products += '<hr/>';
+                                }
+                                indexCount++;
+                                checkToAddLine++;
+                    });           
+
+                    if($.parseJSON(response).length %2 != 0){  
+                        products += '<hr/>';    
+                    }        
+                    
+                    if(url == "<?= $block->getProductGroupAjaxUrl() ?>"){
+                        if($("#ref-ol"+indx).length){
+                            $("#ref-ol"+indx).remove();
+                        }
+                        $("#room-container-"+indx).children("#product-list-"+indx).append('<div id="ref-ol'+indx+'" class="products wrapper list products-list boq-products-list ref-ol">'+
+                            '<ol id="ol-'+indx+'" class="products list items product-items">'+products+'</ol>'+
+                        '</div>');
+                    }
+
+                    if(url == "<?= $block->getRecommendedProductAjaxUrl() ?>"){
+                        if($("#recommendation-ol"+indx).length){
+                            $("#recommendation-ol"+indx).remove();
+                        }
+                        $("#room-container-"+indx).children("#recommended-product-list-"+indx).append('<div id="recommendation-ol'+indx+'" class="accessories-recommendation">'+
+                                    '<h3>You may also need (Accessoies Recommendations)</h3>'+
+                                    '<div id="recommended-product-ol'+indx+'" class="products wrapper list products-list boq-products-list ref-ol">'+
+                                        '<ol id="recommended_product_ol-'+indx+'" class="products list items product-items">'+products+'</ol>'+
+                                    '</div>'+
+                                '</div>');
+                    }
+                    
+                }else{
+                    if(url == "<?= $block->getProductGroupAjaxUrl() ?>"){
+                        if($("#no-data-"+indx).length){
+                            $("#no-data-"+indx).remove();
+                        }
+                        if($("#ol-"+indx).length){
+                            $("#ol-"+indx).empty();
+                        }
+                        $("#room-container-"+indx).append('<div id="no-data-'+indx+'" class="product-alert">Products are not available.</div>');
+                    }
+                }
+                
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+        
+    var saveQuoteOptions = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        title: 'Order Review',
+        width: 100,
+        height: 200,
+        buttons: [{
+            text: $.mage.__('Cancel'),
+            class: '',
+            click: function () {   
+                this.closeModal();
+            }
+        },
+        {
+            text: $.mage.__('Ok'),
+            class: '',
+            click: function (event) {
+                
+                event.preventDefault();
+
+                
+                var form = $('#save-quote-form')[0];
+
+                
+                var data = new FormData(form);
+
+                
+                data.append("customer_id", "<?= $block->getCustomerId() ?>");
+
+                
+                var preferableSpace = $('input[name = preferableSpace]').val();
+                var roomBundleId = "";
+                var roomBundleName = "";
+                var configIds = "";
+                var activeLabelClassName = "";
+                var activeConfigIdsArray = [];
+                var activeConfigIds = "";
+                var dropdownArray = {};
+                var productArray = {};
+
+                
+                if($(".room-bundle").hasClass("active")){    
+                    $(".room-bundle").each(function(index, value){
+                        if($(this).hasClass("active")){
+                            roomBundleId = $(this).attr('data-id');
+                            roomBundleName = $(this).attr('data-name');
+                            configIds = $(this).attr('data-config-ids');
+                        }
+                    })                
+                    
+                }else{
+                    var labelClassName = "";
+                    var configIdsArray = [];
+                    $(".roomtitle").each(function(index, value) {
+                        labelClassName = $(this).children("label").attr("class");
+                        
+                        configIdsArray.push(labelClassName.split('_')[1]);
+                    });
+                    configIds = configIdsArray.join();
+                }
+
+                
+                $("div.roomtitle.active").each(function(index, value) {
+                    activeLabelClassName = $(this).children("label").attr("class");
+                    
+                    activeConfigIdsArray.push(activeLabelClassName.split('_')[1]);
+                    var parentElementId = $(this).parent("div").attr("id");
+                    
+                    var configRangeSelectedId = $("#"+parentElementId).children("div.room-details").children("div").children("div.fieldset").children(".field").children("select.dropdownConfigRange").attr("id");
+                    var colorSelectedId = $("#"+parentElementId).children("div.room-details").children("div").children(".fieldset").children(".field").children("select.colorDropdown").attr("id");
+                    var finishSelectedId = $("#"+parentElementId).children("div.room-details").children("div").children(".fieldset").children(".field").children("select.finishedDropdown").attr("id");
+                    var platesAndFramesSelectedId = $("#"+parentElementId).children("div.room-details").children("div.plates-and-frames").children(".fieldset").children(".field").children("select.plates-and-frames-colorDropdown").attr("id");
+                    dropdownArray["config_range-"+index] = $("#"+configRangeSelectedId+" option:selected").val();
+                    dropdownArray["color-"+index] = $("#"+colorSelectedId+" option:selected").val();
+                    dropdownArray["finish-"+index] = $("#"+finishSelectedId+" option:selected").val();
+                    dropdownArray["plates_and_frames-"+index] = $("#"+platesAndFramesSelectedId+" option:selected").val();
+
+                    var dataIndex = $("#"+parentElementId).children("div.room-details").children("div").children("div.fieldset").children("div.field").children("select.dropdownConfigRange").attr("data-index");
+                    var qtyInputNameIndex = 0;
+                    $("#ol-"+dataIndex+" > li").each(function(index2, value) {
+                        productArray["product_qty_"+dataIndex+"_"+qtyInputNameIndex] = $('input[name = product_qty_'+dataIndex+'_'+qtyInputNameIndex+']').val();
+                        qtyInputNameIndex++;
+                    });
+                    
+                    $("#recommended_product_ol-"+dataIndex+" > li").each(function(index4, value) {
+                        productArray["product_qty_"+dataIndex+"_"+qtyInputNameIndex] = $('input[name = product_qty_'+dataIndex+'_'+qtyInputNameIndex+']').val();
+                        qtyInputNameIndex++;
+                    });
+
+                    $("#plates_and_frames_ol-"+dataIndex+" > li").each(function(index3, value) {
+                        productArray["product_qty_"+dataIndex+"_"+qtyInputNameIndex] = $('input[name = product_qty_'+dataIndex+'_'+qtyInputNameIndex+']').val();
+                        qtyInputNameIndex++;
+                    });
+                    
+                    
+                });
+                
+                activeConfigIds = activeConfigIdsArray.join();
+                var quoteData = {
+                    preferableSpace: preferableSpace,
+                    roomBundleId: roomBundleId,
+                    roomBundleName: roomBundleName,
+                    configIds: configIds,
+                    activeConfigIds: activeConfigIds,
+                    roomContainerData: [ 
+                        dropdownArray
+                    ],
+                    products: [
+                        productArray
+                    ]    
+                };
+                var myString = JSON.stringify(quoteData);
+                
+
+                data.append("data", myString);
+
+
+                saveQuote(data);
+                this.closeModal();
+            }
+        }]
+    };
+
+    var popup = modal(saveQuoteOptions, $('#popup-save-quote-modal'));
+
+    $("#nearest-shops").on("click",function(){
+        var nearestStoreLocatorUrl = "<?= $block->getStoreLocatorUrl() ?>";
+        window.open(nearestStoreLocatorUrl, "_blank");
+    });
+
+    $("#save-quote").on('click',function(){ 
+        var customerId = "<?= $block->getCustomerId() ?>";
+        if(customerId){
+            $("#popup-save-quote-modal").modal("openModal");    
+        }else{
+            var customerLogIn = "<?= $block->getCustomerLoginUrl() ?>";
+            $(location).attr('href', customerLogIn);
+        }
+        
+
+    });
+
+    $(document).on("click",".quote",function(){
+        var quoteCustomerId = $(this).attr("data-customer-id");
+        var quoteData = $(this).attr("data-quote-data");
+
+        
+        arr = $.parseJSON(quoteData); 
+        $.each(arr,function(key,value){
+            
+            if(key == "preferableSpace"){
+                $(".preferable-button").removeClass("active"); 
+                $('input[name = preferableSpace]').val(value);
+                $(".preferable-button").each(function(k,v){
+                    var preferableSpaceValue = $(this).attr('data-value');
+                    if(preferableSpaceValue == value){
+                        $(this).addClass("active");
+                        $(this).trigger("click");
+                    }
+                });                
+            }
+
+            if(key == "roomBundleId" || key == "configIds"){
+                $(".room-type").removeClass("active");
+                if(key == "roomBundleId" && value){
+                    $(".room-bundle").each(function(index,value2){
+                        if($(this).attr("data-id") == value){
+                            $(this).addClass("active");
+                            $(this).trigger("click");
+                        }
+                    });
+                    
+                }else{
+                    $(".room-layout").remove();
+                    var roomsTypeIdArray = value.split(',');
+                    $.each(roomsTypeIdArray,function(key3,value3) {
+                        $(".clickable-room-type").each(function(index4,value4){
+                            if($(this).attr("data-id") == value3){
+                                $(this).trigger("click");
+                            }
+                        })
+                        
+                    });
+                    
+                }
+
+            }
+
+            if(key == "activeConfigIds"){
+                var activeRoomsTypeIdArray = value.split(',');
+                $.each(activeRoomsTypeIdArray,function(key5, value5){
+                    $(".room-layout").each(function(index6,value6){
+                        if($(this).children("div.room-details").children("div.fieldset").children("div.field").children("select.dropdownConfigRange").attr("data-room-type-id") == value5){
+                            if(!$(this).hasClass("opened")){
+                                $(this).addClass("opened");
+                                $(this).children("div.roomtitle").children("label").trigger("click");
+                                
+                            }
+
+                        }
+                    });
+                });
+            }
+
+            if(key == "roomContainerData"){
+                $('body').trigger('processStart');
+                $.each(value,function(key8,value8){
+                    
+                    $.each(value8,function(key9,value9){
+                        var olId = key9;
+                        var idIndex = olId.split('-');                        
+                        
+                        var dropdownIndex = 0;                              
+                        $(".room-layout .room-details .fieldset .field .dropdownConfigRange").each(function(index10,value10){
+                            if($(this).parent(".field").parent(".fieldset").parent(".room-details").parent(".room-layout").hasClass("opened") ){
+                                var configRangeIndex = $(this).attr("data-index");
+                                
+                                
+
+                                if(key9 == "config_range-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                         $("#config-range-"+configRangeIndex).val(value9).trigger("change"); 
+                                    }, 4000);
+                                } 
+                                if(key9 == "color-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                        $("#color-"+configRangeIndex).val(value9).trigger("change"); 
+                                    }, 6000);
+                                } 
+                                if(key9 == "finish-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                        $("#finished-"+configRangeIndex).val(value9).trigger("change"); 
+                                        $('body').trigger('processStop');
+                                    }, 8000);
+                                }
+                                dropdownIndex++;
+                            }
+                        });
+                    });
+                });
+            }            
+            
+        });
+    })
+
+    $(".a2a_button_email").click(function(){
+        
+        sendMail();
+    });
+
+    function sendMail() {
+        var link = "mailto:me@example.com"
+                 + "?cc=myCCaddress@example.com"
+                 + "&subject=" + encodeURIComponent("This is my subject")
+                 + "&body=" + encodeURIComponent(document.getElementById('table-quote').outerHTML)
+        ;
+        
+        
+        window.open(link, '_blank');
+    }
+
+    
+     function convertToImage() {
+        var resultDiv = document.getElementById("result");
+        html2canvas(document.getElementById("table-quote"), {
+            onrendered: function(canvas) {
+                var img = canvas.toDataURL("image/png");
+                
+                result.innerHTML = '<a id="googleEmail" href="" style="display:none;" target="_blank" ><img src="<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/google_email.png'); ?>" class="google_email_image" /></a>'+
+                                    '<img id="imagesrc" src="'+img+'" style="display:none;" />'+
+                                    ' <a id="whatsapp" href="" style="display:none;" target="_blank"><img src="<?php echo $this->getViewFileUrl('Redstage_BoqConfigurator::images/whatsappx1.png'); ?>" class="whatsapp_image" /></a>';
+            }
+        });
+        setTimeout(function(){ 
+            var imagesrc = $("#imagesrc").attr("src");
+            
+            $.ajax({
+                url: "<?= $block->getPdfAjaxUrl() ?>",
+                type: "POST",
+                data: {imagesrc:imagesrc.split(';base64,')[1]},
+                showLoader: true,
+                success: function (response) {                
+                    
+                    var pdfUrl = response.split(';')[0];
+                    $("#whatsapp").show();
+                    $("#googleEmail").show();
+                    $("#googleEmail").attr("href","https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&su=BOQ Configurator&body="+pdfUrl);
+                    $("#whatsapp").attr("href","https://web.whatsapp.com/send?text="+pdfUrl);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                   console.log(textStatus, errorThrown);
+                }
+            });
+        }, 1000);
+     }  
+
+    var convertBtn = document.getElementById("convert");
+    convertBtn.addEventListener('click', convertToImage);
+
+    function platesAndFramesProducts(roomTypeId, indx){
+        var configRangeVal = $('#config-range-'+indx+' option:selected').val();
+        var colorVal = $('#plates-and-frames-color-'+indx+' option:selected').val();
+        var preferableSpace = $('input[name = preferableSpace]').val();
+        
+        
+        if( configRangeVal != "0" && colorVal != "0"){
+            if($("#plates-and-frames-"+indx).children(".fieldset").parent("div.plates-and-frames").children(".product-alert").length){
+                $("#plates-and-frames-"+indx).children(".fieldset").parent("div.plates-and-frames").children(".product-alert").remove();
+            }
+            if($("#plates-and-frames-product-list-"+indx).length){
+                $("#plates-and-frames-product-list-"+indx).remove();
+            }
+            
+            $("#plates-and-frames-"+indx).append('<div id="plates-and-frames-product-list-'+indx+'" class="product-list" ></div>');
+
+            var rangeId = $('#config-range-'+indx+' option:selected').val();
+            var productListUrl = "<?= $block->getPlatesAndFramesProductUrl() ?>";
+            getPlatesAndFramesProductList(productListUrl,roomTypeId,rangeId,colorVal,preferableSpace,indx);
+
+            
+
+        }else{            
+            $("#plates-and-frames-product-list-"+indx).remove();            
+        }
+    }
+
+    function getPlatesAndFramesProductList(url,roomTypeId,rangeId,colorVal,preferableSpace,indx){
+        
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {roomTypeId:roomTypeId, rangeId:rangeId, colorOptionId:colorVal, preferableSpace:preferableSpace},
+            showLoader: true,
+            success: function (response) {                
+                if($.parseJSON(response).length != 0){
+                    if($("#plates-and-frames-"+indx).children(".fieldset").parent("div.plates-and-frames").children(".product-alert").length){
+                        $("#plates-and-frames-"+indx).children(".fieldset").parent("div.plates-and-frames").children(".product-alert").remove();
+                    }
+                    
+                    var products = '';
+                    
+                    var indexCount = 0;
+                    
+                    if(url == "<?= $block->getPlatesAndFramesProductUrl() ?>"){
+                        
+                        if($("#ol-"+indx).children("li").length){
+                            indexCount = parseInt($("#ol-"+indx).children("li").length); 
+                        }
+                        if($("#recommended_product_ol-"+indx).children("li").length){
+                            indexCount += parseInt($("#recommended_product_ol-"+indx).children("li").length); 
+                        }
+                    }
+                    var productIndex = 0;
+                    var checkToAddLine = 1;
+                    $.each($.parseJSON(response), function(index, value){
+                        
+                        
+                        if(value.image){
+                            var productImage = value.image;
+                        }else{
+                            var productImage = "<?= $block->getPlaceholderImageUrl() ?>";
+                        }
+
+
+                        
+                        products += '<li class="item product product-item">'+
+                                        '<div class="product-item-info" >'+
+                                            
+                                                '<span class="product-image-container product-image-container-'+value.id+'" style="width: 240px;">'+
+                                                    '<span class="product-image-wrapper" style="padding-bottom: 125%;">'+
+                                                        '<img class="product-image-photo click-image" src="'+productImage+'" loading="lazy" width="240" height="300" alt="">'+
+                                                    '</span>'+
+                                                '</span>'+
+                                        '<div class="product details product-item-details">'+
+                                            '<div class="product-name">'+value.product_name+'</div>'+
+                                            '<div class="short-desc">'+value.description+'</div>'+
+                                            '<div class="sku">Category Ref: <span class="sku-value">'+value.sku+'</span></div>'+
+                                            '<div class="qty-wrapper">'+
+                                                '<div class="field qty">'+
+                                                    '<div class="control">'+      
+                                                        '<input type="hidden" name="product_id_'+indx+'_'+parseInt(indexCount)+'" value="'+value.id+'" class="product_id" />'+                            
+                                                        '<input type="number" class="input-text qty boq_product_qty" name="product_qty_'+indx+'_'+parseInt(indexCount)+'" value="'+value.qty+'" title="Qty" id="product_qty_'+indx+'_'+parseInt(indexCount)+'" />'+
+                                                        '<span class="validateQty"></span>'+
+                                                    '</div>'+
+                                                '</div>'+
+                                                '<div class="price-box price-final_price" data-role="priceBox" data-product-id="'+value.id+'" data-price-box="product-id-'+value.id+'">'+
+                                                    '<span class="price-wrapper ">'+
+                                                        '<span id="product-price-'+indx+'_'+parseInt(indexCount)+'" class="price" data-total-price="'+value.total_value+'" data-plain-price="'+value.plain_value+'">'+value.value+'</span>'+
+                                                    '</span>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+         
+                                    '</div>'+
+                                '</li>';
+                                
+                                if(index != 0 && index % 2 != 0){
+                                    products += '<hr/>';
+                                }
+                                indexCount++;
+                                checkToAddLine++;
+                    });           
+
+                    if($.parseJSON(response).length %2 != 0){  
+                        products += '<hr/>';    
+                    }        
+                    
+                    if(url == "<?= $block->getPlatesAndFramesProductUrl() ?>"){
+                        if($("#plates-and-frames-ref-ol"+indx).length){
+                            $("#plates-and-frames-ref-ol"+indx).remove();
+                        }
+                        $("#plates-and-frames-product-list-"+indx).append('<div id="plates-and-frames-ref-ol'+indx+'" class="products wrapper list products-list boq-products-list plates-and-frames-ref-ol">'+
+                            '<ol id="plates_and_frames_ol-'+indx+'" class="products list items product-items">'+products+'</ol>'+
+                        '</div>');
+                    }
+
+                    
+                    
+                }else{
+                    $("#plates-and-frames-"+indx).append('<div id="no-data-'+indx+'" class="product-alert">Products are not available.</div>');
+                }
+                
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+
+    <?php if($this->getRequest()->getParam('customerId') && $this->getRequest()->getParam('quoteData')){ ?>
+        $('#counter').html(function(i, val) {return +val+1 });
+        var quoteCustomerId = <?= $this->getRequest()->getParam('customerId') ?>;
+        var quoteData = <?= $this->getRequest()->getParam('quoteData') ?>;        
+        
+        $.each(quoteData,function(key,value){
+            
+            if(key == "preferableSpace"){
+                $(".preferable-button").removeClass("active"); 
+                $('input[name = preferableSpace]').val(value);
+                $(".preferable-button").each(function(k,v){
+                    var preferableSpaceValue = $(this).attr('data-value');
+                    if(preferableSpaceValue == value){
+                        $(this).addClass("active");
+                        $(this).trigger("click");
+                    }
+                });                
+            }
+
+            if(key == "roomBundleId"){
+                $(".room-type").removeClass("active");
+                if(key == "roomBundleId" && value){
+                    
+                }
+            }
+                    
+            if(key == "configIds"){
+                $(".room-layout").remove();
+                var roomsTypeIdArray = value.split(',');
+                $.each(roomsTypeIdArray,function(key3,value3) {
+                    $(".clickable-room-type").each(function(index4,value4){
+                        if($(this).attr("data-id") == value3){
+                            $(this).trigger("click");
+                        }
+                    })
+                    
+                });
+                if(quoteData.roomBundleId){
+                    $(".room-bundle").each(function(index,value2){
+                        if($(this).attr("data-id") == quoteData.roomBundleId){
+                            $(this).addClass("active");
+                            $(".clickable-room-type").removeClass('active');
+                        }
+                    });
+                }
+                
+            }
+
+            
+
+            if(key == "activeConfigIds"){
+                var activeRoomsTypeIdArray = value.split(',');
+                $.each(activeRoomsTypeIdArray,function(key5, value5){
+                    $(".room-layout").each(function(index6,value6){
+                        if($(this).children("div.room-details").children("div.fieldset").children("div.field").children("select.dropdownConfigRange").attr("data-room-type-id") == value5){
+                            if(!$(this).hasClass("opened")){
+                                $(this).addClass("opened");
+                                $(this).children("div.roomtitle").children("label").trigger("click");
+                                
+                            }
+
+                        }
+                    });
+                });
+            }
+
+            if(key == "roomContainerData"){
+                $('body').trigger('processStart');
+                $.each(value,function(key8,value8){
+                    
+                    $.each(value8,function(key9,value9){
+                        var olId = key9;
+                        var idIndex = olId.split('-');                        
+                        
+                        var dropdownIndex = 0;                              
+                        $(".room-layout .room-details .fieldset .field .dropdownConfigRange").each(function(index10,value10){
+                            if($(this).parent(".field").parent(".fieldset").parent(".room-details").parent(".room-layout").hasClass("opened") ){
+                                var configRangeIndex = $(this).attr("data-index");
+                                /*console.log($(configRangeIndex));
+                                console.log($(this).val());*/
+
+                                if(key9 == "config_range-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                         $("#config-range-"+configRangeIndex).val(value9).trigger("change"); 
+                                    }, 1000);
+                                } 
+                                if(key9 == "color-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                        $("#color-"+configRangeIndex).val(value9).trigger("change"); 
+                                    }, 3000);
+                                } 
+                                if(key9 == "finish-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                        $("#finished-"+configRangeIndex).val(value9).trigger("change"); 
+                                        
+                                    }, 5000);
+                                }
+                                if(key9 == "plates_and_frames-"+dropdownIndex && idIndex[1] == dropdownIndex){
+                                    setTimeout(function(){ 
+                                        $("#plates-and-frames-color-"+configRangeIndex).val(value9).trigger("change"); 
+                                        $('body').trigger('processStop');
+                                    }, 8000);
+                                }
+                                dropdownIndex++;
+                            }
+                        });
+                    });
+                });
+            } 
+            setTimeout(function(){ 
+                if(key == "products"){
+                    $.each(value,function(key11,value11){
+                        $.each(value11,function(key12,value12){
+                            if($("#"+key12).length){
+                                $("#"+key12).val(value12);
+                            }                            
+                        });
+                    });
+                }       
+            }, 21000);
+            
+        });
+    <?php } ?> });</script>

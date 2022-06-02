@@ -1,0 +1,26 @@
+<?php /** * Webkul Software. * * @category Webkul * @package Webkul_MarketplaceGstIndia * @author Webkul * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com) * @license https://store.webkul.com/license.html */ ?> <script>
+    require([
+    'jquery',
+    'Magento_Ui/js/modal/alert'
+], function($,alert){
+    'use strict';
+    jQuery(document).ready(function(){
+        
+        $('#save-button').click(function(event){
+            var value = $("input[name='product[gst_percent]']").val();
+            if(100 < value){
+                event.stopImmediatePropagation();
+                alert({
+                            title: 'Wrong Input!',
+                            content: 'Gst Percentage can not be more than 100. Please try again.',
+                             actions: {
+                                always: function(){                                   
+                                    event.stopImmediatePropagation();
+                                }
+                             }
+                        });  
+                $("input[name='product[gst_percent]']").css("border", "1px solid red");          
+            }
+        });   
+    });
+});</script>

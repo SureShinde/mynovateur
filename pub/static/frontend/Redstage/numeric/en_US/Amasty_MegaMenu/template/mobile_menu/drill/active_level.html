@@ -1,0 +1,48 @@
+<section data-bind="
+             style: {
+                color: $data.activeElem().color,
+                fill: $data.activeElem().color
+             },
+             visible: $data.activeElem(),
+             attr: {
+                class: 'ammenu-active-level'
+             }">
+    <section class="ammenu-head"
+       data-bind="
+            attr: {
+                title: $t('Go Back')
+            },
+            event: {
+                click: setPrevLevel
+            }">
+        <button class="ammenu-button -prev">
+            <!-- ko template: { name: $data.root_templates.arrowIcon } --><!-- /ko -->
+        </button>
+        <!-- ko if: $data.activeElem().icon && $data.is_icons_available -->
+            <!-- ko template: { name: $data.root_templates.icon, data: { item: $data.activeElem() } } --><!-- /ko -->
+        <!-- /ko -->
+
+        <p class="ammenu-text-block">
+            <span class="ammenu-text" data-bind="i18n: $data.activeElem().name"></span>
+            <span class="ammenu-label"
+                  if="$data.activeElem().label"
+                  data-bind="
+                   style: {
+                        'background-color': $data.activeElem().label.label_background_color || '',
+                        'color': $data.activeElem().label.label_text_color || ''
+                   },
+                   i18n: $data.activeElem().label.label">
+            </span>
+        </p>
+    </section>
+    <!-- ko scope: 'index = mobile_submenu_wrapper' -->
+        <!-- ko template: { name: getTemplate(), data: $parent.activeElem() } --><!-- /ko -->
+    <!-- /ko -->
+    <ul class="ammenu-items -drill" data-bind="foreach: $data.activeElem().elems">
+        <li data-bind="attr: {
+                class: 'ammenu-item ' + $parent.actionAnimation()
+            }">
+            <!-- ko template: { name: $parent.root_templates.mobile_link, data: { item: $data, uiClass: $parent } } --><!-- /ko -->
+        </li>
+    </ul>
+</section>

@@ -1,0 +1,1 @@
+<?php if($block->getCurrentCategory()){ if($block->getCurrentCategory()->getLayerImage()){ $layerImage = $block->getBaseUrl().$block->getCurrentCategory()->getLayerImage(); if(!empty($layerImage)){?> <div class="category-banner"><a href=""><img src="<?php echo $layerImage ?>" /></a></div><?php } } }?>

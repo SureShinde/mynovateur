@@ -1,0 +1,158 @@
+//
+//  Amasty Mega Menu Lite
+//  ______________________________________________
+
+//
+//  Variables
+//  ----------------------------------------------
+
+@ammenu-mobile-menu__width: 90%;
+@ammenu-mobile-menu__height: 50px;
+
+//
+//  Common
+//  ----------------------------------------------
+
+& when (@media-common = true) {
+    .ammenu-nav-sections.-mobile {
+        & {
+            .ammenu-transition(.3);
+
+            position: fixed;
+            top: 196px;
+            left: -100%;
+            z-index: 99999;
+            overflow: auto;
+            margin-bottom: 25px;
+            padding: 0 0 @ammenu__indent__xl * 2;
+            max-width: 100%;
+            width: 100%;
+            height: 100vh;
+            box-shadow: 0 3px 8px #000;
+        }
+
+        &.-opened {
+            left: 0;
+        }
+   
+
+        .ammenu-items {
+            flex-basis: 100%;
+            margin: 0;
+            padding: 0;
+            ul.ammenu-items{
+                background: #DCDCDC;
+            }
+            > li > a > .ammenu-text-block:after{
+                content: none;
+            }
+        }
+
+        .ammenu-items.-root > .ammenu-item {
+            & {
+                margin: 0;
+                border-bottom: 1px solid @ammenu__color__grey__border;
+            }
+
+            > .ammenu-link {
+                display: flex;
+                align-items: center;
+                flex-basis: 100%;
+                box-sizing: border-box;
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 1.6rem;
+                padding: 10px;
+                .ammenu-text-block{
+                    line-height: 1.5;
+                }
+            }
+
+            .ammenu-item {
+                margin: 0;
+                padding: 0 15px;
+                border-top: 1px solid #b0b0b0;
+                .ammenu-text-block{
+                    line-height: 1.5;
+                }
+            }
+
+            .ammenu-item .ammenu-toggle {
+                .ammenu-icon {
+                    width: 11px;
+                    height: 11px;
+                    transform: none;
+                    border: 0;
+                    margin: 0;
+                    &:after{
+                        content: "+";
+                        font-weight: 600;
+                        font-size: 25px;
+                        position: relative;
+                        top: -5px;
+                        
+                    }
+                }
+                &.-active{
+                    .ammenu-icon{
+                        transform: none;
+                        &:after {
+                            content: "-";
+                        }
+                    }
+                }
+            }
+        }
+
+        .ammenu-label {
+            margin: 0 5px 0 @ammenu__indent;
+            max-width: 50%;
+        }
+
+        .ammenu-toggle {
+            margin: 0 0 0 auto;
+            box-shadow: none;
+        }
+
+        .ammenu-item {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .ammenu-link {
+            flex-basis: 100%;
+            flex-grow: 1;
+            box-sizing: border-box;
+            padding: 10px 0;
+            text-align: left;
+        }
+
+        .ammenu-text-block {
+           
+        }
+
+        .ammenu-text {
+            .ammmenu-word-break();
+
+            overflow: hidden;
+            box-sizing: border-box;
+            max-height: 100%;
+            vertical-align: middle;
+            text-align: left;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .ammenu-nav-sections.-mobile:not(.-left-menu) {
+        .ammenu-menu-header {
+            padding: 10px;
+            border-bottom: 1px solid @ammenu__color__grey__border;
+        }
+
+        .ammenu-items.-root {
+            padding: 0 0 @ammenu__indent__xl;
+            margin: 0;
+        }
+    }
+}

@@ -1,0 +1,26 @@
+<?php /** * Copyright © Redstage. All rights reserved. */ ?> <div class="recently-viewed-products"><?php echo $this->getLayout() ->createBlock('Magento\Cms\Block\Block') ->setBlockId('recently-viewed-products') ->toHtml(); ?></div><script>
+    require([
+        'jquery',
+        'slick',
+        'domReady!'
+    ], function($, slick, domReady) {
+        'use strict';
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".recently-viewed-products .product-items").slick({
+                    dots: false,
+                    infinite: true,
+                    speed: 2000,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    responsive: [{
+                        breakpoint: 767,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }]
+                });
+            }, 5000);
+        });
+    });</script>
