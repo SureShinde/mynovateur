@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="am_mega_menu_update_node_data">
+        <observer name="amasty_mega_menu_update_node_data" instance="Amasty\MegaMenu\Observer\UpdateNodeData" />
+    </event>
+
+    <event name="mega_menu_content_save_before">
+        <observer name="amasty_megamenu_prepare_icon_to_save" instance="Amasty\MegaMenu\Observer\Model\Menu\Item\PrepareIcon" />
+    </event>
+</config>
