@@ -1,0 +1,145 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+/** @var \Magento\SrviceTicket\Block\SrvicesForm $block */
+?>
+<?php $calltype = $block->getValueFromMultipleFields();?>
+<form class="form serviceticket"
+      action="#"
+      id="serviceticket-form"
+      method="post"
+      enctype='multipart/form-data'
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+    <fieldset class="fieldset">
+        <div class="field note no-label"></div>
+        <div class="field product_serial_number required">
+            <label class="label" for="product_serial_number"><span><?= $block->escapeHtml(__('Product Serial Number')) ?></span></label>
+            <div class="control">
+                <input name="product_serial_number" id="product_serial_number" title="<?= $block->escapeHtmlAttr(__('Product Serial Number')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field invoice_number required">
+            <label class="label" for="invoice_number"><span><?= $block->escapeHtml(__('Invoice Number')) ?></span></label>
+            <div class="control">
+                <input name="invoice_number" id="invoice_number" title="<?= $block->escapeHtmlAttr(__('Invoice Number')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field date_of_invoice required">
+            <label class="label" for="date_of_invoice"><span><?= $block->escapeHtml(__('Date of Invoice')) ?></span></label>
+            <div class="control">
+                <input name="date_of_invoice" style="width: auto" id="date-of-invoice" title="<?= $block->escapeHtmlAttr(__('Date of Invoice')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field order_number required">
+            <label class="label" for="order_number"><span><?= $block->escapeHtml(__('Order Number')) ?></span></label>
+            <div class="control">
+                <input name="order_number" id="order_number" title="<?= $block->escapeHtmlAttr(__('Order Number')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field name required">
+            <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+            <div class="control">
+                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" value="<?php echo $block->getCustomerName();?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field customer_address required">
+            <label class="label" for="customer_address"><span><?= $block->escapeHtml(__('Customer Address')) ?></span></label>
+            <div class="control">
+                <textarea name="customer_address" id="customer_address" title="<?= $block->escapeHtmlAttr(__('Customer Address')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"></textarea>
+            </div>
+        </div>
+        <div class="field pincode required">
+            <label class="label" for="pincode"><span><?= $block->escapeHtml(__('Pincode')) ?></span></label>
+            <div class="control">
+                <input name="pincode" id="pincode" title="<?= $block->escapeHtmlAttr(__('Pincode')) ?>" class="input-text" type="text" data-validate="{required:true,'validate-number':true, 'minlength':6, 'maxlength':6}"/>
+            </div>
+        </div>
+        <div class="field mobile required">
+            <label class="label" for="mobile"><span><?= $block->escapeHtml(__('Mobile')) ?></span></label>
+            <div class="control">
+                <input name="mobile" id="mobile" title="<?= $block->escapeHtmlAttr(__('Mobile')) ?>" class="input-text" type="text"  data-validate="{required:true, 'validate-number':true, 'minlength':10, 'maxlength':10}" />
+            </div>
+        </div>
+        <div class="field email required">
+            <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" type="email" value="<?php echo $block->getCustomerEmail();?>" data-validate="{required:true, 'validate-email':true}"/>
+            </div>
+        </div>
+        <div class="field request_type required">
+            <label class="label" for="request_type"><span><?= $block->escapeHtml(__('Request Type')) ?></span></label>
+            <div class="control">
+                <select id="edit-request-type" name="request_type" data-validate="{required:true}">
+                    <option value="" selected="" hidden=""><?php echo __('Call Type') ?></option>
+                    <?php foreach($calltype as $callData){ ?>
+                    <option value="<?= $callData['serviceticket_requesttype'];?>"><?= $callData['serviceticket_requesttype'];?></option>
+                    <?php } ?>
+                </select>
+            </div>
+        </div>
+        <div class="field description">
+            <label class="label" for="description"><span><?= $block->escapeHtml(__('Description')) ?></span></label>
+            <div class="control">
+                <textarea name="description" id="description" title="<?= $block->escapeHtmlAttr(__('Description')) ?>" class="input-text" cols="5" rows="3" ></textarea>
+            </div>
+        </div>
+        <?php if($block->currentStoreId() == 1){ ?>
+            <div class="field subject required">
+                <label class="label" for="subject"><span><?= $block->escapeHtml(__('Subject')) ?></span></label>
+                <div class="control">
+                    <input name="subject" id="subject" title="<?= $block->escapeHtmlAttr(__('Subject')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                </div>
+            </div>
+            <div class="field eCom_ref required">
+                <label class="label" for="eCom_ref"><span><?= $block->escapeHtml(__('eCom ref')) ?></span></label>
+                <div class="control">
+                    <input name="eCom_ref" id="eCom_ref" title="<?= $block->escapeHtmlAttr(__('eCom ref')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+                </div>
+            </div>
+        <?php } ?>
+        
+        <?= $block->getChildHtml('form.additional.info') ?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value="" />
+            <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $block->isCustoemrId();?>" />
+            <input type="hidden" name="store_id" id="store_id" value="<?php echo $block->currentStoreId();?>" />
+            <input type="hidden" name="status" id="status" value="0" />
+            <input type="hidden" name="sf_serviceticket_status" id="sf_serviceticket_status" value="pending" />
+            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary" id="submit-serviceticket" >
+                <span><?= $block->escapeHtml(__('Submit')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+<script>
+require([
+    'jquery',
+    'mage/calendar'
+], function($){
+    $('#date-of-invoice').datepicker({
+        dateFormat: 'mm/dd/yy',
+        changeMonth: true,
+        changeYear: true,
+        showOn: 'button',
+        buttonText: ""
+    });
+});
+</script>
+<?php 
+$ajaxurl = $block->getFormAction();
+?>
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Redstage_ServiceTicket/js/serviceticketajax": {
+                    "ServiceTicketUrl": "<?php echo $ajaxurl; ?>"
+                }
+            }
+        }
+</script>

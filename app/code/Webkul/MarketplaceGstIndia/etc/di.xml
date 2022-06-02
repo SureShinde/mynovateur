@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="shipping_save_to_quote" type="Webkul\MarketplaceGstIndia\Plugin\ShippingInformationManagementPlugin" sortOrder="10" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\ToOrderItem">
+        <plugin name="save_data_from_quote_to_order_item" type="Webkul\MarketplaceGstIndia\Plugin\Model\Quote\Item\ToOrderItem" sortOrder="10" />
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\ToOrderAddress">
+        <plugin name="shipping_save_to_quote" type="Webkul\MarketplaceGstIndia\Plugin\Model\Quote\Address\ToOrderAddress" sortOrder="10" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Invoice">
+        <plugin name="invoice_set_gst_info" type="Webkul\MarketplaceGstIndia\Plugin\Model\Sales\Order\Invoice" sortOrder="10" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Creditmemo\Item">
+        <plugin name="creditmemo_set_gst_info" type="Webkul\MarketplaceGstIndia\Plugin\Model\Sales\Order\Creditmemo\Item" sortOrder="10" />
+    </type>
+    <!-- adding GSTIN and GST information in invoice PDF -->
+    <preference for="Magento\Sales\Model\Order\Pdf\Invoice" type="Webkul\MarketplaceGstIndia\Model\Order\Pdf\Invoice"/>
+    <preference for="Magento\Sales\Model\Order\Pdf\Items\Invoice\DefaultInvoice" type="Webkul\MarketplaceGstIndia\Model\Order\Pdf\Items\Invoice\DefaultInvoice"/>
+    <preference for="Magento\Downloadable\Model\Sales\Order\Pdf\Items\Invoice" type="Webkul\MarketplaceGstIndia\Model\Downloadable\Order\Pdf\Items\Invoice"/>
+    <preference for="Magento\Bundle\Model\Sales\Order\Pdf\Items\Invoice" type="Webkul\MarketplaceGstIndia\Model\Bundle\Order\Pdf\Items\Invoice"/>
+    <!-- adding GSTIN and GST information in creditmemo PDF -->
+    <preference for="Magento\Sales\Model\Order\Pdf\Creditmemo" type="Webkul\MarketplaceGstIndia\Model\Order\Pdf\Creditmemo"/>
+    <preference for="Magento\Sales\Model\Order\Pdf\Items\Creditmemo\DefaultCreditmemo" type="Webkul\MarketplaceGstIndia\Model\Order\Pdf\Items\Creditmemo\DefaultCreditmemo"/>
+    <preference for="Magento\Downloadable\Model\Sales\Order\Pdf\Items\Creditmemo" type="Webkul\MarketplaceGstIndia\Model\Downloadable\Order\Pdf\Items\Creditmemo"/>
+    <preference for="Magento\Bundle\Model\Sales\Order\Pdf\Items\Creditmemo" type="Webkul\MarketplaceGstIndia\Model\Bundle\Order\Pdf\Items\Creditmemo"/>
+
+    <preference for="Magento\Tax\Model\Calculation" type="Webkul\MarketplaceGstIndia\Model\Tax\Calculation"/>
+
+    <preference for="Webkul\Marketplace\Model\Order\Pdf\Invoice" type="Webkul\MarketplaceGstIndia\Model\Marketplace\Order\Pdf\Invoice" />
+    <preference for="Webkul\Marketplace\Model\Order\Pdf\Creditmemo" type="Webkul\MarketplaceGstIndia\Model\Marketplace\Order\Pdf\Creditmemo" />
+    
+    <preference for="Webkul\Marketplace\Controller\Order\Invoice" type="Webkul\MarketplaceGstIndia\Model\Marketplace\Controller\Invoice" />
+
+    <type name="Magento\Sales\Model\Convert\Order">
+        <plugin name="save_data_from_order_to_invoice_item" type="Webkul\MarketplaceGstIndia\Plugin\Model\Sales\Convert\Order" sortOrder="10" />
+    </type>
+    <preference for="Webkul\Marketplace\Observer\SalesOrderPlaceAfterObserver" type="Webkul\MarketplaceGstIndia\Observer\Rewrite\SalesOrderPlaceAfterObserver"/>
+    <preference for="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" type="Webkul\MarketplaceGstIndia\Block\Rewrite\Order\Email\Items\Order\DefaultOrder" />
+</config>

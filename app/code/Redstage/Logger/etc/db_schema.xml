@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Logger module to log all incoming and outgoing request and responses to and from Magento
+ *
+ * @category: PHP
+ * @package: Redstage/Logger
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Logger
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="redstage_api_logs" resource="default" engine="innodb" comment="API Logging">
+        <column xsi:type="int" name="id" nullable="false" identity="true"
+                comment="Id"/>
+        <column xsi:type="varchar" name="request_type" nullable="true" length="20" comment="Identify request type. Possible values Order, Invoice, Shipment, Catalog"/>
+        <column xsi:type="text" name="request_data" nullable="true" comment="Capture data from API"/>
+        <column xsi:type="text" name="response_data" nullable="true" comment="Capture data from API"/>
+        <column xsi:type="varchar" name="status" nullable="true" length="10" comment="Success or Failed API call"/>
+        <column xsi:type="timestamp" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" comment="Current date and time"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="USER_REFFERAL_ID" indexType="btree">
+            <column name="id"/>
+        </index>
+    </table>
+</schema>

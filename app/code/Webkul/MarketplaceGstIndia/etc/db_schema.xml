@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="sales_order_tax" resource="sales" comment="Sales Order Tax Table">
+        <column xsi:type="decimal" scale="2" name="sgst" nullable="true" comment="SGST"/>
+        <column xsi:type="decimal" scale="2" name="cgst" nullable="true" comment="CGST"/>
+        <column xsi:type="decimal" scale="2" name="igst" nullable="true" comment="IGST"/>
+        <column xsi:type="decimal" scale="2" name="utgst" nullable="true" comment="UTGST"/>
+    </table>
+    <table name="sales_order_address" resource="sales" comment="Sales Flat Order Address">
+        <column xsi:type="text" name="gstin" nullable="true" comment="GSTIN"/>
+    </table>
+    <table name="quote_address" resource="sales" comment="Sales Flat Quote Addres">
+        <column xsi:type="text" name="gstin" nullable="true" comment="GSTIN"/>
+    </table>
+    <table name="quote_item" resource="checkout" comment="Sales Flat Order Item">
+        <column xsi:type="decimal" scale="2" name="sgst" nullable="true" comment="SGST"/>
+        <column xsi:type="decimal" scale="2" name="sgst_percent" nullable="true" comment="SGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="cgst" nullable="true" comment="CGST"/>
+        <column xsi:type="decimal" scale="2" name="cgst_percent" nullable="true" comment="CGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="igst" nullable="true" comment="IGST"/>
+        <column xsi:type="decimal" scale="2" name="igst_percent" nullable="true" comment="IGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="utgst" nullable="true" comment="UTGST"/>
+        <column xsi:type="decimal" scale="2" name="utgst_percent" nullable="true" comment="UTGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="gst" nullable="true" comment="GST"/>
+        <column xsi:type="text" name="hsn" nullable="true" comment="HSN CODE"/>
+    </table>
+    <table name="sales_order_item" resource="sales" comment="Sales Flat Order Item">
+        <column xsi:type="decimal" scale="2" name="sgst" nullable="true" comment="SGST"/>
+        <column xsi:type="decimal" scale="2" name="sgst_percent" nullable="true" comment="SGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="cgst" nullable="true" comment="CGST"/>
+        <column xsi:type="decimal" scale="2" name="cgst_percent" nullable="true" comment="CGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="igst" nullable="true" comment="IGST"/>
+        <column xsi:type="decimal" scale="2" name="igst_percent" nullable="true" comment="IGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="utgst" nullable="true" comment="UTGST"/>
+        <column xsi:type="decimal" scale="2" name="utgst_percent" nullable="true" comment="UTGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="gst" nullable="true" comment="GST"/>
+        <column xsi:type="text" name="hsn" nullable="true" comment="HSN CODE"/>
+    </table>
+    <table name="sales_invoice_item" resource="sales" comment="Sales Flat Order Item">
+        <column xsi:type="decimal" scale="2" name="sgst" nullable="true" comment="SGST"/>
+        <column xsi:type="decimal" scale="2" name="sgst_percent" nullable="true" comment="SGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="cgst" nullable="true" comment="CGST"/>
+        <column xsi:type="decimal" scale="2" name="cgst_percent" nullable="true" comment="CGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="igst" nullable="true" comment="IGST"/>
+        <column xsi:type="decimal" scale="2" name="igst_percent" nullable="true" comment="IGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="utgst" nullable="true" comment="UTGST"/>
+        <column xsi:type="decimal" scale="2" name="utgst_percent" nullable="true" comment="UTGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="gst" nullable="true" comment="GST"/>
+        <column xsi:type="text" name="hsn" nullable="true" comment="HSN CODE"/>
+    </table>
+    <table name="sales_creditmemo_item" resource="sales" comment="Sales Flat Order Item">
+        <column xsi:type="decimal" scale="2" name="sgst" nullable="true" comment="SGST"/>
+        <column xsi:type="decimal" scale="2" name="sgst_percent" nullable="true" comment="SGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="cgst" nullable="true" comment="CGST"/>
+        <column xsi:type="decimal" scale="2" name="cgst_percent" nullable="true" comment="CGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="igst" nullable="true" comment="IGST"/>
+        <column xsi:type="decimal" scale="2" name="igst_percent" nullable="true" comment="IGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="utgst" nullable="true" comment="UTGST"/>
+        <column xsi:type="decimal" scale="2" name="utgst_percent" nullable="true" comment="UTGST Percent"/>
+        <column xsi:type="decimal" scale="2" name="gst" nullable="true" comment="GST"/>
+        <column xsi:type="text" name="hsn" nullable="true" comment="HSN CODE"/>
+    </table>
+</schema>

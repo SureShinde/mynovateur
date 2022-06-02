@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Redstage\AmcConfigurator\Api\AmcApiSyncInterface" type="Redstage\AmcConfigurator\Model\AmcSync" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="amcadmin_nonamc_grid_data_source" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\NonamcList\Grid\Collection</item>
+                <item name="amcadmin_customer_grid_data_source" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\Customer\Grid\Collection</item>
+                <item name="amcadmin_amcoffer_grid_data_source" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\AmcOffer\Grid\Collection</item>
+                <item name="amcadmin_amcrecord_listing_data_source" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\AmcRecord\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Redstage\AmcConfigurator\Model\ResourceModel\NonamcList\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">non_amc_tracking</argument>
+            <argument name="eventPrefix" xsi:type="string">amcadmin_nonamc_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">amcadmin_nonamc_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\NonamcList</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\AmcConfigurator\Model\ResourceModel\Customer\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amc_customer_data</argument>
+            <argument name="eventPrefix" xsi:type="string">amcadmin_customer_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">amcadmin_customer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\Customer</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\AmcConfigurator\Model\ResourceModel\AmcOffer\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">amc_material_offer_price</argument>
+            <argument name="eventPrefix" xsi:type="string">amcadmin_amcoffer_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">amcadmin_amcoffer_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\AmcOffer</argument>
+        </arguments>
+    </type> 
+    <type name="Redstage\AmcConfigurator\Model\ResourceModel\AmcRecord\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_amc_record</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\AmcConfigurator\Model\ResourceModel\AmcRecord</argument>
+        </arguments>
+    </type>    
+</config>
+

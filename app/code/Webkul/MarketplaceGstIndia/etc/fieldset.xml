@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="quote_convert_item">
+            <field name="sgst">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="sgst_percent">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="cgst">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="cgst_percent">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="igst">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="igst_percent">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="utgst">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="utgst_percent">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="gst">
+                <aspect name="to_order_item"/>
+            </field>
+            <field name="hsn">
+                <aspect name="to_order_item"/>
+            </field>
+        </fieldset>
+        <fieldset id="sales_convert_order_item">
+            <field name="sgst">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="sgst_percent">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="cgst">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="cgst_percent">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="igst">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="igst_percent">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="utgst">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="utgst_percent">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="gst">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+            <field name="hsn">
+                <aspect name="to_cm_item" />
+                <aspect name="to_invoice_item" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

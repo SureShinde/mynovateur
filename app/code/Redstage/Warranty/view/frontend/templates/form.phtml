@@ -1,0 +1,108 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+/** @var Redstage\Services\Block\WarrantyForm $block */
+?>
+<form class="form warranty"
+      action="#"
+      id="warranty-form"
+      method="post"
+      data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>" 
+      enctype="multipart/form-data">
+    <fieldset class="fieldset">
+        <div class="field note no-label"></div>
+        <div class="field product_serial_number required">
+            <label class="label" for="product_serial_number"><span><?= $block->escapeHtml(__('Product Serial Number')) ?></span></label>
+            <div class="control">
+                <input name="product_serial_number" id="product_serial_number" title="<?= $block->escapeHtmlAttr(__('Product Serial Number')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field invoice_no required">
+            <label class="label" for="invoice_no"><span><?= $block->escapeHtml(__('Invoice No.')) ?></span></label>
+            <div class="control">
+                <input name="invoice_no" id="invoice_no" title="<?= $block->escapeHtmlAttr(__('Invoice No.')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field date_of_installation required">
+            <label class="label" for="date_of_installation"><span><?= $block->escapeHtml(__('Date of Installation')) ?></span></label>
+            <div class="control">
+                <input name="date_of_installation" style="width: auto" id="date-of-installation" title="<?= $block->escapeHtmlAttr(__('Date of Installation')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field name required">
+            <label class="label" for="name"><span><?= $block->escapeHtml(__('Name')) ?></span></label>
+            <div class="control">
+                <input name="name" id="name" title="<?= $block->escapeHtmlAttr(__('Name')) ?>" class="input-text" type="text" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <div class="field installation_site_address required">
+            <label class="label" for="installation_site_address"><span><?= $block->escapeHtml(__('Installation Site Address')) ?></span></label>
+            <div class="control">
+                <textarea name="installation_site_address" id="installation_site_address" title="<?= $block->escapeHtmlAttr(__('Installation Site Address')) ?>" class="input-text" cols="5" rows="3" data-validate="{required:true}"></textarea>
+            </div>
+        </div>
+        <div class="field pincode required">
+            <label class="label" for="pincode"><span><?= $block->escapeHtml(__('Pincode')) ?></span></label>
+            <div class="control">
+                <input name="pincode" id="pincode" title="<?= $block->escapeHtmlAttr(__('Pincode')) ?>" class="input-text" type="text" data-validate="{required:true,'validate-number':true, 'minlength':6, 'maxlength':6}"/>
+            </div>
+        </div>
+        <div class="field mobile required">
+            <label class="label" for="mobile"><span><?= $block->escapeHtml(__('Mobile')) ?></span></label>
+            <div class="control">
+                <input name="mobile" id="mobile" title="<?= $block->escapeHtmlAttr(__('Mobile')) ?>" class="input-text" type="text"  data-validate="{required:true, 'validate-number':true, 'minlength':10, 'maxlength':10}" />
+            </div>
+        </div>
+        <div class="field email required">
+            <label class="label" for="email"><span><?= $block->escapeHtml(__('Email')) ?></span></label>
+            <div class="control">
+                <input name="email" id="email" title="<?= $block->escapeHtmlAttr(__('Email')) ?>" class="input-text" type="email" data-validate="{required:true, 'validate-email':true}"/>
+            </div>
+        </div>
+        <div class="field image required">
+            <label class="label" for="upload-image"><span>Upload image</span></label>
+            <div class="control">
+                <input name="upload_image" id="upload-image" title="upload image" class="input-text" type="file" data-validate="{required:true}"/>
+            </div>
+        </div>
+        <?= $block->getChildHtml('form.additional.info') ?>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <input type="hidden" name="hideit" id="hideit" value="" />
+            <button type="submit" title="<?= $block->escapeHtmlAttr(__('Submit')) ?>" class="action submit primary" id="submit-warranty" >
+                <span><?= $block->escapeHtml(__('Submit')) ?></span>
+            </button>
+        </div>
+    </div>
+</form>
+<script>
+require([
+    'jquery',
+    'mage/calendar'
+], function($){
+    $('#date-of-installation').datepicker({
+        dateFormat: 'mm/dd/yy',
+        changeMonth: true,
+        changeYear: true,
+        showOn: 'button',
+        buttonText: ""
+    });
+});
+</script>
+<?php 
+$ajaxurl = $block->getFormAction();
+?>
+<script type="text/x-magento-init">
+        {
+            "*": {
+                "Redstage_Warranty/js/warrantyajax": {
+                    "WarrantyUrl": "<?php echo $ajaxurl; ?>"
+                }
+            }
+        }
+</script>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage LayeredNavigation module use for customize numeric configurator for layared navigation
+ *
+ * @category: PHP
+ * @package: Redstage/LayeredNavigation
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_LayeredNavigation
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_LayeredNavigation" setup_version="1.0.0">
+        <sequence>
+            <module name="Magento_LayeredNavigation"/>
+            <module name="Magento_LayeredNavigationStaging"/>
+            <module name="Amasty_Shopby"/>
+        </sequence>
+    </module>
+</config>

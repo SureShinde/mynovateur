@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryExtend
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="adminhtml_customer_save_after">
+        <observer name="webkul_delhiveryextend_adminhtml_customer_save_after_observer" instance="Webkul\DelhiveryExtend\Observer\AdminhtmlCustomerSaveAfterObserver" />
+    </event>
+    <event name="wk_delivery_seller_origin_save">
+        <observer name="webkul_delhiveryextend_seller_origin_save" instance="Webkul\DelhiveryExtend\Observer\OriginSave" />
+    </event>
+    <event name="checkout_cart_product_add_after">
+        <observer name="after_add_to_cart" instance="Webkul\DelhiveryExtend\Observer\PricecalculationsAfterAddtoCart" />
+    </event>
+    <event name="generate_api_shipment">
+        <observer name="delhivery_seller_shipment" instance="Webkul\DelhiveryExtend\Observer\SellerDeliveryShipment" />
+    </event>
+    <event name="admin_system_config_changed_section_mpassignproduct">
+        <observer name="upload_postal_code" instance="Webkul\DelhiveryExtend\Observer\UploadPostalData" />
+    </event>
+</config>

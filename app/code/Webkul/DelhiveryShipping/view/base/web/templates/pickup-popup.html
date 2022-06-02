@@ -1,0 +1,28 @@
+<!--
+/**
+ * @category   Webkul
+ * @package    Webkul_DelhiveryShipping
+ * @author     Webkul Software Private Limited
+ * @copyright  Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license    https://store.webkul.com/license.html
+ */  -->
+<form id="get-pickup-datetime-form" method="get" action="<%- formaction %>">
+    <div class="modal-body">
+        <div class="bootbox-body">
+            <div class="field overview required admin__field" data-role="filter-form" id="pickup_time_container">
+                 <span class="field-row">
+                     <label for="pickup_time">
+                        <span>Pickup Time :</span>
+                     </label>
+                     <input class="input-text required-entry admin__control-text"
+                             type="text"
+                             id="pickup_time"
+                             name="pickup_time",
+                             style="width:70%;"
+                             />
+                       <span id="date_from_advice"></span>
+                   </span>
+            </div>
+        </div>
+    </div>
+</form>

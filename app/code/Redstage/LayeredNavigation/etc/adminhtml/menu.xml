@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage LayeredNavigation module use for customize numeric configurator for layared navigation
+ *
+ * @category: PHP
+ * @package: Redstage/LayeredNavigation
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_LayeredNavigation
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Redstage_LayeredNavigation::layerednavigation"
+             title="Numeric Configurator"
+             translate="title"
+             module="Redstage_LayeredNavigation"
+             parent="Redstage_Base::main_menu"
+             sortOrder="10"
+             resource="Redstage_LayeredNavigation::layerednavigation"
+        />
+        <add id="Redstage_LayeredNavigation::layerednavigationset"
+             title="Numeric Configurator Setting"
+             module="Redstage_LayeredNavigation"
+             sortOrder="50"
+             parent="Redstage_LayeredNavigation::layerednavigation"
+             action="layerednavigation/index/"
+             resource="Redstage_LayeredNavigation::layerednavigationset"
+        />
+    </menu>
+</config>

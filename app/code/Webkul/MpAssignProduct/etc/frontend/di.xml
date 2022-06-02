@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpAssignProduct
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    
+    <type name="Magento\Elasticsearch7\SearchAdapter\Adapter">
+        <plugin name="Webkul_MpAssignProduct::aroundAdapterQuery"
+                type="Webkul\MpAssignProduct\Plugin\Elasticsearch7\SearchAdapter\Adapter"
+                sortOrder="0" />
+    </type>
+    <type name="Magento\Elasticsearch7\SearchAdapter\Mapper">
+        <plugin name="Webkul_MpAssignProduct::aroundMapperQuery"
+                type="Webkul\MpAssignProduct\Plugin\Elasticsearch7\SearchAdapter\Mapper"
+                sortOrder="0" />
+    </type>
+
+   
+</config>

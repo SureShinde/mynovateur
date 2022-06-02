@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Redstage_Logger::log"
+             title="Logs"
+             translate="title"
+             module="Redstage_Logger"
+             parent="Redstage_Base::main_menu"
+             sortOrder="10"
+             resource="Redstage_Logger::logger"
+        />
+        <add id="Redstage_Logger::loggerinfo"
+             title="API Logs"
+             module="Redstage_Logger"
+             sortOrder="50"
+             parent="Redstage_Logger::log"
+             action="apilogger/logger/index/"
+             resource="Redstage_Logger::loggerinfo"
+        />
+    </menu>
+</config>

@@ -1,0 +1,329 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+<?php
+/** @var $viewModel Redstage\LayeredNavigation\ViewModel\Layerednavigation */
+$viewModel = $block->getViewModel();
+?>
+<?php $filtered = count($block->getLayer()->getState()->getFilters()) ?>
+<div class="block-content filter-content">  
+    <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Filter By')) ?></strong>
+</div>
+<?php if($this->getRequest()->getModuleName() == 'catalogsearch' && $this->getRequest()->getControllerName() == 'result' && $this->getRequest()->getRouteName() == 'catalogsearch'){
+    //do nothing
+}else{?>
+    <div class="filter-options filter-content"> 
+        <?php echo $viewModel->getApplicationOptions(1);?>
+    </div>
+<?php }?>
+<?php if ($block->canShowBlock()) : ?>
+    <div class="block filter" id="layered-filter-block" data-mage-init='
+    {
+        "collapsible":
+        {
+            "openedState": "active",
+            "collapsible": true,
+            "active": false,
+            "collateral":
+            {
+                "openedState": "filter-active",
+                "element": "body"
+            }
+        }
+    }'>
+    
+        <div class="block-content filter-content">
+            <?= $block->getChildHtml('state') ?>
+
+            <?php if ($block->getLayer()->getState()->getFilters()) : ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?= $block->escapeUrl($block->getClearUrl()) ?>" class="action clear filter-clear">
+                        <span><?= $block->escapeHtml(__('Clear All')) ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php foreach ($block->getFilters() as $filter) :
+              if($filter->getName() == 'Price'){
+                  continue;
+              }
+              ?>
+                <?php if ($filter->getItemsCount()) : ?>
+                    <?php if (!$wrapOptions) : ?>
+                        <!-- <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= $block->escapeHtml(__('Filter By')) ?></strong> -->
+                        <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='
+                        {
+                            "accordion":
+                            {
+                                "openedState": "active",
+                                "collapsible": true,
+                                "active": false,
+                                "multipleCollapsible": false
+                            }
+                        }'>
+                        <?php $otherHide ='';
+                        if($this->getRequest()->getModuleName() != 'catalogsearch'){
+                            if($viewModel->isModuleEnabled()):
+                            ?>
+                                <?php //echo $viewModel->getApplicationOptions(1);?>
+                                <?php if($viewModel->getAttributeHide()):?>
+                                <?php $otherHide = 'style = "display:none;"'; ?>
+                                <?php endif;?>
+                            <?php endif;?>
+                        <?php }?>
+                        <?php $wrapOptions = true;
+                        endif; ?>
+                    <?php
+                    if($filter->getName() == 'Backup Time' || $filter->getName() == 'Network Monitoring'){?>
+                      <div data-role="collapsible" class="filter-options-item">
+                          <div data-role="title" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></div>
+                          <div data-role="content" class="filter-options-content"><?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?></div>
+                      </div>
+                    <?php }else{ ?>
+                      <div data-role="collapsible" class="filter-options-item" <?php echo $otherHide;?>>
+                          <div data-role="title" class="filter-options-title"><?= $block->escapeHtml(__($filter->getName())) ?></div>
+                          <div data-role="content" class="filter-options-content"><?= /* @noEscape */ $block->getChildBlock('renderer')->render($filter) ?></div>
+                      </div>
+                    <?php } ?>
+
+                <?php endif; ?>
+            <?php endforeach; ?>
+            <?php if ($wrapOptions) : ?>
+                </div>
+                <?php 
+                if($this->getRequest()->getModuleName() != 'catalogsearch'){
+                    if($viewModel->isModuleEnabled()):?>
+                    <?php $selectedOption = $viewModel->getSelectedOption(); ?>
+                    <script>
+                        require([
+                            'jquery'
+                        ], function ($) {
+                            $(document).ready(function () {
+                                if(document.location.search.length) {
+                                    var currentcatId = $('.category_id').val();
+                                    
+                                }else{
+                                    $('.filter-content li input.nav-checkbox').attr('checked',false);
+                                    $('.filter-content li input.nav-checkbox').prop('checked',false);
+                                }
+
+                                if($('.category_id').val() > 0){
+                                  setTimeout(function() {
+                                    $('ol.amshopby-items.items').css("display", "none");
+                                    $('a.action.clear.filter-clear').css("display", "none");
+                                    $( ".filter-content li input.nav-checkbox:checked" ).parent().parent().parent().css( "display", "block" );
+                                  }, 1000);
+                                }
+                                $(".filter-options-title").click(function() {
+                                    $(this).next().toggle();
+                                });
+                                $('.filter-content li input.nav-checkbox').click(function(){
+                                    var oldValue, wattvalue;
+                                    var applyQty = 1;
+                                    var inputValue = $(this).attr('value');
+                                    var splitValue = inputValue.split('-');
+                                    var wattValue = splitValue[3];
+                                    var wattQty = $('.'+splitValue[0]+'-wattqty').val();
+                                    if(wattQty){
+                                        applyQty = wattQty;
+                                    }
+                                    $('.'+splitValue[0]+'-wattqty').val(applyQty);
+                                    oldValue = $('.'+splitValue[0]+'-wattvalue').val();
+                                    if(oldValue){
+                                        if($(this).is(':checked')){
+                                            $('.'+splitValue[0]+'-wattvalue').val(parseInt(wattValue) + parseInt(oldValue));
+                                        }else{
+                                            $('.'+splitValue[0]+'-wattvalue').val(parseInt(oldValue) - parseInt(wattValue));
+                                        }
+                                        oldValue = $('.'+splitValue[0]+'-wattvalue').val();
+                                        $('.'+splitValue[0]+'-totalwatt').val(parseInt(applyQty) * parseInt(oldValue));
+                                    }else{
+                                        $('.'+splitValue[0]+'-wattvalue').val(parseInt(wattValue));
+                                        $('.'+splitValue[0]+'-totalwatt').val(parseInt(wattValue) * parseInt(applyQty));
+                                    }
+
+                                    if($('.select-option').val() && $(this).is(':checked')){
+                                        var oldSelect = $('.select-option').val();
+                                        $('.select-option').val(oldSelect+'#'+inputValue);
+                                    }else if($('.select-option').val()){
+                                        var oldSelect = $('.select-option').val();
+                                        oldSelect = oldSelect.replace('#'+inputValue,'');
+                                        $('.select-option').val(oldSelect);
+                                        var oldSelect = $('.select-option').val();
+                                        oldSelect = oldSelect.replace(inputValue,'');
+                                        $('.select-option').val(oldSelect);
+                                    }else{
+                                        $('.select-option').val(inputValue);
+                                    }
+                                    //removeStr($('.select-option').val(),inputValue);
+                                    var selected_options = [];
+                                    var selected_watttmp = [];
+                                    var selected_watt = [];
+                                    var obj = {};
+                                    //obj.selected_watt = [];
+                                    var selected_wattValue = 0;
+                                    $('.filter-content li input.nav-checkbox').each(function(){
+                                        if($(this).is(':checked')){
+                                            selected_options.push($(this).val());
+                                            var selected_value = $(this).val();
+                                            var selected_splitValue = selected_value.split('-');
+                                            var selected_wattAttr = selected_splitValue[0];
+                                            var selected_wattVal = selected_splitValue[3];
+                                            selected_wattValue += parseInt(selected_wattVal);
+                                            selected_watt[selected_wattAttr] = selected_wattValue;
+                                            //selected_watt.concat(selected_watttmp);
+                                            //selected_watt.splice(index, selected_wattAttr, selected_wattValue);
+                                            //selected_wattAttr.push(selected_wattValue);
+                                            //selected_watt.push(selected_wattAttr);
+                                        }
+                                    });
+
+
+
+                                    var selected_options = [];
+                                    var selected_watttmp = [];
+                                    var selected_watt = [];
+                                    var obj = {};
+                                    //obj.selected_watt = [];
+                                    var selected_wattValue = 0;
+                                    $('.filter-content li input.nav-checkbox').each(function(){
+                                        if($(this).is(':checked')){
+                                            selected_options.push($(this).val());
+                                            var selected_value = $(this).val();
+                                            var selected_splitValue = selected_value.split('-');
+                                            var selected_wattAttr = selected_splitValue[0];
+                                            var selected_wattVal = selected_splitValue[3];
+                                            selected_wattValue += parseInt(selected_wattVal);
+                                            selected_watt[selected_wattAttr] = selected_wattValue;
+                                            //selected_watt.concat(selected_watttmp);
+                                            //selected_watt.splice(index, selected_wattAttr, selected_wattValue);
+                                            //selected_wattAttr.push(selected_wattValue);
+                                            //selected_watt.push(selected_wattAttr);
+                                        }
+                                    });
+                                    
+                                    var selected_options_str = selected_options.join('#');
+                                    $('.select-option').val(selected_options_str);
+
+                                    var totalWatt = 0;
+                                    $('input.innertotalwatt').each(function(){
+                                      totalWatt += parseInt($(this).val());
+                                    });
+                                    $('#totalwatt').val(selected_wattValue);
+                                    $.myFunctionName(selected_wattValue);
+                                    //window.location.reload();
+                                });
+                                $('.filter-content li input.nav-radio').click(function(){
+                                    var oldValue,wattQty;
+                                    var inputValue = $(this).attr('value');
+                                    var splitValue = inputValue.split('-');
+                                    oldValue = $('.'+splitValue[0]+'-wattvalue').val();
+                                    $('.'+splitValue[0]+'-wattqty').val(splitValue[2]);
+                                    wattQty = $('.'+splitValue[0]+'-wattqty').val();
+                                    if(oldValue){
+                                        $('.'+splitValue[0]+'-totalwatt').val(parseInt(wattQty) * parseInt(oldValue));
+                                    }
+                                    var totalWatt = 0;
+                                    $('input.innertotalwatt').each(function(){
+                                      totalWatt += parseInt($(this).val());
+                                    });
+                                    $('#totalwatt').val(totalWatt);
+                                    $.myFunctionName(totalWatt);
+                                    //window.location.reload();
+                                });
+
+                                $.myFunctionName = function(twatt)
+                                {
+                                    console.log('calling my func');
+                                    var wattSelect = '';
+                                    $('.wattcalculation').each(function(){
+                                        //wattSelect += '#'+$(this).val();
+                                        wattSelect += '#'+$(this).attr('name')+'|'+$(this).val()
+                                    });
+
+                                    var optionSelect = $('.select-option').val();
+
+                                    var radioSelect = '';
+                                    $('.nav-radio').each(function(){
+                                        if($(this).is(':checked')){
+                                            radioSelect += '#'+$(this).val();
+                                        }
+                                    });
+
+                                    var currentcatId = $('.category_id').val();
+                                    /*$.ajax({
+                                        url:'<?php //echo $viewModel->getBaseUrl();?>layerednavigation/index/index',
+                                        type:'POST',
+                                        showLoader: true,
+                                        dataType:'json',
+                                        data: {wattselect:wattSelect,optionselect:optionSelect,radioselect:radioSelect,category_id:currentcatId},
+                                        success:function(response){
+                                            //alert(response);
+                                        }
+                                    });*/
+
+                                    var totalWatt = $('#totalwatt').val();
+                                    var totalWatt2 = parseInt(totalWatt) + 500;
+
+                                    console.log(totalWatt+'~~~'+totalWatt2);
+                                    //attribute
+                                    var countWatt = 0;
+                                    $('.am-filter-items-numeric_watts li input').prop('checked', false);
+                                    $('.am-filter-items-numeric_watts li').each(function(){
+
+                                        console.log(this);
+                                        if($(this).find('input').is(':checked')==true){
+                                            //$(this).click();
+                                        }
+                                       var wattValueli = $(this).attr("data-label");
+                                       var wattValue = wattValueli.replace(" W", "");
+                                       if(parseInt(totalWatt)<=parseInt(wattValue) && parseInt(totalWatt2)>=parseInt(wattValue) && parseInt(totalWatt) > 0 && $(this).find('input').is(':checked')==false){
+                                          console.log('hhhhh');
+                                            $(this).click();
+                                            countWatt = parseInt(countWatt) + 1;
+                                       }
+                                    });
+                                    $('.am-filter-items-attr_numeric_watts li input').prop('checked', false);
+                                    $('.am-filter-items-attr_numeric_watts li').each(function(){
+
+                                        console.log(this);
+                                        if($(this).find('input').is(':checked')==true){
+                                            //$(this).click();
+                                        }
+                                       var wattValueli = $(this).attr("data-label");
+                                       var wattValue = wattValueli.replace(" W", "");
+                                       if(parseInt(totalWatt)<=parseInt(wattValue) && parseInt(totalWatt2)>=parseInt(wattValue) && parseInt(totalWatt) > 0 && $(this).find('input').is(':checked')==false){
+                                          console.log('hhhhh');
+                                            $(this).click();
+                                            countWatt = parseInt(countWatt) + 1;
+                                       }
+                                    });
+                                }
+                            });
+                        });
+
+                    </script>
+                    <?php endif;?>
+                <?php }?>
+            <?php else : ?>
+                <script>
+                    require([
+                        'jquery'
+                    ], function ($) {
+                        $('#layered-filter-block').addClass('filter-no-options');
+                    });
+                </script>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

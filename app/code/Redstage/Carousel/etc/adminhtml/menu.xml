@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Redstage_Carousel::parent" title="Redstage Carousel" module="Redstage_Carousel" sortOrder="10" resource="Redstage_Carousel::parent"/>
+		<add id="Redstage_Carousel::slide" title="Carousel Slides" module="Redstage_Carousel" sortOrder="20" parent="Redstage_Carousel::parent" action="redstage_carousel/slide" resource="Redstage_Carousel::slide"/>
+	</menu>
+</config>

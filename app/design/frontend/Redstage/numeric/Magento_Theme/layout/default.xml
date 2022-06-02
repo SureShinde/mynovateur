@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="footer_links" remove="true" />
+        <referenceBlock name="marketplace-top-link" remove="true" />	 
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template" name="footer_custom_links" template="Magento_Theme::html/custom-footer.phtml" />
+		</referenceContainer>
+        <referenceBlock name="header.links">
+
+            <block class="Magento\Framework\View\Element\Html\Link" name="wishlist-link" before="-" ifconfig="guestwishlist/general/addlink">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">My Wishlist</argument>
+                    <argument name="path" xsi:type="string" translate="false">wishlist</argument>
+
+                </arguments>
+            </block>
+      </referenceBlock>
+       <move element="minicart" destination="header.panel" before="header.links" />
+       <referenceBlock name="register-link" remove="true" />
+       <move element="navigation.sections" destination="header-wrapper" />
+
+       <referenceContainer name="header.container">
+         <container name="header.bottom" htmlTag="div" htmlClass="header-bottom">
+            <container name="headerbottom.inner" htmlTag="div" htmlClass="header-bottom-inner">
+                <container name="headerbottom.search" htmlTag="div" htmlClass="headerbottom-search"/>
+                <container name="headerbottom.deals" htmlTag="div" htmlClass="headerbottom-deals">
+                    <block class="Magento\Cms\Block\Block" name="static_deals" >
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">static_deals</argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+         </container>
+        </referenceContainer>
+        <move element="top.search" destination="headerbottom.search"  />
+        <referenceContainer name="header.panel">
+            <block class="Magento\Cms\Block\Block" name="header.promotion.message">
+                <arguments>
+                <argument name="block_id" xsi:type="string">header_promotion_message</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+       <move element="header.promotion.message" destination="header.panel" after="top.links"/>
+       <move element="ammenu.logo" destination="header-wrapper" before="minicart" />
+       <referenceBlock name="hyperlocal_options" remove="true" />
+    </body>
+</page>

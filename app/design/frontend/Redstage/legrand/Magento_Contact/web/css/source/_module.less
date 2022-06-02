@@ -1,0 +1,85 @@
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+*/
+
+& when (@media-common = true) {
+    .contact-index-index {
+        .column:not(.sidebar-main) {
+            .form.contact {
+                float: none;
+                width: 50%;
+            }
+        }
+        .column:not(.sidebar-additional) {
+            .form.contact {
+                float: none;
+                width: 50%;
+            }
+        }
+        .pagebuilder-banner-wrapper{
+            margin-top: -58px;
+        }
+        .page-wrapper{
+            >.breadcrumbs{
+                z-index: 99;
+
+                .item {
+                    color: #fff;
+                    a{
+                        color: #fff !important;
+                    }
+                    strong{
+                        color: #fff;
+                        font-weight: bold;
+                    }
+                }
+            }
+            .page-main{
+                margin-top: 25px;
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .contact-index-index{
+        .column:not(.sidebar-additional) {
+            .form.contact {
+                min-width: 600px;
+            }      
+        }
+        .pagebuilder-banner-wrapper{
+            margin-top: -63px;
+        }
+        .page-wrapper{
+            >.breadcrumbs{
+                z-index: 99;
+            }
+        }
+    }
+}
+
+//  Mobile
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .contact-index-index {
+        .column:not(.sidebar-main) {
+            .form.contact {
+                float: none;
+                width: 100%;
+            }
+        }
+
+        .column:not(.sidebar-additional) {
+            .form.contact {
+                float: none;
+                width: 100%;
+            }
+        }
+    }
+}
+

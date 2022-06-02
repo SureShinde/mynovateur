@@ -1,0 +1,36 @@
+<?php
+/**
+ * Webkul Software
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+$helper = $block->getData('mpGstHelper');
+$mphelper = $helper->getMpHelper();
+$isPartner= $mphelper->isSeller();
+$magentoCurrentUrl = $block->getCurrentUrl();
+?>
+<nav class="wk-mp-menu wk-mp-main">
+    <ul id="wk-mp-nav">
+        <?php
+        if ($isPartner) { ?>
+            <?php if (($mphelper->isAllowedAction('delhiveryextend/pickup/history'))) { ?>
+            <li class="nav item notification-link level-0
+                <?= strpos($magentoCurrentUrl, 'delhiveryextend/pickup/history')? $block->escapeHtml("current active"):"";?>"
+            >
+                <a href="<?=
+                    $block->escapeUrl($block->getUrl(
+                        'delhiveryextend/pickup/history',
+                        ['_secure' => $block->getRequest()->isSecure()]
+                    )) ?>"
+                >
+                    <?= $block->escapeHtml(__('Delhivery Pickup')) ?>
+                </a>
+            </li>
+            <?php } ?>
+        <?php } ?>
+    </ul>
+</nav>

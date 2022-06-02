@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryShipping
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2016 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="delhivery_manageawb_list_data_source" xsi:type="string">Webkul\DelhiveryShipping\Model\ResourceModel\Manageawb\Grid\Collection</item>
+                <item name="delhivery_managepincode_list_data_source" xsi:type="string">Webkul\DelhiveryShipping\Model\ResourceModel\Managepincode\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Webkul\DelhiveryShipping\Model\ResourceModel\Manageawb\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_delhivery_awb</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_delhivery_awb</argument>
+            <argument name="eventObject" xsi:type="string">awb_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\DelhiveryShipping\Model\ResourceModel\Manageawb</argument>
+        </arguments>
+    </type>
+
+    <type name="Webkul\DelhiveryShipping\Model\ResourceModel\Managepincode\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_delhivery_pincode</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_delhivery_pincode</argument>
+            <argument name="eventObject" xsi:type="string">pincode_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\DelhiveryShipping\Model\ResourceModel\Managepincode</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="DelhiveryShippingGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="ManageawbGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Webkul\DelhiveryShipping\Model\ResourceModel\Manageawb\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">DelhiveryShippingGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+</config>

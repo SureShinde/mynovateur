@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+    <route url="/V1/serviceticket/updatestatus" method="POST">
+        <service class="Redstage\ServiceTicketsync\Api\UpdateStatusInterface" method="Updateticket"/>
+        <resources>
+            <resource ref="anonymous"/>
+            <!-- <resource ref="Redstage_ServiceTicketsync::manage_serviceticket"/> -->
+        </resources>
+    </route>
+    <route url="/V1/serviceticket/createticket" method="POST">
+        <service class="Redstage\ServiceTicketsync\Api\CreateTicketInterface" method="sendServiceTicketsToSF"/>
+        <resources>
+            <resource ref="anonymous"/>
+            <!-- <resource ref="Redstage_ServiceTicketsync::manage_serviceticket"/> -->
+        </resources>
+    </route>
+
+    
+</routes>

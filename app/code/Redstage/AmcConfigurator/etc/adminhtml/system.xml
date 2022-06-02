@@ -1,0 +1,91 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="amc_config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label">
+			<label>AMC</label>
+			<tab>redstage</tab>
+			<resource>Redstage_AmcConfigurator::amc_config</resource>
+			<group id="contractor" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Contractor Configuration</label>
+                <field id="allowed_asset_status" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10"
+                           translate="label" type="text">
+                    <label>Allowed Asset Status</label>
+                    <comment>Use comma for multiple like CAMC,PCB</comment>
+                </field>
+                <field id="allowed_sales_org" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Sales Org</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_equipment_make" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Equipment Make</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+            </group>
+            <group id="customer" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Customer Configuration</label>
+                <field id="allowed_sales_organization" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Sales Organization</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_distribution_channel" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Distribution Channel</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_division" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Division</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+               <!-- <field id="allowed_region" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Region</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_customer_account_group" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Customer Account Group</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_customer_type" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Customer Type</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_sales_group" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Sales Group</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_sales_office" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Sales Office</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_reconciliation_account" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Reconciliation Account</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_account_assignment_group" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Account assignment group</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_tax_clssification" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Account assignment group</label>
+                    <comment>Use comma for multiple</comment>
+                </field>
+                <field id="allowed_pricing" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                       translate="label" type="text">
+                    <label>Allowed Pricing</label>
+                    <comment>Use comma for multiple</comment>
+                </field>-->
+            </group>
+		</section>
+	</system>
+</config>

@@ -1,0 +1,22 @@
+{
+    "redstage_warranty": {
+        "column": {
+            "entity_id": true,
+            "product_serial_number": true,
+            "invoice_no": true,
+            "date_of_installation": true,
+            "name": true,
+            "installation_site_address": true,
+            "pincode": true,
+            "mobile": true,
+            "email": true,
+            "image": true,
+            "response_status": true,
+            "response_detail": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

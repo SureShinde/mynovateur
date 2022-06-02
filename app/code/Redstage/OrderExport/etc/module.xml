@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage OrderExport module to export order for SAP.
+ *
+ * @category: PHP
+ * @package: Redstage/OrderExport
+ * @copyright: Copyright © 2019 Magento, Inc. All rights reserved.
+ * @author: Ajay Bava <abava@redstage.com>
+ * @project: Legrand & Numeric
+ * @keywords: Module Redstage_OrderExport
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_OrderExport" setup_version="1.0.0" />
+</config>

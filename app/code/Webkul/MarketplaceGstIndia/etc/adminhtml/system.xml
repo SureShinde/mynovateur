@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <tab id="webkul" translate="label" sortOrder="10">
+            <label>Webkul</label>
+        </tab>
+        <section id="mpgst" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Marketplace GST</label>
+            <tab>webkul</tab>
+            <resource>Webkul_MarketplaceGstIndia::system_config</resource>
+            <group id="general_settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="status" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="gstin" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>GSTIN</label>
+                    <validate>required-entry validate-alphanum validate-length minimum-length-15 maximum-length-15</validate>
+                </field>
+                <field id="state" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Production State</label>
+                    <source_model>Webkul\MarketplaceGstIndia\Model\Config\Source\States</source_model>
+                </field>
+                <field id="product_price_type" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Catalog Product Price</label>
+                    <source_model>Webkul\MarketplaceGstIndia\Model\Config\Source\PriceType</source_model>
+                    <comment>
+                    <![CDATA[
+                    This sets whether catalog prices entered from Magento Admin include GST.<br>
+                    Excluding GST: Product price can't contain GST amount but added saperately in subtotal.<br>
+                    Including GST: Product price already contain GST amount it can't added saperately in subtotal.
+                    ]]>
+                    </comment>
+                </field>
+                <field id="show_inclusive_exclusive" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display Inclusive/Exclusive Info</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Warranty module use for create Warranty form in magento side and after take request send information to external url
+ *
+ * @category: PHP
+ * @package: Redstage/Warranty
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Warranty
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Redstage\Warranty\Model\ResourceModel\Warranty\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_warranty</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\Warranty\Model\ResourceModel\Warranty\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="redstage_warranty_listing_data_source" xsi:type="string">Redstage\Warranty\Model\ResourceModel\Warranty\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="content">
+        <field name="landing_page_second" sortOrder="65" formElement="select">
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Add CMS Block Second</label>
+            </settings>
+        </field>
+        <field name="landing_page_third" sortOrder="66" formElement="select">
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Add CMS Block Third</label>
+            </settings>
+        </field>
+        <field name="url_link_thumbnail" sortOrder="25" formElement="input">
+            <settings>
+                <dataType>string</dataType>
+                <label translate="true">Link for Thumbnail</label>
+            </settings>
+        </field>
+    </fieldset>
+</form>

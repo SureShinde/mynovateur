@@ -1,0 +1,56 @@
+Legend
+
++ Features
+- Bugs
+
+-------------------------------- Version 5.0.1 --------------------------------------
+   + Compatible with Magento 2.4.x EE and Marketplace 5.*.*
+   + Grid for Uploaded data from the csv.
+   + Enable/disable global.
+   + Grid below the GST upload option.
+   + Updated the sample name.
+   + Added option of implement Exclusive and include tax in admin end.  
+   - Removed suppress warnings.
+   - Corrected spellings and Updated the heading while uploading the GST csv.
+   - Fixed refunding more amount than paid.
+   - Fixed wrong grand total in invoice.
+   - Fixed wrong order amount at seller end when placing the order with downloadable products.
+   - Fixed GST amount at customer end for the US customer when placing the order with downloadable products.
+   - Fixed special characters in GSTIN field validation.
+   - Added validation on HSN for admin end.
+   - Fixed validation message in GST Rate(in Percentage) before saving the product.
+   - Fixed GST field for US or other countries than INDIA
+   - Fixed HSN number in order invoice.
+   
+-------------------------------- Version 5.0.0 --------------------------------------
+   + Version upgrade for Magento 2.4.x
+   + Compatible with Marketplace 5.*.* version.
+
+-------------------------------- Version 4.0.0 --------------------------------------
+   + Compatible with Magento 2.4.x EE and Marketplace 4.*.*.
+
+-------------------------------- Version 3.0.0 --------------------------------------
+   + Version upgrade for Magento 2.3.x
+   + Compatible with Marketplace 3.*.* version.
+
+-------------------------------- Version 2.2.0 --------------------------------------
+   + Version upgrade for Magento 2.2.x
+   + Compatible with Marketplace 2.3.* version.
+
+-------------------------------- Version 2.1.0 --------------------------------------
+   - Fixed Bugs.
+   + Normal Tax is applicable for other than india.
+   + Min/Max GST feature added.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+   + Admin can Enable/Disable the module any time.
+   + Admin can add GST percent and HSN code product wise.
+   + Admin can set Production State.
+   + Seller is able to set the GST percent and HSN code for their prodcts.
+   + Seller can set own Production State.
+   + Products GST percent and HSN code Mass Update feature is available for both seller and admin.
+   + GST is applied according to per product.
+   + GST is categorized in SGST,CGST and IGST.
+   + Customers can add own GST Number in Customer Address Page.
+   + GST info is displayed in emails and PDF's.

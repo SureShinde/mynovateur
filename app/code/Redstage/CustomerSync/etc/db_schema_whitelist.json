@@ -1,0 +1,9 @@
+{
+    "customer_entity": {
+        "column": {
+            "customer_sf_id": true,
+            "send_to_sf": true,
+            "customer_status": true
+        }
+    }
+}

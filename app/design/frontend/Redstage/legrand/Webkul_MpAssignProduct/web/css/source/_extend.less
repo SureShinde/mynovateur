@@ -1,0 +1,202 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Variables
+//  _____________________________________________
+
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    #zipaddress-modal {
+        input#zipaddressinp {
+            font-weight: bold;
+        }
+    }
+    .modal-popup{
+        &.zipaddress-modal-popup{
+            &.modal-slide {
+                //top: 80px !important;
+            }
+            .modal-inner-wrap{
+                transform: translateY(-50%);
+                border: 2px solid #A8831D;
+                background: transparent linear-gradient(131deg, #FFFFFF 0%, #EFF6FF 100%) 0% 0% no-repeat padding-box !important;
+                .modal-header{
+                    .modal-title{
+                        display: none;
+                    }
+                }
+                button{
+                    text-transform: uppercase;
+                    background: transparent;
+                    border: none;
+                    color: #1980D4;
+                    font-size: 18px;
+                }
+                .modal-content{
+                    overflow-y: visible;
+                    padding-bottom: 60px;
+
+                    .loc-control{
+                        .zipaddress-text{
+                            font-size: 16px;
+                            border-bottom: 1px solid #706A68;
+                            padding: 30px 0;
+                        }
+                        .area-pincode-text{
+                            font-size: 18px;
+                            font-weight: bold;
+                            margin-bottom: 25px;
+                        }
+                        #zipaddressinp{
+                            margin: 5px auto;
+                            padding: 5px 90px 5px 10px;
+                            border: 1px solid #848484;
+                            background: #fff;
+                            height: 40px;
+                        }
+                        .loc-control-wrapper{
+                            #zipcodeok{
+                                position: absolute;
+                                right: 30px;
+                                top: auto;
+                                padding-top: 18px;
+                            }
+                        }
+                    }
+                    .loc-control-wrapper{
+                        span{
+                            font-size: 18px;
+                            font-weight: 600;
+                            padding-left: 30px;
+                        }
+                        &::before{
+                            content: "";
+                            background: url(../images/location-leg.png) no-repeat 0 0;
+                            width: 17px;
+                            height: 25px;
+                            display: inline-block;
+                            position: absolute;
+                            background-size: contain;
+                        }
+                    }
+                }
+                .modal-footer{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .modal-popup {
+        &.zipaddress-modal-popup{
+            &.modal-slide {
+                //top: 100px !important;
+            }
+            .modal-inner-wrap{
+                min-height: 410px;
+                position: fixed;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 50%;
+                button {
+                    font-size: 15px;
+                }
+                .modal-content  {
+                    #zipaddress-modal{
+                        padding-top: 20px;
+                        .loc-control{
+                            margin: 0 auto;
+                            width: 77%;
+                        }
+                    }
+                    .loc-control{
+                        #zipaddressinp{
+                            padding: 5px 90px 5px 35px;
+                        }
+                        .loc-control-wrapper{
+                            #zipcodeok{
+                                padding-top: 17px;
+                                right: 5px;
+                            }
+                        }
+                    }
+                }
+                .modal-footer {
+                    border: none;
+                }
+                .modal-popup._inner-scroll {
+                    .modal-content{
+                        overflow-y: hidden;
+                    }
+                }
+            }
+        }
+        .loc-control-wrapper{
+            position: relative;
+            width: auto;
+            max-width: 415px;
+            margin: 0 auto;
+            &::before{
+                top: 15px;
+                left: 13px;
+            }
+            span{
+                display: none;
+            }
+        }
+    }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+
+}
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m){
+    aside.modal-popup.zipaddress-modal-popup.modal-slide{
+        top: 15%;
+    }
+    .modal-popup{
+        &.zipaddress-modal-popup {
+            .modal-header{
+                padding-top: 5rem !important;
+            }
+            .modal-inner-wrap{
+                min-height: 0% !important;
+                .modal-content{
+                    .loc-control-wrapper{
+                        &::before{
+                            left: auto;
+                        }
+                    }
+                }
+                .modal-footer{
+                    button{
+                        bottom: 96px;
+                        right: 30px;
+                    }
+                }
+            }
+        }
+    }
+}

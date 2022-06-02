@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <redstage_customsms_orders>
+            <new_order>                
+                <new_order_message><![CDATA[Dear {firstname} {lastname}, your order #{order_id} was placed on {shop_name} at {created_at}]]></new_order_message>
+            </new_order>
+            <invoiced_order>
+                <invoiced_order_message><![CDATA[Dear {firstname} {lastname}, Invoice Id #{invoice_id} of Rs. {total_price} created for order #{order_id}.]]></invoiced_order_message>
+            </invoiced_order>
+            <shipped_order>
+                <shipped_order_message><![CDATA[Dear {firstname} {lastname}, Shipment ID #{shipment_id} generated for your order#{order_id}.You can track your order here https://link/to/shipment]]></shipped_order_message> 
+            </shipped_order>
+            <creditmemo_order>
+            <creditmemo_order_message><![CDATA[Dear {firstname} {lastname}, Your order ID #{order_id} is refunded with Rs. {total_price} Reference Credit Memo is #{creditmemo_id}]]></creditmemo_order_message> 
+            </creditmemo_order>
+           <!-- <hold_order>
+                <hold_order_message><![CDATA[Dear {firstname} {lastname}, Status of order #{order_id} has changed to On Hold. Info from {shop_name}.]]></hold_order_message>
+            </hold_order>
+            <unhold_order>
+                <unhold_order_message><![CDATA[Dear {firstname} {lastname}, Status of order #{order_id} has changed to Un Hold . Info from {shop_name}.]]></unhold_order_message>
+            </unhold_order>
+            <cancelled_order>
+                <cancelled_order_message><![CDATA[Dear {firstname} {lastname}, Status of order #{order_id} has changed to Cancelled . Info from {shop_name}.]]></cancelled_order_message>
+            </cancelled_order>-->                    
+        </redstage_customsms_orders>
+        <redstage_customsms_admins>
+            <admin_configuration>
+                <new_order_admin_message><![CDATA[New order is received from customer Email: {email}, order id: #{order_id}, amount: {total_price} from {shop_name} at {created_at} ]]></new_order_admin_message>
+               <!-- <hold_admin_message><![CDATA[Status of order #{order_id} has changed to On Hold. Info from {shop_name}.]]></hold_admin_message>
+                <unhold_admin_message><![CDATA[Status of order #{order_id} has changed to Un Hold . Info from {shop_name}.]]></unhold_admin_message>
+                <cancelled_admin_message><![CDATA[Status of order #{order_id} has changed to Cancelled . Info from {shop_name}.]]></cancelled_admin_message>-->
+                <invoiced_admin_message><![CDATA[Invoice for the order #{order_id} has been created. Invoice id: {invoice_id} Info from {shop_name}.]]></invoiced_admin_message>
+                <shipment_admin_message><![CDATA[Shipment of #{order_id} has been created. Shipment id: {shipment_id}. Info from {shop_name}.]]></shipment_admin_message>
+                <creditmemo_admin_message><![CDATA[Creditmemo of #{order_id} has been created. creditmemo id: {creditmemo_id}. Info from {shop_name}.]]></creditmemo_admin_message>
+                <register_admin_message><![CDATA[Customer {firstname} {lastname}, Email: {email}, has just registered at {shop_name}.]]></register_admin_message>                
+            </admin_configuration>
+        </redstage_customsms_admins>
+    </default>
+</config>

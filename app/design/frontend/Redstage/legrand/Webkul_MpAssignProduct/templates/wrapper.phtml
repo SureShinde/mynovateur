@@ -1,0 +1,144 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$helper = $this->helper('Webkul\MpAssignProduct\Helper\Data');
+$address = $helper->getSavedAddress();
+
+?>
+    <div class="wk-right-loc-field">
+        <div class="control loc-control">
+            <span class="loc-text">ENTER YOUR PINCODE</span>
+            <input class="input-text loc-input" id="zipaddress" type="text" name="zipaddress"
+                value="<?= $address ?>"
+                placeholder="<?= __('Enter Pincode'); ?>" />
+                <button class="code-sub-btn">Submit</button>
+        </div>
+    </div>
+
+    <div id="zipaddress-modal">
+        <div class="control loc-control">
+            <img src='<?= $block->getViewFileUrl('images/company-logo.png'); ?>' alt='' />
+            <p class="zipaddress-text">Welcome to the world of Legrand, global specialist in electrical and digital building infrastructures.</p>
+            <p class="area-pincode-text">To serve you better, please provide us your pincode!</p>
+            <div class="loc-control-wrapper">
+                <span>ENTER YOUR PINCODE</span>
+                <input class="input-text loc-input" id="zipaddressinp" type="text" name="zipaddressinp"
+                    value="<?= $address ?>"
+                    placeholder="<?= __('Enter Pincode'); ?>" />
+                <button id="zipcodeok" class="code-sub-btn">Submit</button>
+            </div>
+        </div>
+    </div>
+<script>
+require([
+    "jquery",
+    "mage/translate",
+    "Magento_Ui/js/modal/modal",
+    "Magento_Ui/js/modal/alert",
+    "Magento_Ui/js/modal/confirm",
+],function ($, $t, modal, alert, confirmation) {
+    var self = this;
+    var zipcode = "<?= $address ?>";
+    var options = {
+        type: 'popup',
+        responsive: true,
+        innerScroll: true,
+        clickableOverlay: false,
+        title: "<?= __('Enter your zip code'); ?>",
+        modalClass: 'zipaddress-modal-popup',
+        // buttons: [{
+        //     text: $.mage.__('Submit'),
+        //     class: '',
+        //     click: function () {
+        //         this.closeModal();
+        //         var updatedZip = $('#zipaddressinp').val();
+        //         if (zipcode && zipcode != updatedZip) {
+        //             confirmation({
+        //                 title: $.mage.__('Confirm'),
+        //                 content: $.mage.__('On location change cart will empty.'),
+        //                 actions: {
+        //                     confirm: function(){
+        //                         locationUpdate(updatedZip);
+        //                     },
+        //                     cancel: function(){},
+        //                     always: function(){}
+        //                 }
+        //             });
+        //         } else if (!zipcode){
+        //             locationUpdate(updatedZip);
+        //         }
+        //     }
+        // }]
+    };
+    function locationUpdate(updatedZip) {
+        $.ajax({
+            url: "<?= $block->getUrl('mpassignproduct/index/setaddress'); ?>",
+            data: {
+                'address':updatedZip,
+            },
+            type: 'POST',
+            dataType:'html',
+            beforeSend: function() {
+                $('body').trigger('processStart');
+            },
+            success: function (transport) {
+                $('body').trigger('processStop');
+                var response = $.parseJSON(transport);
+                if (!response.status) {
+                    alert({
+                        title: $.mage.__('Error'),
+                        content: $.mage.__(response.msg),
+                        actions: {
+                            always: function(){}
+                        }
+                    });
+                } else {
+                    location.reload();
+                }
+            }
+        });
+    }
+
+    function showPopup() {
+        var popup = modal(options, $('#zipaddress-modal'));
+        $('#zipaddress-modal').modal('openModal');
+    }
+    if (!zipcode) {
+        showPopup();
+    }
+
+    $('#zipaddress').on('click', function() {
+        showPopup();
+        $('.zipaddress-modal-popup .action-close').css('display', 'inline-block');
+    });
+
+    $('#zipcodeok').on('click', function(){
+        $('#zipaddress-modal').modal('closeModal');
+        var zipcode = "<?= $address ?>";
+        var updatedZip = $('#zipaddressinp').val();
+        if (zipcode && zipcode != updatedZip) {
+            confirmation({
+                title: $.mage.__('Confirm'),
+                content: $.mage.__('On location change cart will empty.'),
+                actions: {
+                    confirm: function(){
+                        locationUpdate(updatedZip);
+                    },
+                    cancel: function(){},
+                    always: function(){}
+                }
+            });
+        } else if (!zipcode){
+            locationUpdate(updatedZip);
+        }
+            
+    })
+})
+</script>

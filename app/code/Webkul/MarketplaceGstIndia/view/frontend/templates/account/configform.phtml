@@ -1,0 +1,105 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<form class="form" 
+    action="<?= $block->escapeHtml($block->getUrl('mpgst/config/save')) ?>" 
+    method="post" 
+    id="form-validate" 
+    data-mage-init='{"validation":{}}' 
+    enctype="multipart/form-data" 
+    data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>" 
+    autocomplete="off"
+>
+    <div class="wk-mp-page-title page-title">
+        <h2 class="legend"><?= $block->escapeHtml(__('Set GST Configuration')) ?></h2>
+        <button type="submit" class="button wk-mp-btn action save primary">
+            <span><span><?= $block->escapeHtml(__('Save')) ?></span></span>
+        </button>
+    </div>
+    <fieldset class="fieldset info">
+        <div class="field required">
+            <label class="label"><span><?= $block->escapeHtml("GSTIN"); ?>:</span></label>
+            <div class="control">
+                <input id="gstin_no" 
+                    class="required-entry validate-no-html-tags select validate-alphanum" 
+                    type="text" 
+                    name="seller_gstin" 
+                    data-validate="{required:true}" 
+                    value="<?= $block->escapeHtml($block->getCustomerData()->getSellerGstin()); ?>" 
+                />
+            </div>
+        </div>
+        <div class="field required">
+            <label class="label"><span><?= $block->escapeHtml(__("Production State")); ?>:</span></label>
+            <div class="control">
+                <select class="required-entry select" name="seller_production_state" data-validate="{required:true}">
+                <?php $states = $block->getStatesArray(); ?>
+                <?php $selectedState = $block->getCustomerData()->getSellerProductionState(); ?>
+                <?php foreach ($states as $state) { ?>
+                    <option <?=
+                        ($selectedState == $state['value']) ? $block->escapeHtml(__('selected')) : '' ?> 
+                        value="<?= $block->escapeHtml($state['value']) ?>"
+                    >
+                        <?= $block->escapeHtml($state['label']) ?>
+                    </option>
+                <?php } ?>
+                </select>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<br>
+<hr>
+
+<form class="form" 
+    action="<?= $block->escapeHtml($block->getUrl('mpgst/index/save')) ?>" 
+    method="post" 
+    id="form-validate" 
+    data-mage-init='{"validation":{}}' 
+    enctype="multipart/form-data" 
+    data-hasrequired="<?= $block->escapeHtml(__('* Required Fields')) ?>" 
+    autocomplete="off"
+>
+    <div class="wk-mp-page-title page-title">
+        <h2 class="legend"><?= $block->escapeHtml(__('Mass Update Products')) ?></h2>
+        <button type="submit" class="button wk-mp-btn action save primary">
+            <span><span><?= $block->escapeHtml(__('Upload')) ?></span></span>
+        </button>
+    </div>
+    <fieldset class="fieldset info">
+        <div class="field required">
+            <label class="label"><span><?= $block->escapeHtml("Upload CSV"); ?>:</span></label>
+            <div class="control">
+                <input name="csv_file" id="lbl3" type="file" class="required-entry" data-validate="{required:true}" />
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">
+                <span>
+                    <?= $block->escapeHtml(__("Download Sample CSV")); ?>
+                </span>
+            </label>
+            <a target="_blank" 
+                href="<?= $block->escapeUrl($block->getUrl("*/index/downloadfile")) ?>"
+            >
+                <?= $block->escapeHtml(__('sampleFile.csv')) ?>
+            </a>
+            <br>
+            <div>
+                    <span>
+                            <b><?= $block->escapeHtml(__('Note: ')) ?></b>
+                            <?= $block->escapeHtml(__('This is a sample csv file,
+                            you need to add data as per the given headings in csv.')) ?>
+                    </span>
+            </div>
+        </div>
+    </fieldset>
+</form>

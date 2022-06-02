@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <!-- <css src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" src_type="url"/>
+        <css src="Redstage_AmcConfigurator::css/jquery.dm-uploader.min.css"/>
+        <css src="Redstage_AmcConfigurator::css/styles.css"/>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" src_type="url"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" src_type="url"/>
+        <link src="Redstage_AmcConfigurator::js/jquery.dm-uploader.min.js"/> -->
+        <link src="Redstage_AmcConfigurator::js/amcformpopup.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Redstage\AmcConfigurator\Block\AmcList" name="amcconfigurator_amclist" template="Redstage_AmcConfigurator::amclist.phtml" />
+        </referenceContainer>
+    </body>
+</page>

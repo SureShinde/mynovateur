@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<page layout="1column"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content.aside">
+            <block class="Magento\Catalog\Block\Product\ProductList\Crosssell" name="catalog.product.crosssell" before="catalog.product.related" template="Magento_Catalog::product/list/items.phtml">
+                <arguments>
+                    <argument name="type" xsi:type="string">crosssell</argument>
+                </arguments>
+                <block class="Magento\Catalog\Block\Product\ProductList\Item\Container" name="crosssell.product.addto" as="addto">
+                    <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="crosssell.product.addto.wishlist"  template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml"/>
+                    <block class="Magento\Catalog\Block\Product\ProductList\Item\AddTo\Compare" name="crosssell.product.addto.compare" as="compare" template="Magento_Catalog::product/list/addto/compare.phtml"/>
+                </block>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="product.info.main">
+            <!-- <block class="Magento\Framework\View\Element\Template" name="delivery.date" template="Magento_Catalog::product/view/delivery_date.phtml" after="product.info"/> -->
+            <!-- <block class="Magento\Catalog\Block\Product\View" name="custom.attribute" template="Magento_Catalog::product/view/custom_attribute.phtml" after="page.main.title"/> -->
+
+        </referenceContainer>
+        <referenceContainer name="product.info.social">
+              <block class="Magento\Cms\Block\Block" name="static_shipping_info" >
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">static_shipping_info</argument>
+                        </arguments>
+             </block>
+        </referenceContainer>
+        <move element="product.info.review" destination="product.info.main" after="page.main.title" />
+        <move element="product.info.stock.sku" destination="product.info.main" after="page.main.title" />
+        <!-- <move element="custom.attribute" destination="product.info.main" after="product.info.stock.sku" /> -->
+        <referenceContainer name="product.info.price">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info.saved" template="Magento_Catalog::product/price/saved.phtml" after="product.price.final" />
+        </referenceContainer>
+        <move element="static_shipping_info" destination="product.info.social" after="product.info.addto" />
+        <move element="view.addto.wishlist" destination="product.info.addto" after="view.addto.compare" />
+        <referenceBlock name="product.info.main">
+            <block class="Magento\Catalog\Block\Product\View\Details" name="product.info.details.more" template="Magento_Catalog::product/view/details.phtml" >
+                <block class="Magento\Catalog\Block\Product\View" name="descriptionfeature.tab" template="Magento_Catalog::product/view/productfeature.phtml" group="detailed_info" >
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Product Description and Features</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Catalog\Block\Product\View" name="aboutus.tab" template="Magento_Catalog::product/view/aboutus.phtml" group="detailed_info" >
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">About Us</argument>
+                    </arguments>
+                </block>
+            </block>
+       </referenceBlock>
+        <referenceBlock name="product.info.details">
+          <block class="Magento\Catalog\Block\Product\View" name="product.shipping.tab"  template="Magento_Catalog::product/view/shipping.phtml" group="detailed_info">
+                <arguments>
+                    <argument translate="true" name="title" xsi:type="string">Shipping &amp; Returns</argument>
+                    <argument name="sort_order" xsi:type="string">100</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+       <referenceBlock name="product.attributes">
+            <arguments>
+                <argument translate="true" name="title" xsi:type="string">Technical Specification</argument>
+            </arguments>
+        </referenceBlock>
+
+        <!-- PDP page Sticky -->
+        <referenceContainer name="content">
+            <container name="product.info.main.wrapper" htmlTag="div" htmlClass="product-info-main-wrapper" before="-" />
+        </referenceContainer>
+        <move element="product.info.main" destination="product.info.main.wrapper" />
+        <move element="product.info.media" destination="product.info.main.wrapper" />
+
+    </body>
+</page>

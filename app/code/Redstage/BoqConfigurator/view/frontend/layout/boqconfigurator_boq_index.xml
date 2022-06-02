@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- <title>Boq Configurator</title> -->
+        
+        <link src="Redstage_BoqConfigurator::js/boqconfiguratorpopup.js"/>
+    </head>
+    <body>
+        <referenceBlock name="breadcrumbs">
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Home</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Home</item>
+                    <item name="label" xsi:type="string">Home</item>
+                    <item name="link" xsi:type="string">/</item>
+                </argument>
+            </action>
+            <action method="addCrumb">
+                <argument name="crumbName" xsi:type="string">Easy Product Selector</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string">Easy Product Selector</item>
+                    <item name="label" xsi:type="string">Easy Product Selector</item>
+                </argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="page.wrapper">
+            <block class="Magento\Cms\Block\Block" name="boq.banner" before="main.content" >
+                <arguments>
+                    <argument name="block_id" xsi:type="string">boq_banner</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <container name="boqcontainer" htmlTag="div" htmlClass="boqConfigurator-container" >
+                <container name="container.first" htmlTag="div" htmlClass="room-item" >
+                    <block class="Redstage\BoqConfigurator\Block\Configurator" name="boq_configurator_index_first" template="Redstage_BoqConfigurator::boqconfigurator-first.phtml" cacheable="false" />
+                </container>
+                <container name="container.second" htmlTag="div" htmlClass="room-data" >
+                    <block class="Redstage\BoqConfigurator\Block\Configurator" name="boq_configurator_index_second" template="Redstage_BoqConfigurator::boqconfigurator-second.phtml" cacheable="false" />
+                </container>
+            </container>
+            <block class="Redstage\BoqConfigurator\Block\Configurator" name="boq_configurator_index" template="Redstage_BoqConfigurator::boqconfigurator.phtml" cacheable="false" />
+        </referenceContainer>
+        
+    </body>
+</page>

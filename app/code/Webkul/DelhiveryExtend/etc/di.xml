@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @author    Webkul DelhiveryExtend
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webkul\MpAssignProduct\Block\Product\Products" type="Webkul\DelhiveryExtend\Block\Product\Products" />
+    <preference for="Magento\Shipping\Model\Order\Track" type="Webkul\DelhiveryExtend\Model\Order\Track" />
+    <preference for="Magento\Catalog\Block\Product\View" type="Webkul\DelhiveryExtend\Block\Product\View" />
+    <preference for="Webkul\Marketplace\Block\Order\Shipment\Lists" type="Webkul\DelhiveryExtend\Block\Order\Shipment\Lists" />
+    <type name="Magento\Catalog\Pricing\Price\FinalPrice">
+        <plugin name="seller-lowest-price-display" type="Webkul\DelhiveryExtend\Plugin\Pricing\Price\FinalPrice"/>
+    </type>
+    <type name="Webkul\DelhiveryExtend\Model\ResourceModel\DelhiveryWarehouse\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_delhivery_seller_warehouse</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_delhivery_seller_warehouse_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">wk_delhivery_seller_warehouse_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\DelhiveryExtend\Model\ResourceModel\DelhiveryWarehouse</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\DelhiveryExtend\Model\ResourceModel\Pickup\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_delhivery_pickup</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_delhivery_pickup_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">wk_delhivery_pickup_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\DelhiveryExtend\Model\ResourceModel\Pickup</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\DelhiveryExtend\Model\ResourceModel\Shipment\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">marketplace_orders_shipments</argument>
+            <argument name="eventPrefix" xsi:type="string">marketplace_orders_shipments_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">marketplace_orders_shipments_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\DelhiveryExtend\Model\ResourceModel\Shipment</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+       <arguments>
+           <argument name="collections" xsi:type="array">
+               <item name="delhiveryextend_warehouse_list_data_source" xsi:type="string">Webkul\DelhiveryExtend\Model\ResourceModel\DelhiveryWarehouse\Grid\Collection</item>
+               <item name="delhivery_pickup_listing_data_source" xsi:type="string">Webkul\DelhiveryExtend\Model\ResourceModel\Pickup\Grid\Collection</item>
+               <item name="shipment_pickupfailed_listing_data_source" xsi:type="string">Webkul\DelhiveryExtend\Model\ResourceModel\Shipment\Grid\Collection</item>
+           </argument>
+       </arguments>
+   </type>
+
+    <type name="Webkul\DelhiveryExtend\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">customDelhiveryLogHandler</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Webkul\DelhiveryExtend\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

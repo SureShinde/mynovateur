@@ -1,0 +1,22 @@
+{
+    "name": "redstage/module-compareproducts",
+    "description": "Override getSectionData",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "",
+            "email": ""
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Redstage\\CompareProducts\\": ""
+        }
+    }
+}

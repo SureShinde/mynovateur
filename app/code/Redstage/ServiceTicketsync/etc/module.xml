@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services Ticket Sync module use for update service ticket status in bulk and base on magento side created ticket for SF
+ *
+ * @category: PHP
+ * @package: Redstage/ServiceTicketsync
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_ServiceTicketsync
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_ServiceTicketsync" setup_version="1.0.0">
+        <sequence>
+            <module name="Redstage_ServiceTicket"/>
+            <module name="Redstage_Logger"/>
+        </sequence>
+    </module>
+</config>

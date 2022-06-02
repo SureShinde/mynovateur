@@ -1,0 +1,64 @@
+<?php
+if (count($block->getSlides()) >= 1): ?>
+<ul data-orbit>
+<?php foreach ($block->getSlides() as $slide): ?>
+    <li>
+        <?php if ($slide->getEnableSlideLink()): ?>
+        <a href="<?php echo $slide->getLink(); ?>">
+        <?php endif; ?>
+            <img src="<?php echo $block->getMediaUrl().$slide->getImage(); ?>" alt="<?php echo $slide->getName(); ?>" />
+            <?php if ($slide->getEnableCaption() && $slide->getCaption()): ?>
+                <div class="orbit-caption"><?php echo $slide->getCaption(); ?></div>
+            <?php endif; ?>
+            <?php if ($slide->getEnableCta() && $slide->getCtaLabel() && $slide->getLink()): ?>
+                <div class="orbit-cta-label">
+                    <a href="<?php echo $slide->getLink(); ?>" class="cta-button">
+                    <?php echo $slide->getCtaLabel(); ?>
+                    </a>
+                </div>
+            <?php endif; ?>
+        <?php if ($slide->getEnableSlideLink()): ?>
+        </a>
+        <?php endif; ?>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<style type="text/css">
+.orbit-bullets.left {
+  text-align: left; }
+.orbit-bullets.right {
+  text-align: right; }
+.orbit-bullets li:first-child {
+  margin-left: 0; }
+  <?php if ($block->getDotsColor()): ?>
+.orbit-bullets li.active {
+  background: <?php echo $block->getDotsColor(); ?>; }
+<?php endif; ?>
+<?php if ($block->getMaxWidth()): ?>
+.orbit-container {
+  width: <?php echo $block->getMaxWidth().'px'; ?>; }
+.orbit-container .orbit-slides-container img {
+  max-width: <?php echo $block->getMaxWidth().'px'; ?>; }
+.orbit-container .orbit-slides-container > * {
+  width: <?php echo $block->getMaxWidth().'px'; ?>; }
+<?php endif; ?>
+  </style>
+
+<script type="text/javascript">
+require(['jquery','foundation','foundationOrbit'], function ($) {
+      $(document).ready(function() {
+            jQuery(document).foundation({
+                orbit: {
+                    timer_speed: <?php echo $block->getTimerSpeed(); ?>,
+                    navigation_arrows: <?php echo $block->getNavigationArrows(); ?>,
+                    bullets: <?php echo $block->getBullets(); ?>,
+                    bullets_container_class: '<?php echo $block->getBulletsContainerClass(); ?>',
+                    resume_on_mouseout: true,
+                    slide_number: false
+                }
+            });
+        });
+});
+</script>
+<?php endif; ?>

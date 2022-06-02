@@ -1,0 +1,8 @@
+{
+    "quote_item": {
+        "column": {
+            "is_visible": true,
+            "display_price": true
+        }
+    }
+}

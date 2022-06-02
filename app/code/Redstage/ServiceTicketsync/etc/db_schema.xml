@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services Ticket module use for create service form in magento side save and send data to SF
+ *
+ * @category: PHP
+ * @package: Redstage/ServiceTicket
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Services
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="redstage_dump_serviceticket" resource="default" engine="innodb" comment="Service">
+        
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Entity Id "/>
+        
+        <column xsi:type="varchar" name="magento_serviceticket_id" nullable="false" length="100" comment="Magento Service Ticket ID"/>
+
+        <column xsi:type="varchar" name="sf_serviceticket_no" nullable="false" length="100" comment="Sales Force Service Ticket No"/>
+
+        <column xsi:type="varchar" name="sf_serviceticket_status" nullable="false" length="100" comment="Sales Force Service Ticket Status"/>
+
+        <column xsi:type="varchar" name="status" nullable="false" length="20" comment="Type of Status"/>
+
+        <column xsi:type="varchar" name="flow_status" nullable="false" length="20" comment="Flow Status"/>
+
+        <column xsi:type="varchar" name="message" nullable="false" length="255" comment="Message"/>
+
+         <column xsi:type="int" name="batch_id" padding="11" nullable="false" comment="Batch Id "/>
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    
+</schema>

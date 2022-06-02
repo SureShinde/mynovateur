@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage LayeredNavigation module use for customize numeric configurator for layared navigation
+ *
+ * @category: PHP
+* @package: Redstage/LayeredNavigation
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_LayeredNavigation
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <uiComponent name="layerednavigation_form"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,233 @@
+// /**
+//  * Copyright © Magento, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+
+//
+//  Email extend styles
+//  _____________________________________________
+
+//  This file should be used for theme-specific styles for emails that extend or modify the styles in _email.less
+//  This will allow you to edit email styles without copying and editing the _email.less file
+
+//  Importing fonts from an external CSS file, rather than embedding @font-face declarations inside the <style> tag,
+//  as the latter will cause font rendering issues if the web fonts are inaccessible.
+
+@import url("@{baseUrl}css/email-fonts.css");
+
+html,
+body {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+    background: #ffffff;
+    color: #000000;
+}
+table.main {
+    width: calc(~'100% + 25px') !important;
+    max-width: 600px;
+    padding: 10px 5px !important;
+    font-size: 14px;
+    border: 1px solid #f1f1f1 !important;
+}
+table.email-items tr th:first-child, table.email-items tr td:first-child {
+    padding-left: 0 !important;
+}
+.social-icons a {
+    padding: 0 5px;
+    font-size: 18px !important;
+}
+* {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+table.email-items tr th > table {
+    width: 100% !important;
+}
+h1.order-detail-info *, h1.order-detail-info {
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+div[style*="margin: 16px 0"] {
+    margin: 0 !important;
+}
+
+table,
+td {
+    mso-table-lspace: 0pt !important;
+    mso-table-rspace: 0pt !important;
+}
+
+table {
+    border-spacing: 0 !important;
+    table-layout: fixed !important;
+    margin: 0 auto !important;
+    font-family: sans-serif;
+    border-collapse: collapse;
+    background-color: #ffffff;
+}
+
+img {
+    -ms-interpolation-mode:bicubic;
+}
+
+a {
+    text-decoration: none;
+}
+#outlook a{
+    padding:0;
+}
+img{
+    -ms-interpolation-mode:bicubic;
+    outline: none;
+    border: none;
+}
+table{
+    mso-table-lspace:0pt;
+    mso-table-rspace:0pt;
+}
+p,a,li,td,blockquote{
+    mso-line-height-rule:exactly;
+}
+p,a,li,td,body,table,blockquote{
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+}
+@media screen and (max-width: 480px) {
+    .font-adjust {font-size: 8px}
+}
+li{
+    padding: 8px;
+
+}
+*[x-apple-data-detectors],
+.unstyle-auto-detected-links *,
+.aBn {
+    border-bottom: 0 !important;
+    cursor: default !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+.a6S {
+    display: none !important;
+    opacity: 0.01 !important;
+}
+
+.im {
+    color: inherit !important;
+}
+
+img.g-img + div {
+    display: none !important;
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Roboto', sans-serif;
+    color: #000000;
+    margin-top: 0;
+    font-weight: 400;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #000;
+}
+a{
+    color: #1980D4;
+}
+.logo h1{
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+p {
+    margin: 0 !important;
+}
+
+.footer {
+    background: #fff!important;
+    border-bottom: 5px solid #000;
+}
+.footer .closing{
+    display: inline-block;
+}
+.social-icons{
+    float: right;
+}
+.header{
+    background: #fff!important;
+}
+
+td.wrapper-inner * {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+}
+
+.header {
+    background-color: @email__background-color;
+    padding: @email-body__padding;
+}
+th.col.cgst {
+    display: none;
+}
+th.col.sgst {
+    display: none;
+}
+th.col.igst {
+    display: none;
+}
+th.col.ugst {
+    display: none;
+}
+td.col.subtotal {
+    display: none;
+}
+.footer {
+    background-color: @email__background-color;
+    padding: @email-body__padding;
+
+    table {
+        width: 100%;
+
+        td {
+            padding-bottom: @email-body__padding;
+            width: 33%;
+
+            p {
+                margin-bottom: 0;
+
+                &.phone {
+                    font-size: @font-size__l;
+
+                    a {
+                        color: inherit;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+    .header,
+    .main-content,
+    .footer {
+        padding: @email-body__padding @indent__s !important;
+    }
+
+    .footer {
+        td {
+            display: block;
+            width: auto !important;
+        }
+    }
+}

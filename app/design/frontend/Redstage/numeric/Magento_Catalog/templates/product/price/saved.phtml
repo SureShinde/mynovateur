@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+
+<?php
+\Magento\Catalog\Block\Product\View::class;
+/** @var \Magento\Catalog\Block\Product\View $block */
+
+$priceInfo =  $block->getProduct()->getPriceInfo();
+/** ex: \Magento\Catalog\Pricing\Price\RegularPrice */
+/** @var \Magento\Framework\Pricing\Price\PriceInterface $priceModel */
+$priceModel = $priceInfo->getPrice('regular_price');
+
+/** ex: \Magento\Catalog\Pricing\Price\FinalPrice */
+/** @var \Magento\Framework\Pricing\Price\PriceInterface $finalPriceModel */
+$finalPriceModel = $priceInfo->getPrice('final_price');
+
+?>
+<?php if ($finalPriceModel->getAmount()->getValue() < $priceModel->getAmount()->getValue()) :?>
+        <?php
+        $yousave = number_format((float)($priceModel->getAmount()->getValue() - $finalPriceModel->getAmount()->getValue()), 2, '.', '');
+        $yousavepct = ' ('.number_format( (float)( 100 * ( $yousave / $priceModel->getAmount()->getValue() ) ), 2).'% off)';
+        ?>
+        <span class="saved-price-wrapper"><strong class="saved-price"><?= $yousavepct?></strong></span>
+
+<?php endif; ?>

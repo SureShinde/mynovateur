@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>        
+        <add id="Redstage_BoqConfigurator::all_boqconfigurator" 
+            title="BOQ Configurator" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="10" 
+            resource="Redstage_BoqConfigurator::all_boqconfigurator" 
+            parent="Redstage_Base::main_menu"/>
+        <add id="Redstage_BoqConfigurator::all_boq" 
+            title="BOQ Quote" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="10" 
+            resource="Redstage_BoqConfigurator::all_boq" 
+            parent="Redstage_BoqConfigurator::all_boqconfigurator" 
+            action="configuratoradmin/boq/index"/>
+        <add id="Redstage_BoqConfigurator::all_boqroomrange" 
+            title="Room Types" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="15" 
+            resource="Redstage_BoqConfigurator::all_boqroomrange" 
+            parent="Redstage_BoqConfigurator::all_boqconfigurator" 
+            action="configuratoradmin/boqroomrange/index"/>
+        <add id="Redstage_BoqConfigurator::all_boqproductgroup" 
+            title="Product Group" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="40" 
+            resource="Redstage_BoqConfigurator::all_boqproductgroup" 
+            parent="Redstage_BoqConfigurator::all_boqconfigurator" 
+            action="configuratoradmin/boqproductgroup/index"/>
+        <add id="Redstage_BoqConfigurator::all_boqgrouproomqty" 
+            title="Product Group - Room Type Config" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="50" 
+            resource="Redstage_BoqConfigurator::all_boqgrouproomqty" 
+            parent="Redstage_BoqConfigurator::all_boqconfigurator" 
+            action="configuratoradmin/boqgrouproomqty/index"/>
+        <add id="Redstage_BoqConfigurator::all_boqroombundle" 
+            title="Room Bundle" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="60" 
+            resource="Redstage_BoqConfigurator::all_boqroombundle" 
+            parent="Redstage_BoqConfigurator::all_boqconfigurator" 
+            action="configuratoradmin/boqroombundle/index"/> 
+        <add id="Redstage_BoqConfigurator::all_rangeconfig" 
+            title="Range Config" 
+            translate="title" 
+            module="Redstage_BoqConfigurator" 
+            sortOrder="70" 
+            resource="Redstage_BoqConfigurator::all_rangeconfig" 
+            parent="Redstage_BoqConfigurator::all_boqconfigurator" 
+            action="configuratoradmin/rangeconfig/index"/> 
+    </menu>
+</config>

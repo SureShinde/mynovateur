@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Success Page</title>
+    </head>
+    <body>
+         
+        <referenceBlock name="page.main.title">   
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">THANK YOU FOR YOUR PURCHASE</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <container name="row" htmlTag="div" htmlClass="checkout_row" >                              
+                <container name="container.left" htmlTag="div" htmlClass="checkout_row_item container-left" before="-">
+                    <block class="Magento\Cms\Block\Block" name="thank-you-banner" >
+                        <arguments>
+                            <argument name="block_id" xsi:type="string">thank-you-banner</argument>
+                        </arguments>
+                    </block> 
+                </container>
+                <container name="container.right" htmlTag="div" htmlClass="checkout_row_item container-right" >
+                    <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success" template="Magento_Checkout::success.phtml" cacheable="false">
+                        <container name="order.success.additional.info" label="Order Success Additional Info"/>
+                    </block>
+                    <block class="Magento\Checkout\Block\Registration" name="checkout.registration" template="Magento_Checkout::registration.phtml" cacheable="false"/>
+                </container>
+            </container>
+            
+        </referenceContainer>
+        <move element="page.main.title" destination="container.right" before="checkout.success" />
+        <referenceBlock name="checkout.success.print.button" remove="true" />
+    </body>
+</page>

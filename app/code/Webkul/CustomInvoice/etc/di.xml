@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @author    Webkul CustomInvoice
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Webkul\CustomInvoice\Model\ResourceModel\GstStateCode\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_gst_state_code</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_gst_state_code_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">wk_gst_state_code_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\CustomInvoice\Model\ResourceModel\GstStateCode</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\CustomInvoice\Model\ResourceModel\SellerInvoice\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">wk_custom_invoice</argument>
+            <argument name="eventPrefix" xsi:type="string">wk_custom_invoice_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">wk_custom_invoice_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Webkul\CustomInvoice\Model\ResourceModel\SellerInvoice</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+       <arguments>
+           <argument name="collections" xsi:type="array">
+               <item name="custominvoice_gststate_list_data_source" xsi:type="string">Webkul\CustomInvoice\Model\ResourceModel\GstStateCode\Grid\Collection</item>
+               <item name="custominvoice_sellerinvoice_list_data_source" xsi:type="string">Webkul\CustomInvoice\Model\ResourceModel\SellerInvoice\Grid\Collection</item>
+           </argument>
+       </arguments>
+   </type>
+    <type name="Webkul\Marketplace\Block\Order\View">
+        <plugin name="order_invoice_custom" type="Webkul\CustomInvoice\Plugin\Order\View" sortOrder="30" />
+    </type>
+    <type name="Webkul\Marketplace\Block\Order\Shipment\Lists">
+        <plugin name="order_invoicelist_custom" type="Webkul\CustomInvoice\Plugin\Shipment\Lists" sortOrder="30" />
+    </type>
+    <type name="Webkul\CustomInvoice\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Webkul\CustomInvoice\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">custominvoice</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Webkul\CustomInvoice\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

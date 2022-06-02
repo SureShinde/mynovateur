@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var $block \Magento\Catalog\Block\Product\View*/
+
+?>
+<div class="products-details-info">
+    <div class="product-details-item">
+        <span class="dimension-label">Dimension (in mm):</span>
+        <span class="dimension-value">
+            <?php if($dimensionWidth = $block->getProduct()->getCustomAttribute('mm_product_width')){
+                    echo $dimensionWidth->getValue();
+            } ?> x 
+            <?php if($dimensionDepth = $block->getProduct()->getCustomAttribute('mm_product_depth')){
+                echo $dimensionDepth->getValue();
+            } ?> x 
+            <?php if($dimensionHeight = $block->getProduct()->getCustomAttribute('mm_product_height')){
+                echo $dimensionHeight->getValue();
+            } ?> ( w x D x H)</span>
+    </div>
+    <div class="product-details-item">
+        <span class="dimension-label">Weight:</span>
+        <span class="dimension-value"><?php if($weightInKgs = $block->getProduct()->getCustomAttribute('weight_in_kgs')){
+                                            echo $weightInKgs->getValue();
+                                        } ?> kgs
+        </span>
+    </div>
+</div> 

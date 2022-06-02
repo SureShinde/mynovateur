@@ -1,0 +1,20 @@
+{
+    "name": "webkul/marketplace-gst-india",
+    "description": "Marketplace GST India Module",
+    "require": {
+        "webkul/module-marketplace": "4.*.*"
+    },
+    "type": "magento2-module",
+    "version": "5.0.1",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "src/app/code/Webkul/MarketplaceGstIndia/registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\MarketplaceGstIndia\\": "src/app/code/Webkul/MarketplaceGstIndia"
+        }
+    }
+}

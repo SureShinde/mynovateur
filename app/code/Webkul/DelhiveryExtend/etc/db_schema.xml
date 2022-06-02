@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+  /**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryExtend
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="wk_delhivery_pincode_seller_map" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="int" name="pincode" padding="10" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="int" name="seller_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <!-- <constraint xsi:type="unique" referenceId="WK_DELHIVERY_PINCODE_SELLER_MAP_PINCODE" disabled="true" /> -->
+    <!-- <constraint xsi:type="unique" referenceId="WK_DELHIVERY_PINCODE_SELLER_MAP_PINCODE_SELLER_ID">
+        <column name="pincode"/>
+        <column name="seller_id"/>
+    </constraint> -->
+  </table>
+  <table name="wk_delhivery_seller_warehouse" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="varchar" name="name" nullable="false" length="255"/>
+    <column xsi:type="int" name="seller_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="varchar" name="description" nullable="false" length="255"/>
+    <constraint xsi:type="foreign" referenceId="delhivery_seller_warehouse_Customer_entity" table="wk_delhivery_seller_warehouse"
+        column="seller_id" referenceTable="customer_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <constraint xsi:type="unique" referenceId="DELHIVERY_SELLER_WAREHOUSE_NAME_COL">
+        <column name="name"/>
+    </constraint>
+  </table>
+  <table name="wk_delhivery_pickup" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="int" name="seller_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="int" name="delhivery_pickup_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="varchar" name="pickup_location" nullable="false" length="255"/>
+    <column xsi:type="varchar" name="incoming_center" nullable="false" length="255"/>
+    <column xsi:type="varchar" name="description" nullable="false" length="255"/>
+    <column xsi:type="int" name="package_count" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="int" name="pickup_state" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="datetime" name="scheduled_date_time" nullable="false" />
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+  </table>
+  <table name="marketplace_orders" resource="default" engine="innodb">
+     <column xsi:type="varchar" name="delhivery_ship_status" nullable="false" length="255"/>
+     <column xsi:type="boolean" name="label_printed" default="0" unsigned="true" nullable="false" identity="false"/>
+     <column xsi:type="int" name="pickup_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+  </table>
+  <table name="marketplace_assignproduct_items" resource="default" engine="innodb">
+     <constraint xsi:type="unique" referenceId="SELLER_PRODUCT_ASSIGN_UNIQUE">
+        <column name="product_id"/>
+        <column name="seller_id"/>
+    </constraint>
+  </table>
+  <!--table name="wk_delhivery_pincode_seller_map">
+    <constraint xsi:type="unique" referenceId="WK_DELHIVERY_PINCODE_SELLER_MAP_PINCODE_SELLER_ID" disabled="true" />
+</table-->
+  <table name="marketplace_orders_shipments" resource="default" engine="innodb">
+     <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+     <column xsi:type="int" name="seller_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+     <column xsi:type="int" name="order_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+     <column xsi:type="int" name="packet_count" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+     <column xsi:type="int" name="shipment_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+     <column xsi:type="varchar" name="tracking_number" nullable="false" length="255"/>
+     <column xsi:type="varchar" name="ship_status" nullable="false" length="255"/>
+     <column xsi:type="boolean" name="label_printed" default="0" unsigned="true" nullable="false" identity="false"/>
+     <column xsi:type="int" name="pickup_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+     <constraint xsi:type="foreign" referenceId="MARKETPLACE_ORDERS_SHIPMENTS_SALES_SHIPMENT" table="marketplace_orders_shipments"
+         column="shipment_id" referenceTable="sales_shipment" referenceColumn="entity_id" onDelete="CASCADE"/>
+     <constraint xsi:type="primary" referenceId="PRIMARY">
+       <column name="entity_id"/>
+     </constraint>
+     <constraint xsi:type="unique" referenceId="ORDERS_TRACKING_NUMBER_UNIQUE">
+        <column name="tracking_number"/>
+    </constraint>
+  </table>
+  <table name="wk_delhivery_awb">
+     <column xsi:type="int" name="shipment_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+  </table>
+</schema>

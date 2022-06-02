@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright © 2019 Redstage. All rights reserved.
+ * @author    mtyagi@redstage.com
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="redstage" translate="label" sortOrder="15" class="redstage-extensions">
+            <label>Redstage</label>
+        </tab>
+    </system>
+</config>

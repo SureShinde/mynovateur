@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="boq_quote" resource="default" comment="List of Quotation">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="int" name="customer_id"  nullable="true" comment="Customer Id" />
+        <column xsi:type="text" name="data"  nullable="true" comment="Save quote data in json format" />
+        <column xsi:type="varchar" name="title" length="30" nullable="true" comment="Quote Title" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="boq_product_group" resource="default" comment="Product Group">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="varchar" name="name" length="100" nullable="true" comment="Product Name(Gateway etc)" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="boq_room_types" resource="default" comment="Room Type">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="varchar" name="name" length="100" nullable="true" comment="Product Name(Gateway etc)" />
+        <column xsi:type="text" name="range_config"  nullable="true" comment="Range Config" />
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is room Type Active"/>
+       <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="boq_product_group_room_qty_link" resource="default" comment="Link Product Group To Qty">
+        <column xsi:type="int" name="link_id" identity="true" comment="Auto Increment" />
+        <column xsi:type="int" name="product_group_id"  nullable="true" comment="Product Group Id" />
+        <column xsi:type="int" name="room_type_id"  nullable="true" comment="Room Type Id" />
+        <column xsi:type="text" name="product_group_config"  nullable="true" comment="Product Group Config" />
+        <column xsi:type="smallint" name="is_active" unsigned="false" nullable="false" identity="false"
+                default="1" comment="Is Product Group Room Qty Active"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="link_id" />
+        </constraint>
+    </table>
+    <table name="boq_room_bundle" resource="default" comment="Room Bundle">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="varchar" name="name" length="100" nullable="true" comment="Product Name(Gateway etc)" />
+        <column xsi:type="text" name="room_type_config"  nullable="true" comment="Room Type Config" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="range_config" resource="default" comment="Range Config">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="int" name="range" nullable="true" comment="Range" />
+        <column xsi:type="text" name="color" nullable="true" comment="Color" />
+        <column xsi:type="text" name="finished"  nullable="true" comment="Finish type" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services Ticket module use for create service form in magento side save and send data to SF
+ *
+ * @category: PHP
+ * @package: Redstage/ServiceTicket
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_ServiceTicket
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Redstage_ServiceTicket::serviceticket"
+             title="Service Ticket"
+             translate="title"
+             module="Redstage_ServiceTicket"
+             parent="Redstage_Base::main_menu"
+             sortOrder="10"
+             resource="Redstage_ServiceTicket::serviceticket"
+        />
+        <add id="Redstage_ServiceTicket::serviceticketlog"
+             title="Service Ticket Logs"
+             module="Redstage_ServiceTicket"
+             sortOrder="50"
+             parent="Redstage_ServiceTicket::serviceticket"
+             action="serviceticket/listing/index/"
+             resource="Redstage_ServiceTicket::serviceticketlog"
+        />
+    </menu>
+</config>

@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryExtend
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2016 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="delhivery">
+                <field id="free_ship" translate="label comment" type="select" sortOrder="79" showInDefault="1" >
+                    <label>Is Free Shipping</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="amount_limit" translate="label comment" type="text" sortOrder="80" showInDefault="1" >
+                    <label>Free Shipping Till amount</label>
+                    <validate>required-entry validate-number validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="free_ship">1</field>
+                    </depends>
+                    <comment>Free Shipping only available for given amount.</comment>
+                </field>
+                <field id="cost_on_page" translate="label" type="select" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Shipping Cost display on Product Page</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="seller_set_qty" translate="label" type="select" sortOrder="82" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Seller can set product Qty</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="seller_set_price" translate="label" type="select" sortOrder="83" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Seller can set product price</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+        <section id="mpassignproduct" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="1">
+		 <label>Assign Product</label>
+		 <tab>webkul</tab>
+		 <resource>Webkul_MpAssignProduct::config_mpassignproduct</resource>
+            <group id="postal_code" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Mass Assign Postal Code to Sellers</label>
+                <field id="enable_upload" translate="label" type="select" sortOrder="39" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Upload Postal code</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><model>Webkul\DelhiveryExtend\Model\Config\Backend\SystemConfigUrl</model></comment>
+                </field>
+                <field id="postal_code_file" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                  <label>Select file(CSV)</label>
+                   <backend_model>Webkul\DelhiveryExtend\Model\Config\Backend\CustomFileType</backend_model>
+                   <upload_dir config="system" scope_info="1">upload</upload_dir>
+                   <base_url type="media" scope_info="1">upload/default</base_url>
+                   <validate>required-entry</validate>
+                   <comment><![CDATA[Allowed file types: csv]]></comment>
+                   <depends>
+                        <field id="enable_upload">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="seller_product_assign" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Mass Assign Product to Sellers</label>
+                <field id="enable_product_assign_upload" translate="label" type="select" sortOrder="55" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Upload file</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><model>Webkul\DelhiveryExtend\Model\Config\Backend\SystemConfigAttachmentUrl</model></comment>
+                </field>
+                <field id="seller_product_assign_file" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                  <label>Select file(CSV)</label>
+                   <backend_model>Webkul\DelhiveryExtend\Model\Config\Backend\CustomFileType</backend_model>
+                   <upload_dir config="system" scope_info="1">upload</upload_dir>
+                   <base_url type="media" scope_info="1">upload/productAssign</base_url>
+                   <validate>required-entry</validate>
+                   <comment><![CDATA[Allowed file types: csv]]></comment>
+                   <depends>
+                        <field id="enable_product_assign_upload">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

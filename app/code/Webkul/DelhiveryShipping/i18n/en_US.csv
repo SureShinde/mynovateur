@@ -1,0 +1,74 @@
+"Orders List","Orders List"
+"Order Id","Order Id"
+"Date","Date"
+"Search by Order Id","Search by Order Id"
+"Date From","Date From"
+"Date To","Date To"
+"Submit","Submit"
+"Submit Manifest","Submit Manifest"
+"#AWB","#AWB"
+"Ship To","Ship To"
+"Shipment Id","Shipment Id"
+"Status","Status"
+"#OrderId","#OrderId"
+"Order Status","Order Status"
+"No Order Available","No Order Available"
+"Back","Back"
+"Delhivery Orders","Delhivery Orders"
+"Delhivery Shipment Slip","Delhivery Shipment Slip"
+"Generate Delhivery Label","Generate Delhivery Label"
+"Shipping Address :-","Shipping Address :-"
+"Phone No. :-","Phone No. :-"
+"PinCode:-","PinCode:-"
+"Seller :-","Seller :-"
+"Address :-","Address :-"
+"Cell No.-","Cell No.-"
+"Tin:","Tin:"
+"CST:","CST:"
+"INVOICE NO.:","INVOICE NO.:"
+"DT.:","DT.:"
+"Product Name","Product Name"
+"Price","Price"
+"Total","Total"
+"Return Address:","Return Address:"
+"Please add valid License Key, Client ID and Gateway URL in plugin configuration","Please add valid License Key, Client ID and Gateway URL in plugin configuration"
+"More than 50 AWB still available to use","More than 50 AWB still available to use"
+"AWB Downloaded Successfully","AWB Downloaded Successfully"
+"Pincode download Successfully","Pincode download Successfully"
+"Please add valid License Key and Gateway URL in plugin configuration","Please add valid License Key and Gateway URL in plugin configuration"
+"Please Submit Manifest and AWD Status , Before generatting shipping label","Please Submit Manifest and AWD Status , Before generatting shipping label"
+"Please add valid License Key and Gateway URL in plugin configuration","Please add valid License Key and Gateway URL in plugin configuration"
+" Waybill(s) Updated Successfully"," Waybill(s) Updated Successfully"
+"Please add valid License Key, Client ID and Gateway URL in plugin configuration","Please add valid License Key, Client ID and Gateway URL in plugin configuration"
+" Failed to submit. Remark: "," Failed to submit. Remark: "
+"Submitted Successfully","Submitted Successfully"
+" already submitted"," already submitted"
+"$succsscount Waybills submited successfully. $failcount Waybills Failed","$succsscount Waybills submited successfully. $failcount Waybills Failed"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

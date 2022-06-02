@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage CustomerInstallation module purpose admin user can export customer data predifined CSV.
+ *
+ * @category: PHP
+ * @package: Redstage/CustomerInstallation
+ * @copyright: Copyright © 2019 Magento, Inc. All rights reserved.
+ * @author: Mohit Tyagi <mtyagi@redstage.com>
+ * @project: Legrand & Numeric
+ * @keywords: Module Redstage_CustomerInstallation
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="customer">
+        <field name="sap_customer_code">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="company_code">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="division">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="short">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="city2">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="region">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="transportation_zone">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="language_key">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="mobile_telephone_number">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="customer_type">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="ecc_number">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="excise_registration_number">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="excise_range">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="excise_division">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="excise_commissionerate">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="excise_tax_indicator">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="central_sales_tax_no">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="local_sales_tax_no">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="tax_number2">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="name1">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="term_of_payment_key">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="order_perobability_item">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="sales_office">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="sales_group">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="currency">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="pricing">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="customer_stats_group">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="delivery_priority">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="order_combination_indicator">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="shipping_conditions">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="complete_delivery_sales_order">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="partial_delivery_item">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="account_assignment_group">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="web_ref_no">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="reseved1">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="reseved2">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="gstin">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="pan">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+         <field name="sales_organization">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="distribution_channel">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="customer_account_group">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="title_text">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="reconciliation_account">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+         <field name="numbric_customer_group">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="tax_clssification1">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="tax_clssification2">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="tax_clssification3">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="funded">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="name2">
+            <settings>
+                <visible>false</visible>
+            </settings>
+        </field>
+    </fieldset>
+</form>

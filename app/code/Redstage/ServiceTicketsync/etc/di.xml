@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services Ticket sync module use for update service ticket status in bulk and base on magento side created ticket from SF
+ *
+ * @package: Redstage/ServiceTicketsync
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_ServiceTicketsync
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Redstage\ServiceTicketsync\Api\UpdateStatusInterface" 
+                type="Redstage\ServiceTicketsync\Model\Updatetickets" />
+
+    <preference for="Redstage\ServiceTicketsync\Api\CreateTicketInterface" 
+                type="Redstage\ServiceTicketsync\Model\Createtickets" />
+
+    <virtualType name="Redstage\ServiceTicketsync\Model\ResourceModel\ServiceTicketsync\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_dump_serviceticket</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\ServiceTicketsync\Model\ResourceModel\ServiceTicketsync\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="redstage_serviceticketsync_listing_data_source" xsi:type="string">Redstage\ServiceTicketsync\Model\ResourceModel\ServiceTicketsync\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,20 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+/** @var \Magento\Weee\Block\Adminhtml\Items\Price\Renderer $block */
+$_item = $block->getItem();
+?>
+
+<?= /** @escapeNotVerified */ $block->displayPrices(
+    $block->getBaseTotalAmount($_item),
+    $block->getTotalAmount($_item)
+) ?>

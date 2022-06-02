@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Redstage_AmcConfigurator::all_amcconfigurator" title="Numeric AMC" translate="title" module="Redstage_AmcConfigurator" sortOrder="10" resource="Redstage_AmcConfigurator::all_amcconfigurator" parent="Redstage_Base::main_menu"/>
+        <add id="Redstage_AmcConfigurator::all_customer" title="AMC Customer" module="Redstage_AmcConfigurator" sortOrder="20"  action="amcadmin/customer" resource="Redstage_AmcConfigurator::all_customer" parent="Redstage_AmcConfigurator::all_amcconfigurator"/>
+        <add id="Redstage_AmcConfigurator::amcoffer" title="AMC Material Offer" module="Redstage_AmcConfigurator" sortOrder="30"  action="amcadmin/amcoffer" resource="Redstage_AmcConfigurator::amcoffer" parent="Redstage_AmcConfigurator::all_amcconfigurator"/>
+        <add id="Redstage_AmcConfigurator::nonamc" title="Non AMC" module="Redstage_AmcConfigurator" sortOrder="40"  action="amcadmin/nonamc" resource="Redstage_AmcConfigurator::nonamc" parent="Redstage_AmcConfigurator::all_amcconfigurator"/>
+        <add id="Redstage_AmcConfigurator::amcrecord" title="AMC Record Log" module="Redstage_AmcConfigurator" sortOrder="50"  action="amcadmin/amcrecord" resource="Redstage_AmcConfigurator::amcrecord" parent="Redstage_AmcConfigurator::all_amcconfigurator"/>
+    </menu>
+</config>

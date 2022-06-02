@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_img_width" xsi:type="number">90</argument>
+                <argument name="logo_img_height" xsi:type="number">90</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceBlock name="footer_links" remove="true" />	 
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template" name="footer_custom_links" template="Magento_Theme::html/custom-footer.phtml" />
+		</referenceContainer>
+        <referenceBlock name="register-link" remove="true" />
+
+
+        <move element="header.panel" destination="header-wrapper" after="top.search"/>
+        <move element="amasty.menu.toggle" destination="header-wrapper" before="minicart" />
+        <move element="ammenu.logo" destination="header-wrapper" before="minicart" />
+        <referenceBlock name="amfaq_top_link" remove="true" />
+
+        <referenceBlock name="marketplace-top-link" remove="true" />
+        
+    </body>
+</page>           

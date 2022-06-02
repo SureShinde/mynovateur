@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services Ticket module use for create service form in magento side save and send data to SF
+ *
+ * @category: PHP
+ * @package: Redstage/ServiceTicket
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_ServiceTicket
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
+    <router id="admin">
+        <route id="serviceticket" frontName="serviceticket">
+            <module name="Redstage_ServiceTicket" before="Magento_Backend" />
+        </route>
+    </router>
+</config>

@@ -1,0 +1,24 @@
+<?php
+/*   __________________________________________________
+    |  Obfuscated by YAK Pro - Php Obfuscator  2.0.13  |
+    |              on 2022-01-12 20:00:38              |
+    |    GitHub: https://github.com/pk-fr/yakpro-po    |
+    |__________________________________________________|
+*/
+
+$rI = \Magento\Framework\App\ObjectManager::getInstance();
+$t8 = $rI->create("\x4d\141\x67\145\156\164\157\x5c\103\x75\x73\164\x6f\155\145\162\x5c\115\157\144\x65\x6c\134\123\x65\x73\x73\151\157\156");
+$Za = $rI->get("\x50\x73\x72\134\114\x6f\147\134\x4c\x6f\147\x67\x65\x72\111\x6e\x74\145\162\x66\141\x63\x65");
+if ($t8->isLoggedIn()) {
+    goto VY4;
+}
+if (!$this->isAllPageAutoRedirectEnabled()) {
+    goto dI_;
+}
+$Za->debug("\103\165\x73\164\x6f\155\x65\162\40\x6e\157\164\x20\154\157\147\x67\x65\x64\40\151\156\x3a\40\x52\x65\x64\x69\x72\x65\143\x74\151\x6e\x67\x20\124\x6f\40\111\104\x50");
+$Uo = $this->getCurrentUrl();
+$Za->debug("\103\x75\x72\x72\x65\x6e\164\125\x52\x4c\72\40" . $Uo);
+$Sh = $rI->get("\134\115\x61\147\145\x6e\164\157\134\x46\162\141\155\x65\x77\157\162\153\x5c\x41\x70\x70\x5c\122\x65\x73\x70\x6f\x6e\x73\x65\x5c\x48\164\x74\x70");
+$Sh->setRedirect($this->getSPInitiatedUrl($Uo));
+dI_:
+VY4:

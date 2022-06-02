@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="gst" instance="Webkul\MarketplaceGstIndia\Model\Total\Quote\Gst" sort_order="470"/>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="gst" instance="Webkul\MarketplaceGstIndia\Model\Total\Invoice\Gst" sort_order="502"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="gst" instance="Webkul\MarketplaceGstIndia\Model\Total\Creditmemo\Gst" sort_order="450"/>
+        </group>
+    </section>   
+</config>

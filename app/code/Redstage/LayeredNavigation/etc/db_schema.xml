@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage LayeredNavigation module use for customize numeric configurator for layared navigation
+ *
+ * @package: Redstage/LayeredNavigation
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_LayeredNavigation
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="redstage_layerednavigation" resource="default" engine="innodb" comment="Layered Navigation">
+        
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Entity Id "/>
+
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+
+        <column xsi:type="varchar" name="application" nullable="false" length="100" comment="Application"/>
+
+        <column xsi:type="varchar" name="application_type" nullable="false" length="100" comment="Application Type"/>
+
+        <column xsi:type="varchar" name="product_attributes" nullable="false" length="255" comment="Product Attributes"/>
+
+        <column xsi:type="text" name="application_attributes" nullable="true" comment="Application Attributes"/>
+
+        <column xsi:type="varchar" name="starting_attribute" nullable="false" length="100" comment="Starting Attribute"/>
+
+        <column xsi:type="varchar" name="category_apply" nullable="false" length="255" comment="Category Apply"/>
+
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" identity="false" default="0" comment="Status"/>
+
+        <column xsi:type="int" name="parent" nullable="false" padding="11" comment="Parent"/>
+
+        <column xsi:type="int" name="level" nullable="false" padding="11" comment="Level"/>
+
+        <column xsi:type="int" name="sorting" nullable="false" padding="11" comment="Sorting"/>
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="redstage_layerednavigation_selection" resource="default" engine="innodb" comment="Layered Navigation Selection">
+        
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="true" nullable="false" identity="true" comment="Entity Id "/>
+
+        <column xsi:type="int" name="customer_id" padding="11" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Customer Id"/>
+
+        <column xsi:type="int" name="category_id" padding="11" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Category Id"/>
+
+        <column xsi:type="text" name="wattselect" nullable="true" comment="Watt Price Selection"/>
+
+        <column xsi:type="text" name="optionselect" nullable="true" comment="Checkbox Selection"/>
+
+        <column xsi:type="text" name="radioselect" nullable="true" comment="Radio Quantity Selection"/>
+
+        <column xsi:type="varchar" name="session_id" nullable="false" length="255" comment="Session Id"/>
+        
+        <column xsi:type="smallint" name="status" unsigned="true" nullable="false" identity="false" default="0" comment="Status"/>
+
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>   
+</schema>

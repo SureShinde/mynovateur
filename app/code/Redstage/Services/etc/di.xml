@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services module use for create service form in magento side and after take request send information to external url
+ *
+ * @category: PHP
+ * @package: Redstage/Services
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Services
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Redstage\Services\Model\ResourceModel\Services\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_services</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\Services\Model\ResourceModel\Services\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="redstage_services_listing_data_source" xsi:type="string">Redstage\Services\Model\ResourceModel\Services\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

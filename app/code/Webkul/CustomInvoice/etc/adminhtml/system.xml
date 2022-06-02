@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_CustomInvoice
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="webkul" translate="label" sortOrder="10">
+			<label>Webkul</label>
+		</tab>
+		<section id="custom_invoice" translate="label" type="text" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Custom Invoice</label>
+			<tab>webkul</tab>
+			<resource>Webkul_CustomInvoice::config</resource>
+			<group id="options" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Invoice logo</label>
+				<field id="invoice_logo" translate="label" type="image" sortOrder="6" showInDefault="1" showInWebsite="1" >
+		            <label>Invoice Logo</label>
+					<backend_model>Webkul\CustomInvoice\Model\Config\Backend\CustomFileType</backend_model>
+					<base_url type="media">invoicelogo</base_url>
+					<comment>jpg, jpeg</comment>
+		        </field>
+				<field id="logo_position" translate="label" type="select" sortOrder="6" showInDefault="1" showInWebsite="1" >
+		            <label>Invoice Logo Position</label>
+					<source_model>Webkul\CustomInvoice\Model\Config\Source\Position</source_model>
+		        </field>
+				<field id="bottom_logo" translate="label" type="image" sortOrder="8" showInDefault="1" showInWebsite="1" >
+		            <label>Numeric Invoice Bottom Logo</label>
+					<backend_model>Webkul\CustomInvoice\Model\Config\Backend\CustomFileType</backend_model>
+					<base_url type="media">invoicelogo</base_url>
+					<comment>jpg, jpeg</comment>
+		        </field>
+			</group>
+		</section>
+	</system>
+</config>

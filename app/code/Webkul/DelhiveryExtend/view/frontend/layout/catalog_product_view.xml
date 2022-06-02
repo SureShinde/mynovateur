@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryExtend
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<body>
+		<referenceBlock name="assignproduct_list">
+			<action method="setTemplate">
+				 <argument name="template" xsi:type="string">Webkul_DelhiveryExtend::assignproduct.phtml</argument>
+			</action>
+		</referenceBlock>
+			<!--block class="Webkul\MpAssignProduct\Block\Product\Products" name="assignproduct_list" template="Webkul_MpAssignProduct::assignproduct.phtml" before="product.info.details" /-->
+		<referenceContainer name="product.info.main">
+			<block class="Magento\Catalog\Block\Product\View" name="assignproduct_price" template="Webkul_MpAssignProduct::price.phtml" after="product.info.price" />
+		</referenceContainer>
+		<referenceBlock name="product.info.addtocart">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_DelhiveryExtend::product/view/addtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_DelhiveryExtend::product/view/addtocart.phtml</argument>
+            </action>
+        </referenceBlock>
+	</body>
+</page>

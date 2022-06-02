@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage BoqConfigurator module use for create service form in magento side and after take request send information to external url
+ *
+ * @category: PHP
+ * @package: Redstage/BoqConfigurator
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_BoqConfigurator
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="boqconfigurator_quote_save" >
+                <arguments>
+                    <argument name="path" xsi:type="string">boqconfigurator/boq/quote</argument>
+                    <argument name="label" xsi:type="string">My Saved Quotes</argument>
+                    <argument name="sortOrder" xsi:type="number">240</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

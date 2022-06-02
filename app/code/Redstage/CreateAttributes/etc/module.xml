@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage CreateAttributes module purpose create product attribute
+ *
+ * @category: PHP
+ * @package: Redstage/CreateAttributes
+ * @copyright: Copyright © 2019 Magento, Inc. All rights reserved.
+ * @author: Mohit Tyagi <mtyagi@redstage.com>
+ * @project: Legrand & Numeric
+ * @keywords: Module Redstage_CreateAttributes
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_CreateAttributes" setup_version="1.0.0">
+    </module>
+</config>

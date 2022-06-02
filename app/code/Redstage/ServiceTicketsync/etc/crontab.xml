@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="serviceticket">
+        <!-- <job name="serviceticket_sync_cron" instance="Redstage\ServiceTicketsync\Cron\UpdateSyncStatus" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job>-->
+        <job name="send_servicetickets" instance="Redstage\ServiceTicketsync\Cron\SendTickets" method="execute">
+            <schedule>*/5 * * * *</schedule>
+        </job> 
+        <job name="create_servicetickets" instance="Redstage\ServiceTicketsync\Cron\CreateServiceTickets" method="execute">
+            <schedule>*/2 * * * *</schedule>
+        </job>
+    </group> 
+</config>

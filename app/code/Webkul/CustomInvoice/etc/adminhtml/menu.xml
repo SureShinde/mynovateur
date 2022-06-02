@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryExtend
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+		<add id="Webkul_CustomInvoice::gst_state_list" title="GST State" module="Webkul_CustomInvoice" sortOrder="4" parent="Webkul_DelhiveryShipping::delhivery" action="custominvoice/gststate" resource="Webkul_CustomInvoice::gst_state_list"/>
+    </menu>
+</config>

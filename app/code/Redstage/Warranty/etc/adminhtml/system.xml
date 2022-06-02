@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="redstage" sortOrder="999" translate="label">
+			<label>redstage</label>
+		</tab>
+		<section id="warranty" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Warranty Registration</label>
+			<tab>redstage</tab>
+			<resource>Redstage_Warranty::config_redstage_warranty</resource>
+			<group id="warranty_config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Settings</label>
+				<field id="warranty_config_enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+                <field id="warranty_api_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Warranty API Url</label>
+                    <comment>Enter Warranty API url</comment>
+                </field>
+                <field id="warranty_success_message" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="textarea">
+                    <label>Success Message</label>
+                    <comment>Enter Success Message</comment>
+                </field>
+                <field id="warranty_error_message" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="textarea">
+                    <label>Error Message</label>
+                    <comment>Enter Error Message</comment>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

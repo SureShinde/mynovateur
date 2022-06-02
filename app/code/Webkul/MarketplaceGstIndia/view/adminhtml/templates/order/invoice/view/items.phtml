@@ -1,0 +1,56 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ *
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+$wk_helper = $block->getData('mpGstHelper');
+$isEnabled = $wk_helper->getConfigValue('status');
+$_order = $block->getOrder();
+if ($wk_helper->getCountryFromOrder($_order) != 'IN') {
+    $isEnabled = false;
+}
+?>
+<div class="admin__table-wrapper">
+    <table class="data-table admin__table-primary order-invoice-tables">
+        <thead>
+            <tr class="headings">
+                <th class="col-product"><span><?= $block->escapeHtml(__('Product')) ?></span></th>
+                <th class="col-price"><span><?= $block->escapeHtml(__('Price')) ?></span></th>
+                <th class="col-qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></th>
+                <th class="col-subtotal"><span><?= $block->escapeHtml(__('Subtotal')) ?></span></th>
+                <?php if ($isEnabled) { ?>
+                    <th class="col-sgst"><span><?= $block->escapeHtml(__('SGST')) ?></span></th>
+                    <th class="col-cgst"><span><?= $block->escapeHtml(__('CGST')) ?></span></th>
+                    <th class="col-igst"><span><?= $block->escapeHtml(__('IGST')) ?></span></th>
+                    <th class="col-utgst"><span><?= $block->escapeHtml(__('UTGST')) ?></span></th>
+                <?php } ?>
+                <th class="col-tax">
+                    <span>
+                        <?= ($isEnabled) ? $block->escapeHtml(__('GST Amount')) : $block->escapeHtml(__('Tax Amount'))?>
+                    </span>
+                </th>
+                <th class="col-discount"><span><?= $block->escapeHtml(__('Discount Amount')) ?></span></th>
+                <th class="col-total last"><span><?= $block->escapeHtml(__('Row Total')) ?></span></th>
+            </tr>
+        </thead>
+        <?php $_items = $block->getInvoice()->getAllItems() ?>
+        <?php $i = 0; foreach ($_items as $_item): ?>
+            <?php if ($_item->getOrderItem()->getParentItem()) {
+                continue;
+            } else {
+                $i++;
+            } ?>
+            <tbody class="<?= $i%2 ? $block->escapeHtml('even') : $block->escapeHtml('odd') ?>">
+                <?= /* @noEscape */ $block->getItemHtml($_item) ?>
+                <?= /* @noEscape */ $block->getItemExtraInfoHtml($_item->getOrderItem()) ?>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+</div>

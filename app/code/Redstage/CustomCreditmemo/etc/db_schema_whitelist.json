@@ -1,0 +1,7 @@
+{
+    "sales_creditmemo": {
+        "column": {
+            "pay_reference_id": true
+        }
+    }
+}

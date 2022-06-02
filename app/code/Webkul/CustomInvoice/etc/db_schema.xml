@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+  /**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_CustomInvoice
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="wk_custom_invoice" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="int" name="seller_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="varchar" name="gst_invoice_number" nullable="true" length="255"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <constraint xsi:type="unique" referenceId="WK_CUSTOM_INVOICE_GST_INVOICE_NUMBER">
+        <column name="gst_invoice_number"/>
+    </constraint>
+    <constraint xsi:type="unique" referenceId="WK_CUSTOM_INVOICE_SELLER_ORDER">
+        <column name="order_id"/>
+        <column name="seller_id"/>
+    </constraint>
+  </table>
+  <table name="wk_gst_state_code" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="varchar" name="state_code" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="gst_state_code" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="country_code" nullable="true" length="255"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <constraint xsi:type="unique" referenceId="WK_GST_STATE_CODE_MAP">
+        <column name="state_code"/>
+        <column name="country_code"/>
+    </constraint>
+  </table>
+  <table name="wk_custom_invoice" resource="default" engine="innodb">
+    <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+    <column xsi:type="varchar" name="invoice_number" nullable="true" length="255"/>
+    <column xsi:type="varchar" name="int_doc_ctr_n" nullable="true" length="255"/>
+    <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="int" name="seller_id" padding="10" default="0" unsigned="true" nullable="false" identity="false"/>
+    <column xsi:type="varchar" name="path" nullable="true" length="255"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="entity_id"/>
+    </constraint>
+    <constraint xsi:type="unique" referenceId="WK_CUSTOM_INVOICE_NUMBER">
+        <column name="invoice_number"/>
+    </constraint>
+  </table>
+</schema>

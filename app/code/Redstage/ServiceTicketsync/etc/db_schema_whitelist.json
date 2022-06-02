@@ -1,0 +1,19 @@
+{
+    "redstage_dump_serviceticket": {
+        "column": {
+            "entity_id": true,
+            "magento_serviceticket_id": true,
+            "sf_serviceticket_no": true,
+            "sf_serviceticket_status": true,
+            "status": true,
+            "flow_status": true,
+            "message": true,
+            "batch_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

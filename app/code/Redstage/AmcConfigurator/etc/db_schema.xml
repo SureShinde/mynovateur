@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="amc_customer_data" resource="default" comment="AMC Customer">
+        <column xsi:type="int" name="id" identity="true" comment="Primary Key" />
+        <column xsi:type="varchar" name="invoice_invoice_no" length="255" nullable="true" comment="Invoice: Invoice No" />
+        <column xsi:type="date" name="invoice_invoice_date" nullable="true" comment="Invoice: Invoice Date" />
+        <column xsi:type="varchar" name="sales_org" length="255" nullable="true" comment="Sales Org" />
+        <column xsi:type="varchar" name="product_meterial_group_1" length="255"  nullable="true" comment="Product: Material Group 1" />
+        <column xsi:type="varchar" name="product_meterial_group_3" length="255" nullable="true" comment="Product: Meterial Group 3" />
+        <column xsi:type="varchar" name="asset_name" length="255" nullable="true" comment="Asset Name" />
+        <column xsi:type="varchar" name="sold_to_account_name" length="255" nullable="true" comment="Sold To: Account Name" />
+        <column xsi:type="varchar" name="sap_customer_code" length="255" nullable="true" comment="Sap Customer Code" />
+        <column xsi:type="varchar" name="account_account_name" length="255" nullable="true" comment="Account: Account Name" />
+        <column xsi:type="text" name="account_billing_street"  nullable="true" comment="Account: Billing Street" />
+        <column xsi:type="varchar" name="account_city1" length="255" nullable="true" comment="Account: City1" />
+        <column xsi:type="varchar" name="postal_code" length="255" nullable="true" comment="Postal Code" />
+        <column xsi:type="varchar" name="account_region" length="255"  nullable="true" comment="Account : Region" />
+        <column xsi:type="varchar" name="equipment_make" length="255"  nullable="true" comment="Equipment Make" />
+        <column xsi:type="varchar" name="amc_contract_number" length="255" nullable="true" comment="AMC Contract Number" />
+        <column xsi:type="date" name="amc_start_date"  nullable="true" comment="AMC Start Date"  />
+        <column xsi:type="date" name="amc_end_date"  nullable="true" comment="AMC End Date"  />
+        <column xsi:type="varchar" name="contract_net_rate" length="255" nullable="true" comment="Contract Net Rate" />
+        <column xsi:type="varchar" name="battery_product_product_name" length="255" nullable="true" comment="Battery Product: Product Name" />
+        <column xsi:type="int" name="battery_quantity" comment="Battery Quantity" />
+        <column xsi:type="date" name="warranty_start_date"  nullable="true" comment="Warranty Start Date" />
+        <column xsi:type="date" name="warranty_end_date"  nullable="true" comment="Warranty End Date" />
+        <column xsi:type="varchar" name="customer_asset_status" length="10" nullable="true" comment="Customer Asset Status" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created A"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+        <index referenceId="AMC_ASSET_NAME" indexType="btree">
+            <column name="customer_asset_status"/>
+        </index>
+    </table>
+    <table name="amc_material_offer_price" resource="default" comment="">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="varchar" name="sales_org" length="50" nullable="true" comment="Sales Org" />
+        <column xsi:type="varchar" name="meterial_group_1" length="50" nullable="true" comment="Product: Material Group 1" />
+        <column xsi:type="decimal" name="offer1_price_per_year" scale="4" precision="20" nullable="true" comment="Offer1 Price Per Year" />
+        <column xsi:type="decimal" name="offer2_price_per_year" scale="4" precision="20" nullable="true" comment="Offer2 Price Per Year" />
+        <column xsi:type="text" name="term_erm_condition_link" nullable="true" comment="Term Condition Link" />
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="non_amc_tracking" resource="default" comment="">
+        <column xsi:type="int" name="id" identity="true" comment="Auto Increment" />
+        <column xsi:type="varchar" name="sales_org" length="100" nullable="true" comment="Sales Org" />
+        <column xsi:type="text" name="image" nullable="true" comment="Upload Image" />
+        <column xsi:type="varchar" name="status" nullable="true" default="0" comment="Status for approval"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Current date and time"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP" comment="Current date and time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+    </table>
+    <table name="redstage_amc_record" resource="default" comment="Redstage AMC Record">
+        <column xsi:type="int" name="id" identity="true" comment="Primary Key" />
+        <column xsi:type="varchar" name="invoice_invoice_no" length="255" nullable="true" comment="Invoice: Invoice No" />
+        <column xsi:type="date" name="invoice_invoice_date" nullable="true" comment="Invoice: Invoice Date" />
+        <column xsi:type="varchar" name="sales_org" length="255" nullable="true" comment="Sales Org" />
+        <column xsi:type="varchar" name="product_meterial_group_1" length="255"  nullable="true" comment="Product: Material Group 1" />
+        <column xsi:type="varchar" name="product_meterial_group_3" length="255" nullable="true" comment="Product: Meterial Group 3" />
+        <column xsi:type="varchar" name="asset_name" length="255" nullable="true" comment="Asset Name" />
+        <column xsi:type="varchar" name="sold_to_account_name" length="255" nullable="true" comment="Sold To: Account Name" />
+        <column xsi:type="varchar" name="sap_customer_code" length="255" nullable="true" comment="Sap Customer Code" />
+        <column xsi:type="varchar" name="account_account_name" length="255" nullable="true" comment="Account: Account Name" />
+        <column xsi:type="text" name="account_billing_street"  nullable="true" comment="Account: Billing Street" />
+        <column xsi:type="varchar" name="account_city1" length="255" nullable="true" comment="Account: City1" />
+        <column xsi:type="varchar" name="postal_code" length="255" nullable="true" comment="Postal Code" />
+        <column xsi:type="varchar" name="account_region" length="255"  nullable="true" comment="Account : Region" />
+        <column xsi:type="varchar" name="equipment_make" length="255"  nullable="true" comment="Equipment Make" />
+        <column xsi:type="varchar" name="amc_contract_number" length="255" nullable="true" comment="AMC Contract Number" />
+        <column xsi:type="date" name="amc_start_date"  nullable="true" comment="AMC Start Date"  />
+        <column xsi:type="date" name="amc_end_date"  nullable="true" comment="AMC End Date"  />
+        <column xsi:type="varchar" name="contract_net_rate" length="255" nullable="true" comment="Contract Net Rate" />
+        <column xsi:type="varchar" name="battery_product_product_name" length="255" nullable="true" comment="Battery Product: Product Name" />
+        <column xsi:type="int" name="battery_quantity" comment="Battery Quantity" />
+        <column xsi:type="date" name="warranty_start_date"  nullable="true" comment="Warranty Start Date" />
+        <column xsi:type="date" name="warranty_end_date"  nullable="true" comment="Warranty End Date" />
+        <column xsi:type="varchar" name="customer_asset_status" length="10" nullable="true" comment="Customer Asset Status" />
+        <column xsi:type="varchar" name="product_account_assignment_group" length="255" nullable="true" comment="Product Account: Assignment Group" />
+        <column xsi:type="int" name="batch_id" padding="11" nullable="false" comment="Batch Id "/>
+        <column xsi:type="varchar" name="status" nullable="false" length="20" comment="Type of Status"/>
+        <column xsi:type="varchar" name="flow_status" nullable="false" length="20" comment="Flow Status"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+        <index referenceId="AMC_ASSET_NAME" indexType="btree">
+            <column name="customer_asset_status"/>
+        </index>
+    </table>
+</schema>

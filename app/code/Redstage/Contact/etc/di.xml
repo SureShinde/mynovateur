@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Contact module use for create Contact form in magento side
+ *
+ * @category: PHP
+ * @package: Redstage/Warranty
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Contact
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Contact\Controller\Index\Post" type="Redstage\Contact\Controller\Index\Post" />
+
+    <virtualType name="Redstage\Contact\Model\ResourceModel\Contact\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_contact</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\Contact\Model\ResourceModel\Contact\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="contact_log_listing_data_source" xsi:type="string">Redstage\Contact\Model\ResourceModel\Contact\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

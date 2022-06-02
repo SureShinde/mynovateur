@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="configuratoradmin_boq_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\Boqquote\Grid\Collection</item>
+                <item name="configuratoradmin_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqConfigurator\Grid\Collection</item>
+                <item name="configuratoradmin_boqroomrange_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqRoomtype\Grid\Collection</item>
+                <item name="configuratoradmin_boqproductgroup_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqProductgroup\Grid\Collection</item>
+                <item name="configuratoradmin_boqgrouproomqty_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqGrouproomlink\Grid\Collection</item>
+                <item name="configuratoradmin_boqroombundle_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqRoombundle\Grid\Collection</item>
+                <item name="configuratoradmin_rangeconfig_grid_data_source" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\RangeConfig\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\BoqConfigurator\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boq_room_types</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">boqconfigurator_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqConfigurator</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\Boqquote\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boq_quote</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_boq_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">boqconfigurator_boq_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\Boqquote</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\BoqRoomtype\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boq_room_types</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_boqroomrange_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">boqconfigurator_boqroomrange_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqRoomtype</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\BoqProductgroup\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boq_product_group</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_boqproductgroup_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">configuratoradmin_boqproductgroup_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqProductgroup</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\BoqGrouproomlink\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boq_product_group_room_qty_link</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_boqgrouproomqty_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">boqproductgroup_boqgrouproomqty_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqGrouproomlink</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\BoqRoombundle\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">boq_room_bundle</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_boqroombundle_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">boqproductgroup_boqroombundle_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\BoqRoombundle</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\BoqConfigurator\Model\ResourceModel\RangeConfig\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">range_config</argument>
+            <argument name="eventPrefix" xsi:type="string">configuratoradmin_rangeconfig_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">configuratoradmin_rangeconfig_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\BoqConfigurator\Model\ResourceModel\RangeConfig</argument>
+        </arguments>
+    </type>
+</config>

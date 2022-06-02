@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Redstage_Customsms::redstage" title="Redstage SMS" module="Redstage_Customsms" sortOrder="11" resource="Redstage_Customsms::redstage"/>     
+        <add id="Redstage_Customsms::grid" title="SMS Log" module="Redstage_Customsms" sortOrder="20" parent="Redstage_Customsms::redstage" 
+            action="redstage_customsms/grid" resource="Redstage_Customsms::add_row"/>
+        <add id="Redstage_Customsms::redstage_head_config" title="Settings" module="Redstage_Customsms" sortOrder="40"
+             parent="Redstage_Customsms::redstage" resource="Redstage_Customsms::redstage"/>
+        <add id="Redstage_Customsms::config" title="Configuration" module="Redstage_Customsms" sortOrder="50"
+             action="adminhtml/system_config/edit/section/redstage_sms_configuration"
+             resource="Redstage_Customsms::redstage" parent="Redstage_Customsms::redstage_head_config" />
+    </menu>
+</config>

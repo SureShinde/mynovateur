@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage OrderInstallation module purpose admin user can export order data predifined CSV.
+ *
+ * @package: Redstage/OrderInstallation
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_OrderInstallation
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Redstage_OrderInstallation::orderinstallation"
+             title="Order Installation"
+             translate="title"
+             module="Redstage_OrderInstallation"
+             parent="Magento_Sales::sales"
+             sortOrder="100"
+             resource="Redstage_OrderInstallation::orderinstallation"
+        />
+        <add id="Redstage_OrderInstallation::orderexport"
+             title="Export Order Data"
+             module="Redstage_OrderInstallation"
+             sortOrder="1"
+             parent="Redstage_OrderInstallation::orderinstallation"
+             action="orderinstallation/orders/index/"
+             resource="Redstage_OrderInstallation::orderexport"
+        />
+    </menu>
+</config>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @package   Webkul_CoreFix
+ * @author    Ashutosh Srivastva
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+     <preference for="Magento\Quote\Model\QuoteAddressValidator" type="Webkul\CoreFix\Model\QuoteAddressValidator" />
+     <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="disable-place-order" disabled="true"/>
+    </type>
+    <type name="Magento\Checkout\Api\PaymentInformationManagementInterface">
+        <plugin name="corefix-disable-place-order" type="Webkul\CoreFix\Model\PaymentInformationManagementPlugin"/>
+    </type>
+    <type name="Magento\Checkout\Api\GuestPaymentInformationManagementInterface">
+         <plugin name="disable-guest-place-order" disabled="true"/>
+     </type>
+     <type name="Magento\Checkout\Api\GuestPaymentInformationManagementInterface">
+        <plugin name="corefix-disable-guest-place-order" type="Webkul\CoreFix\Model\GuestPaymentInformationManagementPlugin"/>
+    </type>
+</config>

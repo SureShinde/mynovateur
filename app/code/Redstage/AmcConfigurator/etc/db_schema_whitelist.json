@@ -1,0 +1,118 @@
+{
+    "amc_customer_data": {
+        "column": {
+            "id": true,
+            "sales_org": true,
+            "meterial_group_1": true,
+            "meterial_group_3": true,
+            "asset_name": true,
+            "sold_to_account_name": true,
+            "sap_customer_code": true,
+            "account_name": true,
+            "billing_street": true,
+            "billing_city": true,
+            "postal_code": true,
+            "billing_region": true,
+            "warranty_start_date": true,
+            "warranty_end_date": true,
+            "amc_contract_number": true,
+            "amc_start_date": true,
+            "amc_end_date": true,
+            "customer_asset_status": true,
+            "created_at": true,
+            "updated_at": true,
+            "invoice_invoice_no": true,
+            "invoice_invoice_date": true,
+            "product_meterial_group_1": true,
+            "product_meterial_group_3": true,
+            "account_account_name": true,
+            "account_billing_street": true,
+            "account_city1": true,
+            "account_region": true,
+            "equipment_make": true,
+            "contract_net_rate": true,
+            "battery_product_product_name": true,
+            "battery_quantity": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        },
+        "index": {
+            "AMC_CUSTOMER_DATA_ASSET_NAME": true,
+            "AMC_CUSTOMER_DATA_CUSTOMER_ASSET_STATUS": true
+        }
+    },
+    "amc_material_offer_price": {
+        "column": {
+            "id": true,
+            "sales_org": true,
+            "meterial_group_1": true,
+            "Offer1_price_per_year": true,
+            "Offer2_price_per_year": true,
+            "Term_erm_condition_link": true,
+            "created_at": true,
+            "updated_at": true,
+            "offer1_price_per_year": true,
+            "offer2_price_per_year": true,
+            "term_erm_condition_link": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "non_amc_tracking": {
+        "column": {
+            "id": true,
+            "sales_org": true,
+            "Image": true,
+            "Status": true,
+            "created_at": true,
+            "updated_at": true,
+            "image": true,
+            "status": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "redstage_amc_record": {
+        "column": {
+            "id": true,
+            "invoice_invoice_no": true,
+            "invoice_invoice_date": true,
+            "sales_org": true,
+            "product_meterial_group_1": true,
+            "product_meterial_group_3": true,
+            "asset_name": true,
+            "sold_to_account_name": true,
+            "sap_customer_code": true,
+            "account_account_name": true,
+            "account_billing_street": true,
+            "account_city1": true,
+            "postal_code": true,
+            "account_region": true,
+            "equipment_make": true,
+            "amc_contract_number": true,
+            "amc_start_date": true,
+            "amc_end_date": true,
+            "contract_net_rate": true,
+            "battery_product_product_name": true,
+            "battery_quantity": true,
+            "warranty_start_date": true,
+            "warranty_end_date": true,
+            "customer_asset_status": true,
+            "product_account_assignment_group": true,
+            "batch_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "status": true,
+            "flow_status": true
+        },
+        "index": {
+            "REDSTAGE_AMC_RECORD_CUSTOMER_ASSET_STATUS": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

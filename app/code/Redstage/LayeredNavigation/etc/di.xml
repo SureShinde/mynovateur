@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage LayeredNavigation module use for customize numeric configurator for layared navigation
+ *
+ * @category: PHP
+ * @package: Redstage/LayeredNavigation
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_LayeredNavigation
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <!--<preference for="Magento\LayeredNavigation\Block\Navigation" type="Redstage\LayeredNavigation\Block\Navigation" />-->
+    <!--<preference for="Magento\CatalogSearch\Model\Layer\Filter\Category" type="Redstage\LayeredNavigation\Block\Navigation" />-->
+    <!-- For LayeredNavigation -->
+    <virtualType name="LayeredNavigationFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="LayeredNavigationFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Redstage\LayeredNavigation\Model\ResourceModel\LayeredNavigation\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">LayeredNavigationFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Redstage\LayeredNavigation\Model\ResourceModel\LayeredNavigation\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_layerednavigation</argument>
+            <argument name="eventPrefix" xsi:type="string">redstage_layerednavigation_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">layerednavigation_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\LayeredNavigation\Model\ResourceModel\LayeredNavigation</argument>
+        </arguments>
+    </type>
+    <type name="Redstage\LayeredNavigation\Model\ResourceModel\WattCalculation\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">redstage_layerednavigation_selection</argument>
+            <argument name="eventPrefix" xsi:type="string">redstage_layerednavigation_selection_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">redstage_layerednavigation_selection_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Redstage\LayeredNavigation\Model\ResourceModel\WattCalculation</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="redstage_layerednavigation_listing_index_data_source" xsi:type="string">Redstage\LayeredNavigation\Model\ResourceModel\LayeredNavigation\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Redstage\LayeredNavigation\Controller\Adminhtml\Category\Image\Upload">
+       <arguments>
+           <argument name="imageUploader" xsi:type="object">Magento\Catalog\CategoryImageUpload</argument>
+       </arguments>
+   </type>
+   <virtualType name="Magento\Catalog\CategoryImageUpload" type="Magento\Catalog\Model\ImageUploader">
+       <arguments>
+           <argument name="baseTmpPath" xsi:type="string">catalog/tmp/category</argument>
+           <argument name="basePath" xsi:type="string">catalog/category</argument>
+           <argument name="allowedExtensions" xsi:type="array">
+               <item name="jpg" xsi:type="string">jpg</item>
+               <item name="jpeg" xsi:type="string">jpeg</item>
+               <item name="gif" xsi:type="string">gif</item>
+               <item name="png" xsi:type="string">png</item>
+           </argument>
+       </arguments>
+   </virtualType>
+   <preference for="Magento\Catalog\Model\Category\DataProvider" type="Redstage\LayeredNavigation\Model\Category\DataProvider" />
+</config>

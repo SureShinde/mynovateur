@@ -1,0 +1,51 @@
+//  Common (styles-m.css)
+//  _____________________________________________
+& when (@media-common = true) {
+
+    .filter-options-content {
+        li.item {
+            height: 20px;
+        }
+        [data-am-js="filter-item-default"] {
+            background: transparent;
+            position: absolute;
+            padding-left: 20px;
+            left: 0px;
+        }
+    }
+    input.am-input {
+        &+a.amshopby-filter-parent {
+            background: transparent;
+            position: absolute;
+            padding-left: 20px;
+            left: 0px;
+        }
+    }
+
+}
+
+//
+//  Mobile (styles-m.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    // your code
+}
+
+//
+//  Tablet
+//  _____________________________________________
+
+// This will add styles for tablet devices. When using native media-queries, we recommend wrapping your media-queries with media-width Magento mixins or media-target
+& when (@media-target = 'desktop'), (@media-target = 'all') {
+    @media only screen and (min-width: @screen__m) and (max-width: (@screen__xl - 1)) {
+        // styles for breakpoint >= 768px and < 1440px
+    }
+}
+//
+//  Desktop (style-l.css)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    // your code
+}

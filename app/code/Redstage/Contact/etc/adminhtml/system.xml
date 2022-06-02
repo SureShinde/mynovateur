@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<section id="google_recaptcha" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Google ReCaptcha</label>
+			<tab>redstage</tab>
+			<resource>Redstage_Contact::config_google_recaptcha</resource>
+			<group id="config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Configuration</label>
+                <field id="site_key" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Site Key</label>
+                    <comment>Google reCaptcha Site key</comment>
+                </field>
+                <field id="secret_key" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Secret Key</label>
+                    <comment>Google reCaptcha Secrete Key</comment>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

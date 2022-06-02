@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_entity" resource="default" engine="innodb" comment="Customer Entity">
+        <column xsi:type="varchar" name="customer_sf_id" nullable="true" default="0" length="255"  comment="Customer SF id"/>
+        <column xsi:type="varchar" name="send_to_sf" nullable="true" default="0" length="255"  comment="Send to SF"/>
+        <column xsi:type="varchar" name="customer_status" nullable="true" default="browsing" length="10" comment="Customer Status"/>
+    </table>
+</schema>

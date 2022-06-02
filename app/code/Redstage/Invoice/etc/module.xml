@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Invoice module use for customize invoice pdf
+ *
+ * @category: PHP
+ * @package: Redstage/Invoice
+ * @copyright: Copyright © 2019 Magento, Inc. All rights reserved.
+ * @author: Mohit Tyagi <mtyagi@redstage.com>
+ * @project: Legrand & Numeric
+ * @keywords: Module Redstage_Invoice
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_Invoice" setup_version="1.0.0">
+        <sequence>
+            <module name="Magento_Sales"/>
+        </sequence>
+    </module>
+</config>

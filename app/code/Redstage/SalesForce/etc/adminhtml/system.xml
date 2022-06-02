@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="redstage" sortOrder="999" translate="label">
+			<label>redstage</label>
+		</tab>
+		<section id="salesforce" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Sales Force</label>
+			<tab>redstage</tab>
+			<resource>Redstage_SalesForce::salesforce_config</resource>
+			<group id="salesforce_config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Salesforce Authentication Configuration</label>
+				<field id="salesforce_config_enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+                <field id="salesforce_auth_api_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>SalesForce Auth API Url</label>
+                    <comment>Enter salesforce auth API url</comment>
+                </field>                
+                <field id="salesforce_username" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Username</label>
+                    <comment>Enter Username</comment>
+                </field>
+                <field id="salesforce_password" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Password</label>
+                    <comment>Enter Password</comment>
+                </field>
+                <field id="salesforce_grand_type" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Grant Type</label>
+                    <comment>Enter Grant Type</comment>
+                </field>
+                <field id="salesforce_client_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Client Id</label>
+                    <comment>Enter Client Id</comment>
+                </field>
+                <field id="salesforce_client_secret" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Client Secret</label>
+                    <comment>Enter Client Secret</comment>
+                </field>
+                
+            </group>
+            <group id="salesforce_config_customersync" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Customer Sync Configuration</label>
+                <field id="customersync_config_enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                    <label>Enabled</label>
+                    <comment/>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="salesforce_customersync_api_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Customer Sync API Url</label>
+                    <comment>Enter API url for customer sync</comment>
+                </field>     
+            </group>
+            <group id="salesforce_config_create_ticket" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Service Ticket Configuration</label>
+                <field id="create_ticket_config_enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+                    <label>Enabled</label>
+                    <comment/>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="create_ticket_api_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Create Service Ticket API Url</label>
+                    <comment>Enter API url for create service ticket</comment>
+                </field>     
+            </group>
+		</section>
+	</system>
+</config>

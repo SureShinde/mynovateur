@@ -1,0 +1,24 @@
+Legend
+
++ Features
+- Bugs
+-------------------------------- Version 2.0.2 --------------------------------------
+
+	+ Compatible with magento 2.2.*.
+
+-------------------------------- Version 2.0.1 --------------------------------------
+
+	+ Now awb download option remove.
+	- Update module according updated delhivery API.
+
+-------------------------------- Version 2.0.0 --------------------------------------
+
+	+ Admin can enable or disable Webkul Delhivery Shipping method.
+	+ Admin can set the Webkul Delhivery Shipping method name that will be shown from front side.
+	+ Admin can download pincode and check their availability.
+	+ Admin can download AWB no.
+	+ Delhivery shipping rate will be calculated from admin address.
+	+ Admin can add tracking no.
+	+ Admin submit manifest using mass action.
+	+ Admin update AWB status.
+	+ Admin can download Delhivery packing slip in PDF format.

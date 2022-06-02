@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage CustomerInstallation module purpose admin user can export customer data predifined CSV.
+ *
+ * @category: PHP
+ * @package: Redstage/CustomerInstallation
+ * @copyright: Copyright © 2019 Magento, Inc. All rights reserved.
+ * @author: Mohit Tyagi <mtyagi@redstage.com>
+ * @project: Legrand & Numeric
+ * @keywords: Module Redstage_CustomerInstallation
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_CustomerInstallation" setup_version="1.0.0">
+        <sequence>
+            <module name="Magento_Customer" />
+        </sequence>
+    </module>
+</config>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Logger module to log all incoming and outgoing request and responses to and from Magento
+ *
+ * @category: PHP
+ * @package: Redstage/Logger
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Logger
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Redstage_Logger" setup_version="1.0.0">
+        <sequence>
+            <module name="Magento_Backend"/>
+        </sequence>
+    </module>
+</config>

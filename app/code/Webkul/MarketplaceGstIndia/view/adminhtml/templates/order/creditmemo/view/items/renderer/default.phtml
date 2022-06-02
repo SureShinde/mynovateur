@@ -1,0 +1,98 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+?>
+<?php /** @var $block \Magento\Sales\Block\Adminhtml\Items\Renderer\DefaultRenderer */ ?>
+<?php
+$wk_helper = $block->getData('mpGstHelper');
+$isEnabled = $wk_helper->getConfigValue('status');
+$_order = $block->getOrder();
+if ($wk_helper->getCountryFromOrder($_order) != 'IN') {
+    $isEnabled = false;
+}
+?>
+<?php $_item = $block->getItem() ?>
+<?php
+$orderItem = $_item->getOrderItem();
+$orderItemQty = $orderItem->getQtyOrdered();
+$ratio = $_item->getQty() / $orderItemQty;
+?>
+<?php $_item->setStoreId($_item->getCreditMemo()->getStoreId()) ?>
+<?php $block->setPriceDataObject($_item) ?>
+<tr>
+    <td class="col-product"><?= $block->getColumnHtml($_item, 'name') ?></td>
+    <td class="col-price">
+        <?= /* @noEscape */ $block->getColumnHtml($_item, 'price') ?>
+    </td>
+    <td class="col-qty"><?= $block->escapeHtml($_item->getQty()*1); ?></td>
+    <td class="col-subtotal">
+        <?= /* @noEscape */ $block->getColumnHtml($_item, 'subtotal') ?>
+    </td>
+    <?php if ($isEnabled) { ?>
+        <?php $orderItem = $_item->getOrderItem(); ?>
+        <?php $taxPercent = $orderItem->getTaxPercent(); ?>
+        <td class="col-sgst">
+            <?php
+                $itemSgst = $orderItem->getData('sgst');
+                $sgst = ($itemSgst > 0) ? ($itemSgst * $ratio) : 0;
+                $html = $orderItem->getOrder()->formatPrice($sgst);
+            if ($orderItem->getData('sgst') != 0) {
+                $html.= '<br>('.($orderItem->getData('sgst_percent')).'%)';
+            }
+                /* @noEscape */ echo $html;
+            ?>
+        </td>
+        <td class="col-cgst">
+            <?php
+                $itemCgst = $orderItem->getData('cgst');
+                $cgst = ($itemCgst > 0) ? ($itemCgst * $ratio) : 0;
+                $html = $orderItem->getOrder()->formatPrice($cgst);
+            if ($orderItem->getData('cgst') != 0) {
+                $html.= '<br>('.($orderItem->getData('cgst_percent')).'%)';
+            }
+                /* @noEscape */ echo $html;
+            ?>
+        </td>
+        <td class="col-igst">
+            <?php
+                $itemIgst = $orderItem->getData('igst');
+                $igst = ($itemIgst > 0) ? ($itemIgst * $ratio) : 0;
+                $html = $orderItem->getOrder()->formatPrice($igst);
+            if ($orderItem->getData('igst') != 0) {
+                $html.= '<br>('.($orderItem->getData('igst_percent')).'%)';
+            }
+                /* @noEscape */ echo $html;
+            ?>
+        </td>
+        <td class="col-utgst">
+            <?php
+                $itemUtgst = $orderItem->getData('utgst');
+                $utgst = ($itemUtgst > 0) ? ($itemUtgst * $ratio) : 0;
+                $html = $orderItem->getOrder()->formatPrice($utgst);
+            if ($orderItem->getData('utgst') != 0) {
+                $html.= '<br>('.($orderItem->getData('utgst_percent')).'%)';
+            }
+                /* @noEscape */ echo $html;
+            ?>
+        </td>
+    <?php } ?>
+    <?php if ($isEnabled) { ?>
+        <?php $itemGst = $orderItem->getData('gst');
+            $gst = ($itemGst > 0) ? ($itemGst * $ratio) : 0; ?>
+        <td class="col-tax-amount"><?= /* @noEscape */ $orderItem->getOrder()->formatPrice($gst); ?></td>
+    <?php } else { ?>
+        <td class="col-tax-amount"><?= /* @noEscape */ $block->displayPriceAttribute('tax_amount') ?></td>
+    <?php } ?>
+    <td class="col-discount"><?= /* @noEscape */ $block->displayPriceAttribute('discount_amount') ?></td>
+    <td class="col-total last">
+        <?= /* @noEscape */ $block->getColumnHtml($_item, 'total') ?>
+    </td>
+</tr>

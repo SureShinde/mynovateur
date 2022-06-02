@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_DelhiveryShipping
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2016 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+    	<add id="Webkul_DelhiveryShipping::delhivery" title="Webkul Delhivery Shipping" module="Webkul_DelhiveryShipping" sortOrder="10" resource="Webkul_DelhiveryShipping::delhivery"/>
+
+		<add id="Webkul_DelhiveryShipping::managepincode" title="Manage Pincode" module="Webkul_DelhiveryShipping" sortOrder="1" parent="Webkul_DelhiveryShipping::delhivery" action="delhivery/managepincode" resource="Webkul_DelhiveryShipping::managepincode"/>
+
+		<add id="Webkul_DelhiveryShipping::manageawb" title="Manage AWB" module="Webkul_DelhiveryShipping" sortOrder="1" parent="Webkul_DelhiveryShipping::delhivery" action="delhivery/manageawb" resource="Webkul_DelhiveryShipping::manageawb"/>
+
+    </menu>
+</config>
+

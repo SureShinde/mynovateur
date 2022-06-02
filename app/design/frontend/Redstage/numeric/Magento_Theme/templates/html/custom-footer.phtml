@@ -1,0 +1,28 @@
+<?php
+   /**
+   * Custom Footer Links
+   *
+   */
+?>
+<div class="footer-middle">
+   <?php
+      echo $this->getLayout()
+      ->createBlock('Magento\Cms\Block\Block')
+      ->setBlockId('footer-menu')
+      ->toHtml();
+   ?>
+</div>
+
+<script>
+    require([
+        'jquery',
+      ], function ($) {
+         $(window).on("load resize",function() {
+            if($(window).width() < 768 ){
+               $('.footer-middle .block-title.parent').click(function(){
+                  $(this).toggleClass('active');
+               })
+            }
+         });
+   });
+</script>

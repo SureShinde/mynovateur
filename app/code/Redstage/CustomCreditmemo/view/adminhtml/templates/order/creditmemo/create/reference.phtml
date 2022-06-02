@@ -1,0 +1,13 @@
+    <tr>
+        <td class="label">
+            <?= $block->escapeHtml($block->getPaymentReferenceLabel()) ?>
+            <div id="payment_reference"></div>
+        </td>
+        <td>
+            <input type="text"
+                   name="creditmemo[pay_reference_id]"
+                   value="<?= /* @noEscape */ $block->getPaymentReference() ?>"
+                   class="input-text"
+                   id="pay_reference_id" />
+        </td>
+    </tr>

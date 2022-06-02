@@ -1,0 +1,78 @@
+{
+    "boq_quote": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "data": true,
+            "title": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "boq_product_group": {
+        "column": {
+            "id": true,
+            "name": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "boq_room_types": {
+        "column": {
+            "id": true,
+            "name": true,
+            "range_config": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "boq_product_group_room_qty_link": {
+        "column": {
+            "link_id": true,
+            "product_group_id": true,
+            "room_type_id": true,
+            "product_group_config": true,
+            "is_active": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "boq_room_bundle": {
+        "column": {
+            "id": true,
+            "name": true,
+            "room_type_config": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "range_config": {
+        "column": {
+            "id": true,
+            "range": true,
+            "color": true,
+            "finished": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

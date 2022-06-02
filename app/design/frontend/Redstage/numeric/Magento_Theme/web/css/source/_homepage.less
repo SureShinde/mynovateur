@@ -1,0 +1,253 @@
+// /**
+//  * Copyright © Redstage, Inc. All rights reserved.
+//  * See COPYING.txt for license details.
+//  */
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+    .quick-ads-container {
+        padding: 100px 45px;
+        color: #fff;
+    }
+    span.quick-ads-title {
+        font-size: 22px;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 5px;
+    }
+    .cms-home {
+        h3 {
+            font-size: 25px;
+            font-weight: 500;
+        }
+        .block-title.title strong {
+            font-size: 21px;
+            font-weight: 500;
+            text-align: center;
+            display: block;
+            border: 0;
+            margin-top: 35px;
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+        .slick-prev {
+            left: 0;
+        }
+        .slick-next {
+            right: 0;
+        }
+        .slick-slide{
+            .item.product.product-item {
+                margin: 0 !important;
+                padding: 10px !important;
+            }
+        }
+        .slick-prev,
+        .slick-next{
+            height: auto;
+            width: auto;
+        }
+        .page-header{
+            margin-bottom: 0;
+        }
+    }
+    .easy-guide-container{
+        color: #fff;
+        h3{
+            color: #fff;
+        }
+    }
+    .title-section {
+        text-align: center;
+        background: #D6D6D6;
+        padding: 15px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .exclusive-deals-products {
+        background: #F7F5F5;
+    }
+    .category-button{
+        text-align: center;
+        a.action.primary{
+            min-width: 200px;
+        }
+    }
+    .products{
+        .slick-slide{
+            .product-item {
+                padding: 10px 17px !important;
+                margin: 0 !important;
+                box-shadow: none;
+                width: 100% !important;
+                .tocart{
+                    max-width: 240px;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
+
+        }
+    }
+    .category-best-selling{
+        .products{
+            .slick-slide{
+                .product-item {
+                    padding: 10px 5px !important;
+                    .tocart{
+                        font-size: 12px;
+                        font-weight: 600;
+                    }
+                }
+
+            }
+        }
+    }
+
+    .wrapper a{
+        text-decoration:none;
+        font-size: 14px;
+        color:#514747;
+        font-weight: 500;
+        &:hover{
+            text-decoration:none;
+        }
+    }
+    .page-wrapper > ul{
+        list-style: none;
+        padding: 0;
+    }
+    .product-application-block-flexible{
+        min-height: 130px;
+        margin: 0 20px;
+    }
+    .product-application-block-gaming{
+        min-height: 130px;
+        margin: 5px 20px;
+    }
+    .pagebuilder-column.product-application-video {
+        margin:0 20px;
+    }
+}
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .products{
+        .slick-slide{
+            .product-item{
+                .tocart{
+                     font-size: 16px;
+                }
+            }
+        }
+    }
+    .secure-payment-section {
+        margin: 0 20px;
+    }
+    .footer-banner-section{
+        background-position: left bottom !important;
+        background-size: 99% auto !important;
+        min-height: 300px;
+        padding-bottom: 110px;
+    }
+    .page-header{
+        .header.content{
+            padding-top:0;
+        }
+    }
+}
+
+//
+// Extra Small
+//
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .cms-home{
+        .slick-prev {
+            left: -35px;
+        }
+        .slick-next {
+            right: -35px;
+        }
+    }
+    .exclusive-deals-products {
+        display: flex;
+        background: #F7F5F5;
+    }
+    .exclusive-product-slider {
+        max-width: 80%;
+        padding: 0 40px;
+    }
+    .title-section{
+        width: 20%;
+    }
+    .product-application-block-flexible {
+        margin: 0 8px 5px 0;
+        min-height: 240px;
+    }
+    .product-application-block-gaming {
+        margin: 0 0 5px 0;
+    }
+    .pagebuilder-column.product-application-video {
+        margin: 0;
+    }
+
+    .products{
+        .slick-slide{
+            .product-item {
+                padding: 10px 17px !important;
+                margin: 0 !important;
+                box-shadow: none;
+                width: 100% !important;
+                .tocart{
+                    max-width: 240px;
+                    font-size: 16px;
+                    font-weight: 600;
+                }
+            }
+
+        }
+    }
+    .category-best-selling{
+        .products{
+            .slick-slide{
+                .product-item {
+                    padding: 10px 10px !important;
+                    .tocart{
+                        font-size: 16px;
+                    }
+                }
+
+            }
+        }
+    }
+    .footer-banner-section{
+        min-height: 500px;
+    }
+}
+
+//
+// Tablet Landscape view 1024
+//
+@media only screen and (max-width: 1024px){
+
+}
+
+// ipad
+
+@media (max-width: 812px) and (min-width: 768px){
+
+}

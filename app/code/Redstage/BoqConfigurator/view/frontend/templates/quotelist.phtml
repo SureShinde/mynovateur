@@ -1,0 +1,76 @@
+<?php
+$boqQuoteCollection = $block->getQuote();
+//echo "<pre>";
+?>
+<?= $block->getChildHtml('info') ?>
+<div class="content">
+	<?php if(!empty($block->getCustomerId())){ 
+		if(count($boqQuoteCollection) != 0){
+	?>
+	<div class="table-wrapper orders-history">
+		<h3>My Saved Quotes</h3>
+		<table class="data table table-order-items history" id="savedQuote">
+			<caption class="table-caption"><?= $block->escapeHtml(__('My Saved Quotes')) ?></caption>
+			<thead>
+				<tr>
+					<th>Sr No</th>
+					<th>Quote Name</th>
+					<th>Created At</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+		<?php 
+			
+				$formIndex = 0;
+				$srNo = 1;
+				foreach ($boqQuoteCollection as $boqQuote) { 
+					if($block->getCustomerId() == $boqQuote['customer_id']){
+						echo "<tr>";
+						echo "<td>".$srNo."</td>";
+						echo "<td>".$boqQuote['title']."</td>";
+						echo "<td>".$boqQuote['created_at']."</td>";
+						echo "<td>";
+						echo '<form method="post" name="redirect_'.$formIndex.'" class="redirect" action="'. $block->getboqUrl().'">';
+						//print_r($boqQuote);
+						echo '<input type="hidden" class="post" name="customerId" value="'.$boqQuote['customer_id'].'">';
+						echo "<input type='hidden' class='post' name='quoteData' value='".$boqQuote['data']."'>";
+
+						echo "<div><a href='javascript:void(0);' class='quote' data-id='".$boqQuote['id']."' data-customer-id='".$boqQuote['customer_id']."' data-quote-data='".$boqQuote['data']."'>View</a></div>";
+						echo '<input type="submit" style="display: none;">';
+						echo '</form>';
+						echo "</td>";
+						echo "</tr>";
+						
+						$srNo++;
+						$formIndex++;
+					}
+				}
+
+		?>
+		</tbody>
+		</table>
+	</div>
+	<?php }else{ ?>
+
+		<div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have no quotes.') ?></span>
+	<?php } } ?>
+
+		
+</div>
+
+<script type="text/javascript">
+require(
+    [
+        "jquery"
+    ],
+    function(
+        $
+    ){
+        $(document).ready(function() {
+        	$(document).on("click",".quote",function(){
+	        	$(this).parent('div').parent('.redirect').submit();
+	        });
+        });
+    });
+</script>

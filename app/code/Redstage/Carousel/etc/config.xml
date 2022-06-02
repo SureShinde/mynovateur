@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+        <default>
+            <carousel>
+                <general>
+                    <duration>2000</duration>
+                    <arrow_navigation>1</arrow_navigation>
+                    <dots_navigation>0</dots_navigation>
+                    <after_topnav>1</after_topnav>
+					<code_snippet><![CDATA[{{block type="Redstage\Carousel\Block\Carousel" name="carousel" template="Redstage_Carousel::carousel/carousel.phtml"}}]]></code_snippet>
+                    <responsive>1</responsive>
+                </general>
+            </carousel>
+        </default>
+    </config>

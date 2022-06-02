@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <head>
+        <title>Account Dashboard</title>
+    </head>
+    <body>
+        <referenceContainer name="sidebar.main">
+            <referenceBlock name="customer-account-navigation-account-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Account Dashboard</argument>
+                </arguments>
+            </referenceBlock> 
+        </referenceContainer>
+        	
+        <!-- Store credit -->
+        <referenceBlock name="customer-account-navigation-customer-balance-link" remove="true"/>
+        <!-- Downloadable product link -->
+        <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true"/>
+        <!-- Billing agreement link -->
+        <referenceBlock name="customer-account-navigation-billing-agreements-link" remove="true"/>
+        <!-- Gift card link -->
+        <referenceBlock name="customer-account-navigation-gift-card-link" remove="true"/>
+        <!-- Order by SKU -->
+        <referenceBlock name="customer-account-navigation-checkout-sku-link" remove="true"/>
+        <!-- Gift registry -->
+        <referenceBlock name="customer-account-navigation-giftregistry-link" remove="true"/>
+        <!-- Reward points -->
+        <referenceBlock name="customer-account-navigation-reward-link" remove="true"/>
+        <!-- Newletter subscriptions -->
+         <referenceBlock name="customer-account-navigation-newsletter-subscriptions-link" remove="true"/>
+          <!-- My Invitations -->
+        <referenceBlock name="customer-account-navigation-magento-invitation-link" remove="true"/>
+    </body>
+</page>

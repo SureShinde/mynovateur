@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="miniorange_tab" translate="label" sortOrder="1500">
+            <label>Miniorage</label>
+        </tab>
+        <section id="ouath" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Oauth</label>
+            <tab>miniorange_tab</tab>
+            <resource>MiniOrange_OAuth::module</resource>
+            <group id="ouath_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Ouath Settings</label>
+								<field id="ouath_client_callbackurl" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+													 translate="label" type="text">
+										<label>Callback Url</label>
+								</field>
+                <field id="ouath_client_id" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="120"
+                           translate="label" type="text">
+                    <label>Client Id</label>
+                </field>
+                <field id="ouath_client_secret" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130"
+                           translate="label" type="text">
+                    <label>Client Secret</label>
+                </field>
+								<field id="ouath_client_scope" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130"
+                           translate="label" type="text">
+                    <label>Scope</label>
+                </field>
+								<field id="ouath_client_authorizeendpoint" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130"
+                           translate="label" type="text">
+                    <label>Authorize Endpoint</label>
+                </field>
+								<field id="ouath_client_accesstokenendpoint" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130"
+                           translate="label" type="text">
+                    <label>AccessToken Endpoint</label>
+                </field>
+								<field id="ouath_client_getuserinfoendpoint" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130"
+                           translate="label" type="text">
+                    <label>Get user info Endpoint</label>
+                </field>
+								<field id="ouath_client_jwksurl" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="130"
+                           translate="label" type="text">
+                    <label>JWKS Url</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

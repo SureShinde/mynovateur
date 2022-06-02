@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services module use for create service form in magento side and after take request send information to external url
+ *
+ * @category: PHP
+ * @package: Redstage/Services
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Services
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Redstage_Services::services"
+             title="Service Call"
+             translate="title"
+             module="Redstage_Services"
+             parent="Redstage_Base::main_menu"
+             sortOrder="10"
+             resource="Redstage_Services::services"
+        />
+        <add id="Redstage_Services::servicelog"
+             title="Service Logs"
+             module="Redstage_Services"
+             sortOrder="50"
+             parent="Redstage_Services::services"
+             action="services/listing/index/"
+             resource="Redstage_Services::servicelog"
+        />
+    </menu>
+</config>

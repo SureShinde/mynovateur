@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   
+    <body>
+	
+		 <referenceBlock name="invoice_totals">
+            <block class="Webkul\MarketplaceGstIndia\Block\Sales\Order\Totals" name="gstamount"/>
+			 <arguments>
+                <argument name="label_properties" xsi:type="string">colspan="7" class="mark"</argument>
+                <argument name="value_properties" xsi:type="string">colspan="4" class="amount"</argument>
+              </arguments>
+        </referenceBlock>
+		
+		 <referenceBlock name="sales.order.print.invoice">
+
+                <action method="setTemplate">
+                    <argument name="template" translate="true" xsi:type="string">Webkul_MarketplaceGstIndia::order/print/invoice.phtml</argument>
+                </action>
+
+            </referenceBlock>
+			
+		
+    </body>
+</page>

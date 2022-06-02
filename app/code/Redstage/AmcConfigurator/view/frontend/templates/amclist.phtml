@@ -1,0 +1,318 @@
+<?php
+
+/** @var \Redstage\AmcConfigurator\Block\Template $block */
+$renewalAmcCollection = $block->getRenewalAmc();
+$nonAmcCollection = $block->getNonAmc();
+$expiredAmcCollection = $block->getExpiredAmc();
+$completeCoveredAmcList = $block->getCompleteCoveredAmc();
+$amcHelper = $this->helper('Redstage\AmcConfigurator\Helper\Data');
+//print_r($block->getAmcOfferCollection());
+$amcOffers = array("0"=>"abc","1"=>"ABC","2"=>"Abc","3"=>"aBC");
+?>
+<div class="amc_list_details product data items" >
+   <div class="itemtitle-outer-wrapper">
+        <div class="itemtitle-wrapper">
+            <div class="item title active">
+                <span class="switch" data-href="#renewal_accordion">AMC Renewal List</span>
+            </div>
+            <div class="item title " >
+                <span class="switch" data-href="#nonamc_accordion">Non-AMC List</span>
+            </div>
+            <div class="item title " >
+                <span class="switch" data-href="#amc_search">AMC Search</span>
+            </div>
+        </div>
+   </div>
+    <div class="itemcontent-wrapper">
+        <div id="renewal_accordion" class="item content active">
+            <div class="renewal_amc_type amclist" data-mage-init='{ "accordion":{ "active": [0], "collapsible": true, "openedState": "active", "multipleCollapsible": true }}'>
+                <?php foreach ($renewalAmcCollection as $renewalAmc) {?>
+                <?php $amc_id = $renewalAmc['id']; ?>
+                <div class="list_container">
+                    <div data-role="trigger" class="title">
+                        <div data-role="collapsible" class="collapsible">
+                            <?=$renewalAmc['asset_name'];?>
+                        </div>
+                    </div>
+                    <div data-role="content" class="content">
+                        <div class="product_details inner-section">
+                            <h3>Product Details:</h3>
+                            <table>
+                                <tr>
+                                    <td width="33%">
+                                        <div class="product_title">Sales Organization</div>
+                                        <div class="product_desc"><?=$renewalAmc['sales_org'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">Account Name</div>
+                                        <div class="product_desc"><?=$renewalAmc['sold_to_account_name'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">Warranty Date</div>
+                                        <?php if (isset($renewalAmc['warranty_start_date']) && !empty($renewalAmc['warranty_start_date'])) {?>
+                                                <div class="product_desc"><?= date('d/m/Y', strtotime($renewalAmc['warranty_start_date'])) . " - " .  date('d/m/Y', strtotime($renewalAmc['warranty_end_date'])); ?></div>
+                                            <?php } else {
+                                                echo "NA";
+                                            } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                    <td width="33%">
+                                        <div class="product_title">Product Material Group</div>
+                                        <div class="product_desc"><?=$renewalAmc['product_meterial_group_1'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">Location</div>
+                                        <div class="product_desc"><?=$renewalAmc['account_billing_street'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">AMC Date</div>
+                                        <?php if (isset($renewalAmc['amc_start_date']) && !empty($renewalAmc['amc_start_date'])) {?>
+                                        <div class="product_desc"><?=date('d/m/Y', strtotime($renewalAmc['amc_start_date'])) . " - " . date('d/m/Y', strtotime($renewalAmc['amc_end_date']));?></div>
+                                        <?php } else {
+                                            echo "NA";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="33%">
+                                        <div class="product_title">Asset Name</div>
+                                        <div class="product_desc"><?=$renewalAmc['asset_name'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">City</div>
+                                        <div class="product_desc"><?=$renewalAmc['account_city1'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                    </td>
+                                </tr>
+                            </table>
+                            <hr class="dotted">
+                            <div>
+                                <div class="package-heading">
+                                    <strong>Choose Your Preferable Package
+                                    <span class="tooltip amshopby-filter-tooltip" title="lorem ipsum">
+                                    </span>
+                                    </strong>
+                                    <a  href="<?php echo $this->getUrl('terms-and-conditions');?>" target="_blank" >Terms & Conditions Apply</a>
+                                </div>
+                                
+                                <section class="slider">
+                                    <?php $asset_name = $renewalAmc['asset_name']; ?>
+                                    <?php if (isset($renewalAmc['amc_end_date']) && !empty($renewalAmc['amc_end_date'])) { 
+                                        $offerStartDate = date('d/m/Y', strtotime("1 day", strtotime($renewalAmc['amc_end_date'])));
+                                            $offerEndDate = date('d/m/Y', strtotime("+1 years +1 day", strtotime($renewalAmc['amc_end_date'])));
+                                        ?>
+                                    <?php } else {
+                                        $offerStartDate = date('d/m/Y', strtotime("1 day", strtotime($renewalAmc['warranty_end_date'])));
+                                        $offerEndDate = date('d/m/Y', strtotime("+1 years +1 day", strtotime($renewalAmc['warranty_end_date'])));
+                                    }?>
+                                    <?php $offer_range = $offerStartDate . " - " . $offerEndDate; ?>
+                                    <?php $numeric_meterial = filter_var($renewalAmc['product_meterial_group_1'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);?>
+                                    <?php $amcOfferPrices = $amcHelper->getAMCOfferPrices($renewalAmc['sales_org'], $numeric_meterial); ?>
+                                    <?php //print_r($amcOfferPrices); ?>
+                                    <?php if (isset($amcOfferPrices['offer1_price_per_year']) && !empty($amcOfferPrices['offer1_price_per_year'])) { ?>
+                                        <div class="offerItems">
+                                            <div class="packages">
+                                                <h4 class="year">SILVER PACKAGE</h4>
+                                                <div class="term">
+                                                    <p class="amc-term">AMC Term</p>
+                                                    <p class="date">
+                                                        <?php echo $offer_range; ?>
+                                                    </p>
+                                                </div>    
+                                                <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('amc-silver-package')->toHtml(); ?>
+                                                <?php $silver_price = $amcOfferPrices['offer1_price_per_year']; ?>
+                                                <div class="price"><?= $block->getCurrencySymbol($silver_price) ?></div>
+                                                <button class="addToCartButton" onclick='return control.cartSubmit("<?php echo $asset_name; ?>", "Silver", "<?php echo $silver_price; ?>", "<?php echo $offer_range; ?>", "<?php echo $amc_id; ?>")'>ADD TO CART</button>
+                                            </div>
+                                        </div>
+                                    <?php }?>
+                                    <?php if (isset($amcOfferPrices['offer2_price_per_year']) && !empty($amcOfferPrices['offer2_price_per_year'])) { ?>
+                                        <div class="offerItems">
+                                            <div class="packages">
+                                                <h4 class="year">GOLD PACKAGE</h4>
+                                                <div class="term">
+                                                    <p class="amc-term">AMC Term</p>
+                                                    <!-- <p class="date">07/01/2022-07/01/2023</p> -->
+                                                    <p class="date">
+                                                        <?php echo $offer_range; ?>
+                                                    </p>
+                                                </div>    
+                                                <?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('amc-gold-package')->toHtml(); ?>
+                                                <?php $gold_price = $amcOfferPrices['offer2_price_per_year']; ?>
+                                                <div class="price"><?= $block->getCurrencySymbol($gold_price) ?></div>
+                                                <button class="addToCartButton" onclick='return control.cartSubmit("<?php echo $asset_name; ?>", "Gold", "<?php echo $gold_price; ?>", "<?php echo $offer_range; ?>", "<?php echo $amc_id; ?>")'>ADD TO CART</button>
+                                            </div>
+                                        </div>
+                                    <?php }?>
+                                </section>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <?php }?>
+            </div>
+        </div>
+        <div id="nonamc_accordion" class="item content">
+            <div class="non_amc_type amclist" data-mage-init='{ "accordion":{ "active": [], "collapsible": true, "openedState": "active", "multipleCollapsible": true }}'>
+                <?php foreach ($nonAmcCollection as $nonAmc) {
+                    $id = $nonAmc['id'];
+                    $uploadImgById = $block->getUrl('amcconfigurator/nonamc/uploadimage/id/' . $id);
+                ?>
+                <div class="list_container">
+                    <div data-role="trigger" class="title">
+                        <div data-role="collapsible" class="collapsible">
+                            <?=$nonAmc['asset_name'];?>
+                        </div>
+                    </div>
+                    <div data-role="content" class="content">
+                        <div class="product_details inner-section">
+                            <h3>Product Details:</h3>
+                            <table>
+                                <tr>
+                                    <td width="33%">
+                                        <div class="product_title">Sales Organization</div>
+                                        <div class="product_desc"><?=$nonAmc['sales_org'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">Account Name</div>
+                                        <div class="product_desc"><?=$nonAmc['sold_to_account_name'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">Warranty Date</div>
+                                        <?php if (isset($nonAmc['warranty_start_date']) && !empty($nonAmc['warranty_start_date'])) {?>
+                                        <div class="product_desc"><?=date('d/m/Y', strtotime($nonAmc['warranty_start_date'])) . " - " . date('d/m/Y', strtotime($nonAmc['warranty_end_date']));?></div>
+                                        <?php } else {
+                                            echo "NA";
+                                        }?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="33%">
+                                        <div class="product_title">Product Material Group</div>
+                                        <div class="product_desc"><?=$nonAmc['product_meterial_group_1'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">Location</div>
+                                        <div class="product_desc"><?=$nonAmc['account_billing_street'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">AMC Date</div>
+                                        <?php if (isset($nonAmc['amc_start_date']) && !empty($nonAmc['amc_start_date'])) {?>
+                                        <div class="product_desc"><?=date('d/m/Y', strtotime($nonAmc['amc_start_date'])) . " - " . date('d/m/Y', strtotime($nonAmc['amc_end_date']));?></div>
+                                        <?php } else {
+                                            echo "NA";
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="33%">
+                                        <div class="product_title">Asset Name</div>
+                                        <div class="product_desc"><?=$nonAmc['asset_name'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                        <div class="product_title">City</div>
+                                        <div class="product_desc"><?=$nonAmc['account_city1'];?></div>
+                                    </td>
+                                    <td width="33%">
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="img_upload_section">
+                            <form name="nonamc_form_<?=$id?>" enctype="multipart/form-data" action="<?php echo $block->getUrl('amcconfigurator/nonamc/save'); ?>" method="post">
+                                <h3>Upload Picture: </h3>
+                                <input type="file" name="nonamcimages[]" id="nonamc_img_upload" multiple="multiple" required/>
+                                <div class="submit_btn">
+                                    <input type="hidden" name="sales_org" value="<?=$nonAmc['sales_org'];?>">
+                                    <input type="hidden" name="id" value="<?=$id;?>">
+                                    <button class="action tocart primary" type="submit" name="submit_<?=$id;?>" title="<?php echo __('Submit') ?>">
+                                        <span><?php echo __('Submit') ?></span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <?php }?>
+            </div>
+        </div>
+        <div id="amc_search" class="item content">
+            <div class="search_area">
+                <p class="no-found-text">No products found,</p>
+                <p>Search with your contact # or Purchase Invoice #</p>
+                <input type="text" name="amc_invoice" id="amc_invoice">
+                <a class="search_button" href="javascript:void(0)">Search</a>
+            </div>
+            <div class="amclist">
+                <div id="content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $('.itemtitle-wrapper > .item.title').click(function(){
+            var contentID = $(this).children('.switch').attr('data-href');
+            $('.itemcontent-wrapper > .item.content').removeClass('active');
+            $('.itemtitle-wrapper > .item.title').removeClass('active');
+            $(this).addClass('active');
+            $(contentID).addClass('active');
+        });
+
+        $('.search_button').click(function(){
+            var inv_no = $('#amc_invoice').val();
+            if (inv_no != '') {
+                $.ajax({
+                    url: "<?php echo $this->getUrl().'amcconfigurator/amclist/search'?>",
+                    data: {inv_no: inv_no},
+                    type: 'POST',
+                    dataType: 'json',
+                    showLoader: true,
+                    beforeSend: function() {
+                        // show some loading icon
+                    },
+                    success: function(data, status, xhr) {
+                        //console.log(data.output);
+                        // data contains your controller response
+                        $('#content').html(data.output);
+                        $('body').trigger('processStop');
+                    },
+                    error: function (xhr, status, errorThrown) {
+                        $('body').trigger('processStop');
+                        //console.log('Error happens. Try again.');
+                        console.log(errorThrown);
+                    }
+                });
+            }
+        });
+
+        var control = {
+            cartSubmit: function(asset_name, package, offer_price, offer_range, amc_id) {
+                //console.log(asset_name+'~~~'+package+'~~~'+offer_price);
+                var pckg = '';
+                if (package == "Silver") {
+                    pckg = "1";
+                } else if (package == "Gold") {
+                    pckg = "2";
+                }
+                var paramString = '?cache=false&is_amc=1&id='+amc_id+'&package='+pckg;
+                var controllerUrl = "<?php echo $this->getUrl().'amcconfigurator/renew/package'?>"+paramString;
+                window.location.href = controllerUrl;
+            }
+        }
+        window.control = control;
+    });
+
+    /*function cartSubmit(asset_name, package, offer_price) {
+        alert(asset_name+'~~~'+package+'~~~'+offer_price);
+    }*/
+</script>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MarketplaceGstIndia
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="invoice_totals">
+            <block class="Webkul\MarketplaceGstIndia\Block\Sales\Order\Totals" name="invoice_gstamount"/>
+            <arguments>
+                <argument name="label_properties" xsi:type="string">colspan="7" class="mark"</argument>
+                <argument name="value_properties" xsi:type="string"> colspan="4" class="amount"</argument>
+            </arguments>
+        </referenceBlock>
+
+        <referenceContainer name="additional.product.info">
+            <block class="Magento\Framework\View\Element\Template" name="marketplacegst_hsn_sales_item"/>
+        </referenceContainer>
+        <referenceBlock name="marketplacegst_hsn_sales_item">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Webkul_MarketplaceGstIndia::hsn.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="invoice_items">
+            <action method="setTemplate">
+                <argument name="template" translate="true" xsi:type="string">Webkul_MarketplaceGstIndia::order/invoice/items.phtml</argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

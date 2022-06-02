@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Marketplace
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <listingToolbar name="listing_top">
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters"/>
+        <paging name="listing_paging"/>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Webkul_DelhiveryShipping/js/grid/massactions</item>
+                </item>
+            </argument>
+            <action name="awb-status-update">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">awbstatusupdate</item>
+                        <item name="label" xsi:type="string" translate="true">AWB Status Update</item>
+                        <item name="url" xsi:type="url" path="delhiveryshipping/order_ui/awbstatusupdate"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">AWB Status Update</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to update AWB status of selected order(s)?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <action name="delhivery-printshipping">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">shippinglable</item>
+                        <item name="label" xsi:type="string" translate="true">Print Shipping Slip</item>
+                        <item name="url" xsi:type="url" path="delhiveryshipping/order_ui/printshipping"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Print Shipping Slip</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to print shipping slip of selected order(s)?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action>
+            <!--action name="delhivery-pickup">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">pickup</item>
+                        <item name="label" xsi:type="string" translate="true">Schedule Delhivery Pickup</item>
+                        <item name="url" xsi:type="url" path="delhiveryshipping/order_ui/pickup"/>
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Schedule Delhivery Pickup</item>
+                            <item name="message" xsi:type="string" translate="true">Are you sure you want to schedule pickup of selected order(s)?</item>
+                        </item>
+                    </item>
+                </argument>
+            </action-->
+        </massaction>
+    </listingToolbar>
+    <columns name="orders_columns">
+        <!--column name="tracking_number">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Tracking Number</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="delhivery_ship_status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Webkul\DelhiveryShipping\Model\Source\DelhiveryShipStatus</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Shipping Status</item>
+                    <item name="sortOrder" xsi:type="number">11</item>
+                </item>
+            </argument>
+        </column-->
+        <!--column name="pickup_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Pickup ID</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column-->
+    </columns>
+</listing>

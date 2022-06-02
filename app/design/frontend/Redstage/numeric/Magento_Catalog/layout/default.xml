@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page layout="2columns-right"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="sidebar.additional">
+            <block class="Magento\Catalog\Block\Widget\RecentlyViewed" name="recently_viewed_products_block" before="catalog.leftnav" template="Magento_Catalog::product/view/recently_viewed_products.phtml"/>
+           <block class="Redstage\LayeredNavigation\Block\Categorybanner" name="categorybanner" as="categorybanner" template="Redstage_LayeredNavigation::categoryleftbanner.phtml" after="-" />
+        </referenceContainer>
+        <move element="categorybanner" destination="sidebar.additional" before="recently_viewed_products_block" />
+    </body>
+</page>

@@ -1,0 +1,33 @@
+{
+    "redstage_serviceticket": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "store_id": true,
+            "sf_serviceticket_no": true,
+            "sf_serviceticket_status": true,
+            "product_serial_number": true,
+            "invoice_number": true,
+            "order_number": true,
+            "date_of_invoice": true,
+            "message": true,
+            "description": true,
+            "subject": true,
+            "eCom_ref": true,
+            "name": true,
+            "customer_address": true,
+            "installation_site_address": true,
+            "pincode": true,
+            "mobile": true,
+            "email": true,
+            "request_type": true,
+            "images": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

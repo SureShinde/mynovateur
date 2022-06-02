@@ -1,0 +1,85 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_CustomInvoice
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+$customInvoice = $block->getCustomInvoiceRecord();
+$readOnly = $customInvoice->getEntityId() ? 'disabled="disabled"' : '';
+?>
+<div class="wk_mp_design">
+    <div><h3><strong><?= $block->escapeHtml(__('Invoice Details')) ?></strong></h3></div>
+    <div class="fieldset wk-mp-fieldset">
+        <form id="review-form" method="post" data-mage-init='{"validation": {}}' enctype="multipart/form-data"
+            action="<?= $block->escapeUrl($block->getUrl('custominvoice/invoice/create', ['_secure' => $this->getRequest()->isSecure()])) ?>">
+            <?= $block->getBlockHtml('formkey'); ?>
+            <input type="hidden" value="<?= $block->escapeHtml($block->getRequest()->getParam('id')); ?>"
+                class="input-text required-entry" id="order_id" name="order_id">
+            <fieldset class="fieldset info wk-mp-fieldset">
+                <div class="field required">
+                    <label class="label"><?= $block->escapeHtml(__('Invoice Number')) ?></label>
+                    <div class="control">
+                        <input type="text" <?= $readOnly ?> value="<?= $block->escapeHtml($customInvoice->getInvoiceNumber()); ?>"
+                            class="input-text required-entry" id="invoice_number" name="invoice_number" />
+                    </div>
+                </div>
+                <div class="field required">
+                    <label class="label"><?= $block->escapeHtml(__('Internal Doc. Control No.')) ?></label>
+                    <div class="control">
+                        <input type="text" <?= $readOnly ?> value="<?= $block->escapeHtml($customInvoice->getIntDocCtrN()); ?>"
+                            class="input-text required-entry" id="int_doc_ctr_n" name="int_doc_ctr_n" />
+                    </div>
+                </div>
+                <button class="button wk-mp-btn" title="<?= $block->escapeHtml(__('Create Invoice')) ?>" type="submit" id="save-invoice">
+                    <span><span><?= $block->escapeHtml($readOnly ? __('Download Invoice') : __('Create Invoice')) ?></span></span>
+                </button>
+            </fieldset>
+            <fieldset class="fieldset info wk-mp-fieldset">
+                <table class="data table table-order-items" id="my-orders-table" summary="<?= $block->escapeHtml(__('Items Ordered')) ?>">
+                    <caption class="table-caption"><?= $block->escapeHtml(__('Items Ordered')) ?></caption>
+                    <thead>
+                        <tr>
+                            <th class="col name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                            <th class="col sku"><?= $block->escapeHtml(__('SKU')) ?></th>
+                            <!--th class="col price">< ?= $block->escapeHtml(__('Price')) ?></th-->
+                            <th class="col qty"><?= $block->escapeHtml(__('Qty')) ?></th>
+                            <!--th class="col price">< ?= $block->escapeHtml(__('Total Price')) ?></th-->
+                            <!--th class="col price">< ?= $block->escapeHtml(__('HSN')) ?></th-->
+                        </tr>
+                    </thead>
+
+                <?php
+                $items = $block->getInvoiceItems();
+                foreach ($items as $item) { ?>
+                    <tr class="border" id="order-item-row-<?= $block->escapeHtml($item->getId()) ?>">
+                        <td class="col name" data-th="<?= $block->escapeHtml(__('Name')); ?>">
+                            <?= $block->escapeHtml($item->getMageproName()) ?>
+                        </td>
+                        <td class="col sku" data-th="<?= $block->escapeHtml(__('SKU')); ?>">
+                            <?= $block->escapeHtml($item->getSku()) ?>
+                        </td>
+                        <!--td class="col name" data-th="< ?= $block->escapeHtml(__('Price')); ?>">
+                            < ?= $block->escapeHtml($item->getMageproPrice()) ?>
+                        </td-->
+                        <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')); ?>">
+                            <?= $block->escapeHtml($item->getMagequantity()) ?>
+                        </td>
+                        <!--td class="col name" data-th="< ?= $block->escapeHtml(__('Total')); ?>">
+                            < ?= $block->escapeHtml($item->getTotalAmount()) ?>
+                        </td-->
+                        <!--td class="col name" data-th="< ?= $block->escapeHtml(__('HSN')); ?>">
+                            <input class="input-text required-entry" type="text" name="item[< ?= $item->getId()?>]['hsn']" />
+                        </td-->
+                    </tr>
+                <?php } ?>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</div>

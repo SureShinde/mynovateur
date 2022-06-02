@@ -1,0 +1,161 @@
+GST,GST
+"Exclusive GST","Exclusive GST"
+"Inclusive GST","Inclusive GST"
+"Grand Total (Excl.Tax)","Grand Total (Excl.Tax)"
+"Grand Total (Incl.Tax)","Grand Total (Incl.Tax)"
+"Gst product rate","Gst product rate"
+"Only Csv type file extension is allowed","Only Csv type file extension is allowed"
+"Found Empty File","Found Empty File"
+"Products Updated Successfully","Products Updated Successfully"
+"Gst Configuration saved successfully.","Gst Configuration saved successfully."
+"Can not save the records.","Can not save the records."
+"Manage GST Configuration","Manage GST Configuration"
+SKU,SKU
+HSN,HSN
+"Excluding GST","Excluding GST"
+"Including GST","Including GST"
+Select,Select
+"Credit Memo # ","Credit Memo # "
+"GSTIN # ","GSTIN # "
+"Order # ","Order # "
+"Order Date: ","Order Date: "
+"Payment Method:","Payment Method:"
+"Shipping Method:","Shipping Method:"
+"Total Shipping Charges","Total Shipping Charges"
+Title,Title
+Number,Number
+"Sold to:","Sold to:"
+"Ship to:","Ship to:"
+"Payment Method","Payment Method"
+"Invoice # ","Invoice # "
+"GSTIN # 123","GSTIN # 123"
+Products,Products
+"Total (ex)","Total (ex)"
+Discount,Discount
+Qty,Qty
+SGST,SGST
+CGST,CGST
+IGST,IGST
+UTGST,UTGST
+Tax,Tax
+"Total (inc)","Total (inc)"
+Price,Price
+Subtotal,Subtotal
+"Excl. GST","Excl. GST"
+"Incl. GST","Incl. GST"
+"The product was unable to be saved. Please try again.","The product was unable to be saved. Please try again."
+" GST Rate to Apply Below Minimum Price can not be more than 100. Please try again."," GST Rate to Apply Below Minimum Price can not be more than 100. Please try again."
+"Gst Percentage can not be more than 100. Please try again.","Gst Percentage can not be more than 100. Please try again."
+"You saved the product.","You saved the product."
+"SKU for product %1 has been changed to %2.","SKU for product %1 has been changed to %2."
+"You duplicated the product.","You duplicated the product."
+"The image cannot be removed as it has been assigned to the other image role","The image cannot be removed as it has been assigned to the other image role"
+"The value of attribute(s) ""%1""
+            must be unique","The value of attribute(s) ""%1""
+            must be unique"
+Gst,Gst
+Ordered,Ordered
+Invoiced,Invoiced
+Shipped,Shipped
+Refunded,Refunded
+Canceled,Canceled
+"Items to Refund","Items to Refund"
+Product,Product
+"Return to Stock","Return to Stock"
+"Qty to Refund","Qty to Refund"
+"GST Amount","GST Amount"
+"Tax Amount","Tax Amount"
+"Discount Amount","Discount Amount"
+"Row Total","Row Total"
+"No Items To Refund","No Items To Refund"
+"Order Total","Order Total"
+"Credit Memo Comments","Credit Memo Comments"
+"Comment Text","Comment Text"
+"Refund Totals","Refund Totals"
+"Append Comments","Append Comments"
+"Email Copy of Credit Memo","Email Copy of Credit Memo"
+"Items Refunded","Items Refunded"
+%1,%1
+"Qty to Invoice","Qty to Invoice"
+"Invoice History","Invoice History"
+"Invoice Comments","Invoice Comments"
+"Invoice Totals","Invoice Totals"
+Amount,Amount
+"Capture Online","Capture Online"
+"Capture Offline","Capture Offline"
+"Not Capture","Not Capture"
+"The invoice will be created offline without the payment gateway.","The invoice will be created offline without the payment gateway."
+"Email Copy of Invoice","Email Copy of Invoice"
+"Upload CSV","Upload CSV"
+"Download Sample CSV","Download Sample CSV"
+sampleFile.csv,sampleFile.csv
+"Note: ","Note: "
+"This is a sample csv file,
+                                you need to add data as per the given headings in csv.","This is a sample csv file,
+                                you need to add data as per the given headings in csv."
+"Click To Submit","Click To Submit"
+Submit,Submit
+"* Required Fields","* Required Fields"
+"Set GST Configuration","Set GST Configuration"
+Save,Save
+"Production State","Production State"
+selected,selected
+"Mass Update Products","Mass Update Products"
+Upload,Upload
+default.csv,default.csv
+"This is a sample csv file,
+                            you need to add data as per the given headings in csv.","This is a sample csv file,
+                            you need to add data as per the given headings in csv."
+"HSN :","HSN :"
+"Incl. Tax","Incl. Tax"
+"Excl. Tax","Excl. Tax"
+"GST Configuration","GST Configuration"
+"Product Name","Product Name"
+"COD Charges","COD Charges"
+"Tax Total","Tax Total"
+"Discount Total","Discount Total"
+"Items Ordered","Items Ordered"
+Status,Status
+"Paid Amount","Paid Amount"
+"Refund Amount","Refund Amount"
+"Shipping Amount","Shipping Amount"
+"Shipping Refund","Shipping Refund"
+"Order Grand Total","Order Grand Total"
+"Total GST","Total GST"
+"Total Tax","Total Tax"
+"Refund Shipping","Refund Shipping"
+"Adjustment Refund","Adjustment Refund"
+"Adjustment Fee","Adjustment Fee"
+"Grand Total","Grand Total"
+"Visible on Frontend","Visible on Frontend"
+"Refund Offline","Refund Offline"
+"Refund Online","Refund Online"
+Refund,Refund
+"GST Rate (in Percentage)","GST Rate (in Percentage)"
+"HSN Code","HSN Code"
+"Minimum Price to Apply Different GST","Minimum Price to Apply Different GST"
+"GST Rate to Apply Below Minimun Price (in Percentage)","GST Rate to Apply Below Minimun Price (in Percentage)"
+GSTIN,GSTIN
+"Mass Update GST","Mass Update GST"
+Webkul,Webkul
+"Marketplace GST","Marketplace GST"
+"General Settings","General Settings"
+Enable,Enable
+"Catalog Product Price","Catalog Product Price"
+"This sets whether catalog prices entered from Magento Admin include GST.<br>
+                    Excluding GST: Product price can't contain GST amount but added saperately in subtotal.<br>
+                    Including GST: Product price already contain GST amount it can't added saperately in subtotal.","This sets whether catalog prices entered from Magento Admin include GST.<br>
+                    Excluding GST: Product price can't contain GST amount but added saperately in subtotal.<br>
+                    Including GST: Product price already contain GST amount it can't added saperately in subtotal."
+"Display Inclusive/Exclusive Info","Display Inclusive/Exclusive Info"
+"Item Status","Item Status"
+"Original Price","Original Price"
+"Tax Percent","Tax Percent"
+ID,ID
+Name,Name
+"GST Percent ","GST Percent "
+"GST Minimum Price","GST Minimum Price"
+"GST Maximum Percent","GST Maximum Percent"
+"Order Total Excl. Tax","Order Total Excl. Tax"
+"Order Total Incl. Tax","Order Total Incl. Tax"
+"You will be charged for","You will be charged for"

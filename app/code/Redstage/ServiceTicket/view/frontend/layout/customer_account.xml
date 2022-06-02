@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Services module use for create service form in magento side and after take request send information to external url
+ *
+ * @category: PHP
+ * @package: Redstage/Services
+ * @copyright: Copyright © 2020 Magento, Inc. All rights reserved.
+ * @keywords: Module Redstage_Services
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Redstage\ServiceTicket\Block\Html\Link\ServiceLink" name="customer-account-navigation-service-ticket-link" after="-">
+                <arguments>
+                    <argument name="label" xsi:type="string">Service Ticket</argument>
+                    <argument name="path" xsi:type="helper" helper="Redstage\ServiceTicket\Helper\Data::getLink"></argument>
+                    <argument name="navigation" xsi:type="boolean">false</argument>
+                </arguments>
+                <action method="isServiceEnable"></action>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

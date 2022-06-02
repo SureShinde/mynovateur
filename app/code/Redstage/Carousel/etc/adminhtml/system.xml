@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+    <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Config/etc/system_file.xsd">
+        <system>
+            <tab id="redstage" translate="label" sortOrder="800">
+                 <label>Redstage</label>
+             </tab>
+             <section id="carousel" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <tab>redstage</tab>
+                <resource>Redstage_Carousel::redstage_carousel</resource>
+                <label>Redstage Carousel</label>
+                    <group id="general" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Redstage Carousel</label>
+                        <field id="duration" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Duration</label>
+                            <comment>In milliseconds.</comment>
+                        </field>
+                        <field id="arrow_navigation" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Show left/right navigation</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="dots_navigation" translate="label" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Show bottom navigation (dots)</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="dots_position" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Position of dots</label>
+                            <source_model>Redstage\Carousel\Model\Adminhtml\System\Config\Source\Dots\Position</source_model>
+                            <depends><field id="dots_navigation">1</field></depends>
+                        </field>
+                        <field id="dots_color" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Color of dots</label>
+                            <comment>Example format: #000000</comment>
+                            <depends><field id="dots_navigation">1</field></depends>
+                        </field>
+                        <field id="max_width" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Maximum image width</label>
+                            <comment>Example format: 980px or 980</comment>
+                        </field>
+                        <field id="after_topnav" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Show slider right after top navigation</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                        <field id="code_snippet" translate="label" type="textarea" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Code snippet</label>
+                            <comment>Please insert the block in CMS Page.</comment>
+                            <depends><field id="after_topnav">0</field></depends>
+                        </field>
+                        <field id="responsive" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Responsive behavior</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        </field>
+                    </group>
+                </section>
+        </system>
+   </config>

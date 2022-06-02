@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="redstage" sortOrder="999" translate="label">
+			<label>redstage</label>
+		</tab>
+		<section id="services" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Service Call</label>
+			<tab>redstage</tab>
+			<resource>Redstage_Services::config_redstage_services</resource>
+			<group id="services_config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Settings</label>
+				<field id="services_config_enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+                <field id="services_api_url" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="text">
+                    <label>Serivce API Url</label>
+                    <comment>Enter Services API url</comment>
+                </field>
+                <field id="services_success_message" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="textarea">
+                    <label>Success Message</label>
+                    <comment>Enter Success Message</comment>
+                </field>
+                <field id="services_error_message" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="110"
+                           translate="label" type="textarea">
+                    <label>Error Message</label>
+                    <comment>Enter Error Message</comment>
+                </field>
+                <field id="service_calltype"  showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="110" translate="label">
+				    <label>Call Type</label>
+				    <frontend_model>Redstage\Services\Block\Adminhtml\Form\Field\MultipleFields</frontend_model>
+				    <backend_model>Redstage\Services\Model\Config\Backend\MultipleFields</backend_model>
+				</field>
+            </group>
+		</section>
+	</system>
+</config>

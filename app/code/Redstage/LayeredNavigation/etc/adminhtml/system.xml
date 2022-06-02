@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="redstage" sortOrder="999" translate="label">
+			<label>redstage</label>
+		</tab>
+		<section id="redstagelayered" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Layered Navigation Configuration</label>
+			<tab>redstage</tab>
+			<resource>Redstage_LayeredNavigation::config_redstage_layerednavigation</resource>
+			<group id="redstagelayered_config" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Settings</label>
+				<field id="redstagelayered_config_enabled" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+                <field id="redstagelayered_application"  showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="110" translate="label">
+				    <label>Application</label>
+				    <frontend_model>Redstage\LayeredNavigation\Block\Adminhtml\Form\Field\MultipleFields</frontend_model>
+				    <backend_model>Redstage\LayeredNavigation\Model\Config\Backend\MultipleFields</backend_model>
+				</field>
+				<field id="redstagelayered_applicationtype"  showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="120" translate="label">
+				    <label>Application Type</label>
+				    <frontend_model>Redstage\LayeredNavigation\Block\Adminhtml\Form\Field\MultipletypeFields</frontend_model>
+				    <backend_model>Redstage\LayeredNavigation\Model\Config\Backend\MultipleFields</backend_model>
+				</field>
+				<field id="redstagelayered_categoryapply"  showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="130" translate="label">
+				    <label>Category Apply</label>
+				    <frontend_model>Redstage\LayeredNavigation\Block\Adminhtml\Form\Field\MultiplecatFields</frontend_model>
+				    <backend_model>Redstage\LayeredNavigation\Model\Config\Backend\MultipleFields</backend_model>
+				</field>
+            </group>
+		</section>
+	</system>
+</config>

@@ -1,0 +1,232 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_MpRmaSystem
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+<?php
+    $helper = $block->helper();
+    $rmaDetails = $helper->getRmaDetails();
+    $orderRef = $rmaDetails->getOrderRef();
+    $orderId = $rmaDetails->getOrderId();
+    $order = $helper->getOrder($orderId);
+    $rmaId = $rmaDetails->getId();
+    $images = $helper->getImages($rmaId);
+    $sellerId = $rmaDetails->getSellerId();
+    $date = $rmaDetails->getCreatedDate();
+    $date = $block->formatDate($date, \IntlDateFormatter::MEDIUM, true);
+    $sellerName = $helper->getCustomerName($rmaId, true);
+    $customerName = $helper->getCustomerName($rmaId, false);
+    $status = $rmaDetails->getStatus();
+    $finalStatus = $rmaDetails->getFinalStatus();
+    $resolutionType = $rmaDetails->getResolutionType();
+    $rmaStatus = $helper->getRmaStatusTitle($status, $finalStatus);
+    $sellerStatus = $helper->getSellerStatusTitle($rmaDetails->getSellerStatus());
+    $orderStatus = $helper->getOrderStatusTitle($rmaDetails->getOrderStatus());
+    $resolution = $helper->getResolutionTypeTitle($resolutionType);
+    $productDetails = $helper->getRmaProductDetails($rmaId);
+    $totalPrice = 0;
+    $totalPric = 0;
+    $orderUrl = $block->getUrl("marketplace/order/view/")."id/".$orderId;
+    $invoiceId = $helper->getMpOrder($orderId, $sellerId)->getInvoiceId();
+    $invoice = $helper->getInvoiceData($invoiceId);
+    $rmaItemId = $helper->getRmaItems($rmaId)->getItemId();
+    $rmaRefundQty = $helper->getRmaItems($rmaId)->getQty();
+    $count = 0;
+    $productType = "";
+foreach ($productDetails as $product) {
+    $isQtyReturned = $product->getIsQtyReturned();
+    $totalPric += $helper->getItemFinalPrice($product);
+    $productTyp = $product->getProductType();
+    if ($productTyp == "simple" || $productTyp == "configurable" || $productTyp == "bundle") {
+        $count++;
+    }
+}
+
+if ($count == 0) {
+    $productType = "intangible";
+} else {
+    $productType = "tangible";
+}
+$allStatus = $helper->getAllStatus($resolutionType, $productType);
+
+?>
+<div class="wk-mprma-container wk-mprma-view">
+<a href="<?= $escaper->escapeUrl($block->getUrl('mprmasystem/seller/allrma')); ?>" 
+    class="wk-date-info" ><?= $escaper->escapeHtml(__("Back")); ?></a>
+<a class="wk-date-info" aria-hidden="true"
+                    title="<?= $escaper->escapeHtml(__('Print Rma'))?>"
+                    href = "<?= $escaper->escapeUrl($block->getUrl(
+                        'mprmasystem/customer/printpdf/',
+                        [
+                            'rma_id'=>$rmaId,
+                            '_secure' => $block->getIsSecure()
+                        ]
+                    )) ?>"
+                    login-url = "<?= $escaper->escapeUrl($block->getUrl('customer/account/login')); ?>">
+<?= $escaper->escapeHtml(__('Print Rma')) ?>
+</a>
+    <div class="wk-title">
+        <?= $escaper->escapeHtml(__("RMA Details")); ?>
+        <span class="wk-date-info"><?= $escaper->escapeHtml($date);?></span>
+    </div>
+    <form method="post" 
+        action="<?= $escaper->escapeUrl($block->getUrl('mprmasystem/customer/create')); ?>" 
+        id="wk_new_rma_form" enctype="multipart/form-data" data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset wk-mprma-fieldset">
+            <div class="field">
+                <label for="Ordrer Id" class="label">
+                    <span><?= $escaper->escapeHtml(__("Order Id")); ?></span>
+                </label>
+                <div class="control">
+                    <a target="_blank" 
+                        href="<?= $escaper->escapeUrl($orderUrl);?>">
+                        <?= $escaper->escapeHtml($orderRef);?>
+                    </a>
+                </div>
+            </div>
+            <div class="field">
+                <label for="Status" class="label">
+                    <span><?= $escaper->escapeHtml(__("Status")); ?></span>
+                </label>
+                <div class="control">
+                    <div class="wk-row">
+                        <span><?= $escaper->escapeHtml(__("RMA Status")); ?> :</span> 
+                        <?= $escaper->escapeHtml($rmaStatus); ?>
+                    </div>
+                    <div class="wk-row">
+                        <span><?= $escaper->escapeHtml(__("Status")); ?> :</span> 
+                        <?= $escaper->escapeHtml($sellerStatus);?>
+                    </div>
+                    <?php if ($rmaDetails->getOrderStatus() != Webkul\MpRmaSystem\Helper\Data::ORDER_NOT_APPLICABLE):?>
+                        <div class="wk-row">
+                            <span><?= $escaper->escapeHtml(__("Order Status")); ?> :</span> 
+                            <?= $escaper->escapeHtml($orderStatus);?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($rmaDetails->getOrderStatus() == Webkul\MpRmaSystem\Helper\Data::ORDER_DELIVERED):?>
+                        <div class="wk-row">
+                            <span><?= $escaper->escapeHtml(__("Consignment Number")); ?> :</span> 
+                            <?= $escaper->escapeHtml($rmaDetails->getNumber());?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if ($rmaDetails->getTrackingId()):?>
+                    <div class="wk-row">
+                        <span><?= $escaper->escapeHtml(__("Tracking ID")); ?> :</span> 
+                            <?= $escaper->escapeHtml($rmaDetails->getTrackingId());?>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="field">
+                <label for="Resolution Type" class="label">
+                    <span><?= $escaper->escapeHtml(__("Resolution Type")); ?></span>
+                </label>
+                <div class="control">
+                    <?= $escaper->escapeHtml($resolution);?>
+                </div>
+            </div>
+            <div class="field">
+                <label for="Additional Information" class="label">
+                    <span><?= $escaper->escapeHtml(__("Additional Information")); ?></span>
+                </label>
+                <div class="control">
+                    <?= $escaper->escapeHtml($rmaDetails->getAdditionalInfo());?>
+                </div>
+            </div>
+            <?php if ($resolutionType == \Webkul\MpRmaSystem\Helper\Data::RESOLUTION_REFUND): ?>
+                <div class="field wk-refund-block wk-display-none">
+                    <label for="Refund Details" class="label">
+                        <span><?= $escaper->escapeHtml(__("Refund Details")); ?></span>
+                    </label>
+                    <div class="control">
+                        <div class="wk-row">
+                            <span><?= $escaper->escapeHtml(__("Refundable Amount")); ?> :</span>
+                            <span class="wk-refundable-amount"></span>
+                        </div>
+                        <?php if ($rmaDetails->getRefundedAmount() > 0): ?>
+                            <div class="wk-row">
+                                <span><?= $escaper->escapeHtml(__("Refunded Amount")); ?> :</span>
+                                <span class="wk-refunded-amount">
+                                    <?= /* @noEscape */ $order->formatPrice($rmaDetails->getRefundedAmount()); ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <?php if (count($images) > 0): ?>
+                <div class="field wk-lg">
+                    <label for="Images" class="label">
+                        <span><?= $escaper->escapeHtml(__("Images")); ?></span>
+                    </label>
+                    <div class="control">
+                        <div id="preview">
+                            <?php foreach ($images as $image): ?>
+                                <div class="wk-showcase-block">
+                                    <img src="<?= $escaper->escapeUrl($image);?>">
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </fieldset>
+    </form>
+</div>
+<div class="wk-mprma-container wk-mprma-view">
+    <div class="wk-title">
+        <?= $escaper->escapeHtml(__("Item(s) Requested for RMA")); ?>
+    </div>
+    <div class="wk-table-wrapper">
+        <table id="mprma-items-table" class="data table">
+            <thead>
+                <tr>
+                    <th class="col" scope="col"><?= $escaper->escapeHtml(__("Product Name")); ?></th>
+                    <th class="col" scope="col"><?= $escaper->escapeHtml(__("Sku")); ?></th>
+                    <th class="col" scope="col"><?= $escaper->escapeHtml(__("Price")); ?></th>
+                    <th class="col" scope="col"><?= $escaper->escapeHtml(__("Qty")); ?></th>
+                    <th class="col" scope="col"><?= $escaper->escapeHtml(__("Reason")); ?></th>
+                </tr>
+            </thead>
+            <?php foreach ($productDetails as $product): ?>
+                <?php
+                    $totalPrice += $helper->getItemFinalPrice($product);
+                ?>
+                <tbody>
+                    <tr>
+                        <td class="col">
+                            <?= $escaper->escapeHtml($product->getName()); ?>
+                            <?= /* @noEscape */ $helper->getOptionsHtml($product); ?>
+                        </td>
+                        <td class="col"><?= $escaper->escapeHtml($product->getSku()); ?></td>
+                        <td class="col"><?= /* @noEscape */ $order->formatPrice($product->getData("price")); ?></td>
+                        <td class="col"><?= $escaper->escapeHtml($product->getQty()); ?></td>
+                        <td class="col"><?= $escaper->escapeHtml($helper->getReasonById($product->getReasonId()));?>
+                        </td>
+                    </tr>
+                </tbody>
+            <?php endforeach; ?>
+        </table>
+    </div>
+</div>
+<?php
+    $data = $helper->jsonEncodeData([
+                "totalPrice" => $totalPrice,
+                "totalPriceWithCurrency" => $order->formatPrice($totalPrice),
+                "errorMsg" => __("Partial amount can not be more then %1", $order->formatPrice($totalPrice)),
+                "warningLable" => __("Warning")
+            ]);
+    ?>
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "Webkul_MpRmaSystem/js/rma": <?= /* @noEscape */ $data ?>
+        }
+    }
+</script>

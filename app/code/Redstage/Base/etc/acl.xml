@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Redstage Base module to add all system configuration.
+ *
+ * @category: PHP
+ * @package: Redstage/Base
+ * @copyright: Copyright © 2019 Magento, Inc. All rights reserved.
+ * @author: Mohit Tyagi <mtyagi@redstage.com>
+ * @project: Legrand & Numeric
+ * @keywords: Module Redstage_Base
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Redstage_Base::main_menu" title="Redstage" sortOrder="100" />
+            </resource>
+        </resources>
+    </acl>
+</config>
